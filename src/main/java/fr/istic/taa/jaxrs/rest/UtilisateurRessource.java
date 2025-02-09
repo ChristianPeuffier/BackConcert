@@ -1,6 +1,8 @@
 package fr.istic.taa.jaxrs.rest;
 
+import fr.istic.taa.jaxrs.dao.business.UtilisateurDAO;
 import fr.istic.taa.jaxrs.domain.Pet;
+import fr.istic.taa.jaxrs.domain.Utilisateur;
 import io.swagger.v3.oas.annotations.Parameter;
 import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.GET;
@@ -10,15 +12,17 @@ import jakarta.ws.rs.PathParam;
 import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.core.Response;
 
-@Path("pet")
-@Produces({"application/json", "application/xml"})
-public class PetResource {
+@Path("utilisateur")
+@Produces({"application/json"})
+public class UtilisateurRessource {
+
+  UtilisateurDAO utilisateurDAO = new UtilisateurDAO();
 
   @GET
-  @Path("/{petId}")
-  public Pet getPetById(@PathParam("petId") Long petId)  {
+  @Path("/{id}")
+  public Utilisateur getUserById(@PathParam("id") Long id)  {
       // return pet
-      return new Pet();
+      return utilisateurDAO.findOne(id);
   }
 
   @GET

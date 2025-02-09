@@ -1,0 +1,27 @@
+/*C3*/SET SCHEMA PUBLIC
+DISCONNECT
+/*C4*/SET SCHEMA PUBLIC
+DISCONNECT
+/*C6*/SET SCHEMA PUBLIC
+create sequence evenement_SEQ start with 1 increment by 50
+create sequence Stats_SEQ start with 1 increment by 50
+create sequence ticket_SEQ start with 1 increment by 50
+create sequence utilisateur_SEQ start with 1 increment by 50
+create table evenement (date date, id integer not null, organisateur_id bigint, artiste varchar(100), genre varchar(100), nom varchar(100), description varchar(1000), lieu varchar(255), primary key (id))
+create table Stats (evenement_id integer, id integer not null, primary key (id))
+create table ticket (dateAchat date, evenement_id integer, id integer not null, prix float(53), utilisateur_id bigint, statut varchar(100) check (statut in ('ACHETE','ANNULE','REMBOURSE','RESERVE')), primary key (id))
+create table utilisateur (id bigint not null, type_utilisateur varchar(31) not null, email varchar(100), nom varchar(100), password varchar(100), prenom varchar(100), primary key (id))
+alter table evenement add constraint FKjh9v630rxbsdflex9ij94rjai foreign key (organisateur_id) references utilisateur
+alter table Stats add constraint FKnx30p674yasit6i7549ejsuqf foreign key (evenement_id) references evenement
+alter table ticket add constraint FK4l049kq87r4dhky2rijk4r0f5 foreign key (evenement_id) references evenement
+alter table ticket add constraint FKr6p65raty6l8vrfssxrdolnee foreign key (utilisateur_id) references utilisateur
+INSERT INTO UTILISATEUR VALUES(1,'Utilisateur','Alexisr0910@gmail.com','Alexis','1234','Raulais')
+ALTER SEQUENCE PUBLIC.UTILISATEUR_SEQ RESTART WITH 51
+COMMIT
+DISCONNECT
+/*C7*/SET SCHEMA PUBLIC
+DISCONNECT
+/*C5*/SET SCHEMA PUBLIC
+DISCONNECT
+/*C8*/SET SCHEMA PUBLIC
+DISCONNECT
