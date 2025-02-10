@@ -12,6 +12,8 @@ import jakarta.ws.rs.PathParam;
 import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.core.Response;
 
+import java.util.List;
+
 @Path("utilisateur")
 @Produces({"application/json"})
 public class UtilisateurRessource {
@@ -21,22 +23,20 @@ public class UtilisateurRessource {
   @GET
   @Path("/{id}")
   public Utilisateur getUserById(@PathParam("id") Long id)  {
-      // return pet
       return utilisateurDAO.findOne(id);
   }
 
   @GET
   @Path("/")
-  public Pet getPet(Long petId)  {
-      return new Pet();
+  public List<Utilisateur> getUser()  {
+      return utilisateurDAO.findAll();
   }
 
   
   @POST
   @Consumes("application/json")
-  public Response addPet(
-      @Parameter(description = "Pet object that needs to be added to the store", required = true) Pet pet) {
-    // add pet
+  public Response addUser(
+      @Parameter(description = "User object that needs to be added to the store", required = true) Utilisateur user) {
     return Response.ok().entity("SUCCESS").build();
   }
 }
