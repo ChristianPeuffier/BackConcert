@@ -10,8 +10,8 @@ import java.util.List;
 
 public class UtilisateurService extends AbstractService<Long, Utilisateur> {
 
-    public UtilisateurService(UtilisateurDAO utilisateurDAO) {
-        super(utilisateurDAO);
+    public UtilisateurService() {
+        super(new UtilisateurDAO());
     }
 
     public UtilisateurDTO getUtilisateurById(Long id) {

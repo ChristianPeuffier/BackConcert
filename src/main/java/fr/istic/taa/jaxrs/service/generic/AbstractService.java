@@ -10,7 +10,7 @@ public abstract class AbstractService<K, T extends Serializable> implements IGen
 
     IGenericDao<K, T> genericDao;
 
-    public AbstractService(IGenericDao<K, T> genericDao) {
+    protected AbstractService(IGenericDao<K, T> genericDao) {
         this.genericDao = genericDao;
     }
 

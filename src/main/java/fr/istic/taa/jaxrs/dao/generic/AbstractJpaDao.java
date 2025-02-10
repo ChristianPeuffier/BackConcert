@@ -12,7 +12,7 @@ public abstract class AbstractJpaDao<K, T extends Serializable> implements IGene
 
 	protected EntityManager entityManager;
 
-	public AbstractJpaDao(Class<T> clazz) {
+	protected AbstractJpaDao(Class<T> clazz) {
 		this.entityManager = EntityManagerHelper.getEntityManager();
 		this.clazz = clazz;
 	}

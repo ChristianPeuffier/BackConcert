@@ -12,6 +12,7 @@ import jakarta.ws.rs.Path;
 import jakarta.ws.rs.PathParam;
 import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.core.Response;
+import org.hibernate.service.spi.InjectService;
 
 import java.util.List;
 
@@ -19,11 +20,8 @@ import java.util.List;
 @Produces({"application/json"})
 public class UtilisateurRessource {
 
-  UtilisateurService utilisateurService;
+  UtilisateurService utilisateurService = new UtilisateurService( );
 
-  public UtilisateurRessource(UtilisateurService utilisateurService) {
-        this.utilisateurService = utilisateurService;
-  }
 
   @GET
   @Path("/{id}")
