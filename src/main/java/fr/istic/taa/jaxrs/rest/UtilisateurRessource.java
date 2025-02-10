@@ -3,6 +3,7 @@ package fr.istic.taa.jaxrs.rest;
 import fr.istic.taa.jaxrs.dao.business.UtilisateurDAO;
 import fr.istic.taa.jaxrs.domain.Pet;
 import fr.istic.taa.jaxrs.domain.Utilisateur;
+import fr.istic.taa.jaxrs.service.UtilisateurService;
 import io.swagger.v3.oas.annotations.Parameter;
 import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.GET;
@@ -18,18 +19,22 @@ import java.util.List;
 @Produces({"application/json"})
 public class UtilisateurRessource {
 
-  UtilisateurDAO utilisateurDAO = new UtilisateurDAO();
+  UtilisateurService utilisateurService;
+
+  public UtilisateurRessource(UtilisateurService utilisateurService) {
+        this.utilisateurService = utilisateurService;
+  }
 
   @GET
   @Path("/{id}")
   public Utilisateur getUserById(@PathParam("id") Long id)  {
-      return utilisateurDAO.findOne(id);
+      return utilisateurService.findOne(id);
   }
 
   @GET
   @Path("/")
-  public List<Utilisateur> getUser()  {
-      return utilisateurDAO.findAll();
+  public Iterable<Utilisateur> getUser()  {
+      return utilisateurService.findAll();
   }
 
   
@@ -37,6 +42,7 @@ public class UtilisateurRessource {
   @Consumes("application/json")
   public Response addUser(
       @Parameter(description = "User object that needs to be added to the store", required = true) Utilisateur user) {
+            utilisateurService.save(user);
     return Response.ok().entity("SUCCESS").build();
   }
 }
