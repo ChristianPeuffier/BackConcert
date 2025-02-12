@@ -1,7 +1,8 @@
 package fr.istic.taa.jaxrs.rest;
 
-import fr.istic.taa.jaxrs.dao.business.EvenementDAO;
 import fr.istic.taa.jaxrs.domain.Evenement;
+import fr.istic.taa.jaxrs.dto.EvenementDTO;
+import fr.istic.taa.jaxrs.service.business.EvenementService;
 import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.POST;
@@ -15,25 +16,27 @@ import java.util.List;
 
 @Path("evenement")
 @Produces({"application/json"})
-public class EvenementRssources {
-    EvenementDAO evenementDAO = new EvenementDAO();
+public class EvenementRessources {
+
+    EvenementService evenementService = new EvenementService();
 
     @GET
     @Path("/")
-    public List<Evenement> getEvenement()  {
-        return evenementDAO.findAll();
+    public List<EvenementDTO> getEvenements()  {
+        return evenementService.getAllEvenements();
     }
 
     @GET
     @Path("/{id}")
-    public Evenement getEvenementById(@PathParam("id") Long id)  {
-        return evenementDAO.findOne(id);
+    public EvenementDTO getEvenementById(@PathParam("id") Long id)  {
+        return evenementService.getEvenementById(id);
     }
 
     @POST
     @Consumes("application/json")
     public Response addEvenement(
         @Parameter(description = "User object that needs to be added to the store", required = true) Evenement event) {
+            evenementService.save(event);
             return Response.ok().entity("SUCCESS").build();
         }
 

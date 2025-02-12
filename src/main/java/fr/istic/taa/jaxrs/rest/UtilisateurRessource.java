@@ -1,9 +1,8 @@
 package fr.istic.taa.jaxrs.rest;
 
-import fr.istic.taa.jaxrs.dao.business.UtilisateurDAO;
-import fr.istic.taa.jaxrs.domain.Pet;
 import fr.istic.taa.jaxrs.domain.Utilisateur;
-import fr.istic.taa.jaxrs.service.UtilisateurService;
+import fr.istic.taa.jaxrs.dto.UtilisateurDTO;
+import fr.istic.taa.jaxrs.service.business.UtilisateurService;
 import io.swagger.v3.oas.annotations.Parameter;
 import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.GET;
@@ -12,7 +11,6 @@ import jakarta.ws.rs.Path;
 import jakarta.ws.rs.PathParam;
 import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.core.Response;
-import org.hibernate.service.spi.InjectService;
 
 import java.util.List;
 
@@ -25,14 +23,14 @@ public class UtilisateurRessource {
 
   @GET
   @Path("/{id}")
-  public Utilisateur getUserById(@PathParam("id") Long id)  {
-      return utilisateurService.findOne(id);
+  public UtilisateurDTO getUserById(@PathParam("id") Long id)  {
+      return utilisateurService.getUtilisateurById(id);
   }
 
   @GET
   @Path("/")
-  public Iterable<Utilisateur> getUser()  {
-      return utilisateurService.findAll();
+  public List<UtilisateurDTO> getUser()  {
+      return utilisateurService.getAllUtilisateurs();
   }
 
   

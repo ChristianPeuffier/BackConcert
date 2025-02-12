@@ -13,4 +13,20 @@ public class Stats implements Serializable {
     @ManyToOne
     @JoinColumn(name = "evenement_id")
     private Evenement evenement;
+
+    public Evenement getEvenement() {
+        return evenement;
+    }
+
+    public void setEvenement(Evenement evenement) {
+        this.evenement = evenement;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 }
