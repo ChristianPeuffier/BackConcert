@@ -10,6 +10,9 @@ import fr.istic.taa.jaxrs.domain.Organisateur;
 import fr.istic.taa.jaxrs.domain.Utilisateur;
 import jakarta.persistence.EntityManager;
 
+import java.sql.Date;
+import java.time.ZonedDateTime;
+
 
 public class JpaTest {
 
@@ -20,28 +23,37 @@ public class JpaTest {
 		this.manager = manager;
 	}
 	/**
-	 * @param args
+	 * @param args the command line arguments
 	 */
 	public static void main(String[] args) {
 
 		try {
 
 			EvenementDAO evenementDAO = new EvenementDAO();
-
+			OrganisateurDAO organisateurDAO = new OrganisateurDAO();
+			UtilisateurDAO utilisateurDAO = new UtilisateurDAO();
 			Organisateur organisateur = new Organisateur();
+			Utilisateur utilisateur = new Utilisateur();
+			Evenement evenement = new Evenement();
+
+			utilisateur.setNom("Peuffier");
+			utilisateur.setPrenom("Christian");
+			utilisateur.setEmail("christian.peuffier@gmail.com");
+			utilisateur.setPassword("password");
+			utilisateurDAO.save(utilisateur);
+
 			organisateur.setNom("Raulais");
 			organisateur.setPrenom("Alexandre");
 			organisateur.setEmail("AlexandreR0910@gmail.com");
 			organisateur.setPassword("password");
-			OrganisateurDAO organisateurDAO = new OrganisateurDAO();
 			organisateurDAO.save(organisateur);
 
-			Evenement evenement = new Evenement();
+
 			evenement.setNom("Gims Tour");
 			evenement.setLieu("Rennes");
 			evenement.setDescription("Tournée de france de l'artiste Gims");
 			evenement.setGenre("Pop et R&B");
-			evenement.setDate(java.sql.Date.valueOf("2022-06-01"));
+			evenement.setDate(Date.valueOf(ZonedDateTime.now().toLocalDate()));
 			evenement.setOrganisateur(organisateur);
 			evenementDAO.save(evenement);
 			organisateur.getEvenements().add(evenement);

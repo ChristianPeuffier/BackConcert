@@ -19,12 +19,19 @@ package fr.istic.taa.jaxrs;
 import java.util.HashSet;
 import java.util.Set;
 
+import fr.istic.taa.jaxrs.rest.EvenementRessources;
+import fr.istic.taa.jaxrs.rest.OrganisateurRessources;
+import fr.istic.taa.jaxrs.rest.SwaggerResource;
 import fr.istic.taa.jaxrs.rest.UtilisateurRessource;
+import io.swagger.v3.jaxrs2.integration.resources.AcceptHeaderOpenApiResource;
 import io.swagger.v3.jaxrs2.integration.resources.OpenApiResource;
+import io.swagger.v3.oas.annotations.OpenAPIDefinition;
+import io.swagger.v3.oas.annotations.info.Info;
 import jakarta.ws.rs.ApplicationPath;
 import jakarta.ws.rs.core.Application;
 
 @ApplicationPath("/")
+@OpenAPIDefinition(info = @Info(title = "Evenement API", version = "1.0", description = "Evenement API"))
 public class TestApplication extends Application {
 	
 
@@ -33,9 +40,12 @@ public class TestApplication extends Application {
 
         final Set<Class<?>> clazzes = new HashSet<Class<?>>();
 
-        clazzes.add(OpenApiResource.class);
         clazzes.add(UtilisateurRessource.class);
-//        clazzes.add(AcceptHeaderOpenApiResource.class);
+        clazzes.add(EvenementRessources.class);
+        clazzes.add(OrganisateurRessources.class);
+        clazzes.add(OpenApiResource.class);
+        clazzes.add(SwaggerResource.class);
+        clazzes.add(AcceptHeaderOpenApiResource.class);
          
 
         return clazzes;

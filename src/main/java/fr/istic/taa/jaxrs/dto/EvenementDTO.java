@@ -1,8 +1,11 @@
 package fr.istic.taa.jaxrs.dto;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import fr.istic.taa.jaxrs.domain.Evenement;
 
 import java.sql.Date;
+import java.time.ZonedDateTime;
+import java.util.TimeZone;
 
 public class EvenementDTO {
 
@@ -16,7 +19,7 @@ public class EvenementDTO {
     public EvenementDTO(Evenement evenement) {
         this.nom = evenement.getNom();
         this.description = evenement.getDescription();
-        this.date = evenement.getDate();
+        this.date = Date.valueOf(evenement.getDate().toLocalDate());
         this.lieu = evenement.getLieu();
         this.genre = evenement.getGenre();
 
@@ -38,10 +41,12 @@ public class EvenementDTO {
         return description;
     }
 
+    @JsonFormat(pattern="yyyy-MM-dd", timezone = "Europe/Paris")  // Vous pouvez choisir le format souhaité
     public void setDate(Date date) {
         this.date = date;
     }
 
+    @JsonFormat(pattern="yyyy-MM-dd", timezone = "Europe/Paris")  // Vous pouvez choisir le format souhaité
     public Date getDate() {
         return date;
     }
