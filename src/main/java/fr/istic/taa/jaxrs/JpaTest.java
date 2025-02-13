@@ -14,10 +14,11 @@ import java.time.ZonedDateTime;
 public final class JpaTest {
 
 	/**
-	 * constructor.
-	 **/
+	** constructor.
+	**/
 	private JpaTest() {
 	}
+
 	/**
 	 * @param args the command line arguments
 	 **/

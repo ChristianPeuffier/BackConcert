@@ -6,7 +6,14 @@ import jakarta.persistence.Persistence;
 
 public class EntityManagerHelper {
 
+	/**
+	 * EntityManagerFactory.
+	 */
 	private static final EntityManagerFactory emf;
+
+	/**
+	 * ThreadLocal EntityManager.
+	 */
 	private static final ThreadLocal<EntityManager> threadLocal;
 
 	static {
@@ -14,7 +21,7 @@ public class EntityManagerHelper {
 		threadLocal = new ThreadLocal<EntityManager>();
 	}
 
-	public static EntityManager getEntityManager() {
+	protected static EntityManager getEntityManager() {
 		EntityManager em = threadLocal.get();
 
 		if (em == null) {

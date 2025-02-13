@@ -24,6 +24,8 @@ import java.util.List;
     private String password;
     @OneToMany(mappedBy = "utilisateur")
     private List<Ticket> tickets;
+    @Column(name = "type_utilisateur", insertable = false, updatable = false)
+    private String typeUtilisateur;
 
 
     public Utilisateur() {
