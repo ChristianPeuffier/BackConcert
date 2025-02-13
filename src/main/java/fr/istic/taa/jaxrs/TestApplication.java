@@ -32,8 +32,7 @@ import jakarta.ws.rs.core.Application;
 
 @ApplicationPath("/")
 @OpenAPIDefinition(info = @Info(title = "Evenement API", version = "1.0", description = "Evenement API"))
-public class TestApplication extends Application {
-	
+public final class TestApplication extends Application {
 
     @Override
     public Set<Class<?>> getClasses() {
@@ -46,7 +45,6 @@ public class TestApplication extends Application {
         clazzes.add(OpenApiResource.class);
         clazzes.add(SwaggerResource.class);
         clazzes.add(AcceptHeaderOpenApiResource.class);
-         
 
         return clazzes;
     }

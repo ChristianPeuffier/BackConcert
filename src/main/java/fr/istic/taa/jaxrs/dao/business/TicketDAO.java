@@ -5,7 +5,10 @@ import fr.istic.taa.jaxrs.domain.Ticket;
 
 public class TicketDAO extends AbstractJpaDao<Long, Ticket> {
 
-    public TicketDAO(){
+    /**
+     * Constructor.
+     */
+    public TicketDAO() {
         super(Ticket.class);
     }
 }

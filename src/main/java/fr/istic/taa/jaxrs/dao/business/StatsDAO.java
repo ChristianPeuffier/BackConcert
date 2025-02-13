@@ -8,7 +8,10 @@ import fr.istic.taa.jaxrs.domain.Stats;
 
 public class StatsDAO extends AbstractJpaDao<Long, Stats> {
 
-    public StatsDAO(){
+    /**
+     * Constructor.
+     */
+    public StatsDAO() {
         super(Stats.class);
     }
 

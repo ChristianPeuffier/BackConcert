@@ -1,8 +1,6 @@
 package fr.istic.taa.jaxrs.service.generic;
 
 import fr.istic.taa.jaxrs.dao.generic.IGenericDao;
-import fr.istic.taa.jaxrs.service.generic.IGenericService;
-import jakarta.persistence.EntityManager;
 import java.io.Serializable;
 import java.util.List;
 

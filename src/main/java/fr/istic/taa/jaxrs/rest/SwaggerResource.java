@@ -13,7 +13,6 @@ import java.util.logging.Logger;
 @Path("/api")
 public class SwaggerResource {
 
-    private static final Logger logger = Logger.getLogger(SwaggerResource.class.getName());
 
     @GET
     public byte[] Get1() {

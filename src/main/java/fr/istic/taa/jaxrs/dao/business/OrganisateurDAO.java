@@ -6,7 +6,10 @@ import fr.istic.taa.jaxrs.domain.Organisateur;
 
 public class OrganisateurDAO extends AbstractJpaDao<Long, Organisateur> {
 
-    public OrganisateurDAO(){
+    /**
+     * Constructor.
+     */
+    public OrganisateurDAO() {
         super(Organisateur.class);
     }
 }

@@ -6,25 +6,39 @@ import org.jboss.resteasy.plugins.server.undertow.UndertowJaxrsServer;
 import java.util.logging.Logger;
 
 /**
- * RESTfull microservice, based on JAX-RS and JBoss Undertow
- * */public class RestServer {
+ * RESTfull microservice, based on JAX-RS and JBoss Undertow.
+ * */
+public final class RestServer {
 
-    private static final Logger logger = Logger.getLogger(RestServer.class.getName());
+    private RestServer() {
+        throw new UnsupportedOperationException("No RestServer instances for you!");
+    }
 
-    public static void main( String[] args ) {
+    /**
+     * Logger.
+     */
+    private static final Logger LOGGER = Logger.getLogger(RestServer.class.getName());
+
+    /**
+     * Main method.
+     * @param args Command line arguments.
+     */
+    public static void main(final String[] args) {
 
         UndertowJaxrsServer ut = new UndertowJaxrsServer();
 
         TestApplication ta = new TestApplication();
 
+        final int port = 8080;
+
         ut.deploy(ta);
 
         ut.start(
                 Undertow.builder()
-                        .addHttpListener(8080, "localhost")
+                        .addHttpListener(port, "localhost")
 
         );
 
-        logger.info("JAX-RS based micro-service running!");
+        LOGGER.info("JAX-RS based micro-service running!");
     }
 }

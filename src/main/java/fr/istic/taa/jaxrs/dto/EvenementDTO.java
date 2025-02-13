@@ -2,10 +2,7 @@ package fr.istic.taa.jaxrs.dto;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import fr.istic.taa.jaxrs.domain.Evenement;
-
 import java.sql.Date;
-import java.time.ZonedDateTime;
-import java.util.TimeZone;
 
 public class EvenementDTO {
 

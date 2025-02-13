@@ -9,6 +9,9 @@ import java.io.Serializable;
 @DiscriminatorValue("administrateur")
 public class Administrateur extends Utilisateur implements Serializable {
 
+    /**
+     * Constructor.
+     */
     public Administrateur() {
         super();
     }

@@ -1,6 +1,5 @@
 package fr.istic.taa.jaxrs.rest;
 
-import fr.istic.taa.jaxrs.dao.business.TicketDAO;
 import fr.istic.taa.jaxrs.domain.Ticket;
 import fr.istic.taa.jaxrs.dto.TicketDTO;
 import fr.istic.taa.jaxrs.service.business.TicketService;

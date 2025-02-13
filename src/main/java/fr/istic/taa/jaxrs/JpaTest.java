@@ -1,6 +1,5 @@
 package fr.istic.taa.jaxrs;
 
-
 import fr.istic.taa.jaxrs.dao.business.EvenementDAO;
 import fr.istic.taa.jaxrs.dao.business.OrganisateurDAO;
 import fr.istic.taa.jaxrs.dao.business.UtilisateurDAO;
@@ -8,24 +7,21 @@ import fr.istic.taa.jaxrs.dao.generic.EntityManagerHelper;
 import fr.istic.taa.jaxrs.domain.Evenement;
 import fr.istic.taa.jaxrs.domain.Organisateur;
 import fr.istic.taa.jaxrs.domain.Utilisateur;
-import jakarta.persistence.EntityManager;
 
 import java.sql.Date;
 import java.time.ZonedDateTime;
 
+public final class JpaTest {
 
-public class JpaTest {
-
-
-	private EntityManager manager;
-
-	public JpaTest(EntityManager manager) {
-		this.manager = manager;
+	/**
+	 * constructor.
+	 **/
+	private JpaTest() {
 	}
 	/**
 	 * @param args the command line arguments
-	 */
-	public static void main(String[] args) {
+	 **/
+	public static void main(final String[] args) {
 
 		try {
 
@@ -48,7 +44,6 @@ public class JpaTest {
 			organisateur.setPassword("password");
 			organisateurDAO.save(organisateur);
 
-
 			evenement.setNom("Gims Tour");
 			evenement.setLieu("Rennes");
 			evenement.setDescription("Tournée de france de l'artiste Gims");
@@ -58,8 +53,6 @@ public class JpaTest {
 			evenementDAO.save(evenement);
 			organisateur.getEvenements().add(evenement);
 			organisateurDAO.update(organisateur);
-
-
 
 		} catch (Exception e) {
 			e.printStackTrace();

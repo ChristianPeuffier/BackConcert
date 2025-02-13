@@ -6,7 +6,10 @@ import fr.istic.taa.jaxrs.domain.Evenement;
 
 public class EvenementDAO extends AbstractJpaDao<Long, Evenement> {
 
-    public EvenementDAO(){
+    /**
+     * Constructor.
+     */
+    public EvenementDAO() {
         super(Evenement.class);
     }
 }
