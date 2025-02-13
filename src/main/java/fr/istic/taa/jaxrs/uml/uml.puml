@@ -1,0 +1,55 @@
+@startuml
+
+package "domain" {
+
+  class Utilisateur {
+    -long id
+    -String nom
+    -String prenom
+    -String email
+    -String password
+    -List<Ticket> tickets
+  }
+
+  class Organisateur {
+    -List<Evenement> evenements
+  }
+
+  class Administrateur {
+  }
+
+  class Evenement {
+    -int id
+    -String nom
+    -Date date
+    -String lieu
+    -String description
+    -Organisateur organisateur
+    -String artiste
+    -String genre
+  }
+
+  class Stats {
+    -int id
+    -Evenement evenement
+    +Evenement getEvenement()
+  }
+
+  class Ticket {
+    -int id
+    -Utilisateur utilisateur
+    -Evenement evenement
+    -Double prix
+    -Date dateAchat
+    -StatutTicket statut
+  }
+
+  Utilisateur <|-- Organisateur
+  Utilisateur <|-- Administrateur
+  Utilisateur "1" -- "0..*" Ticket 
+  Evenement "0..*" -- "1" Organisateur 
+  Evenement "0..*" -- "1" Ticket 
+  Stats "0..*" -- "1" Evenement 
+}
+
+@enduml
