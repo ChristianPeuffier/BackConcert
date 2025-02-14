@@ -18,26 +18,41 @@ import java.util.List;
 @Produces({"application/json"})
 public class UtilisateurRessource {
 
-  UtilisateurService utilisateurService = new UtilisateurService( );
+  /**
+   * The service for the user.
+   */
+  private final UtilisateurService utilisateurService = new UtilisateurService();
 
 
+  /**
+   * Get the user by id.
+   * @param id the id
+   * @return the user
+   */
   @GET
   @Path("/{id}")
-  public UtilisateurDTO getUserById(@PathParam("id") Long id)  {
+  public UtilisateurDTO getUserById(@PathParam("id") final Long id)  {
       return utilisateurService.getUtilisateurById(id);
   }
 
+    /**
+     * Get the user.
+     * @return the user
+     */
   @GET
   @Path("/")
   public List<UtilisateurDTO> getUser()  {
       return utilisateurService.getAllUtilisateurs();
   }
 
-  
+  /**
+   * Add a user.
+   * @param user the user
+   * @return the response
+   */
   @POST
   @Consumes("application/json")
-  public Response addUser(
-      @Parameter(description = "User object that needs to be added to the store", required = true) Utilisateur user) {
+  public Response addUser(@Parameter(description = "User object that needs to be added to the store", required = true) final Utilisateur user) {
             utilisateurService.save(user);
     return Response.ok().entity("SUCCESS").build();
   }

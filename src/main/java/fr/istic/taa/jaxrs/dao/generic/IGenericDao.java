@@ -4,16 +4,42 @@ import java.io.Serializable;
 import java.util.List;
 
 public interface IGenericDao<K, T extends Serializable> {
- 
-   T findOne(final K id);
- 
+
+   /**
+    * Find an entity by its primary key.
+    * @param id the primary key
+    * @return the entity
+    */
+   T findOne(K id);
+
+    /**
+     * Find all entities.
+     * @return a list of entities
+     */
    List<T> findAll();
-  
-   void save(final T entity);
- 
-   T update(final T entity);
- 
-   void delete(final T entity);
- 
-   void deleteById(final K entityId);
+
+   /**
+    * Save an entity.
+    * @param entity the entity to save
+    */
+   void save(T entity);
+
+    /**
+     * Update an entity.
+     * @param entity the entity to update
+     * @return the updated entity
+     */
+   T update(T entity);
+
+    /**
+     * Delete an entity.
+     * @param entity the entity to delete
+     */
+   void delete(T entity);
+
+    /**
+     * Delete an entity by its primary key.
+     * @param entityId the primary key
+     */
+   void deleteById(K entityId);
 }

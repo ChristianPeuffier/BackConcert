@@ -1,13 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<pmd xmlns="http://pmd.sourceforge.net/report/2.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://pmd.sourceforge.net/report/2.0.0 http://pmd.sourceforge.net/report_2_0_0.xsd" version="6.29.0" timestamp="2025-02-13T13:54:14.001">
+<pmd xmlns="http://pmd.sourceforge.net/report/2.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://pmd.sourceforge.net/report/2.0.0 http://pmd.sourceforge.net/report_2_0_0.xsd" version="6.29.0" timestamp="2025-02-14T09:37:56.293">
 <file name="C:\Users\chris\Desktop\M1\SIR\JaxRSOpenAPI\src\main\java\fr\istic\taa\jaxrs\domain\Utilisateur.java">
-<violation beginline="28" endline="28" begincolumn="20" endcolumn="34" rule="UnusedPrivateField" ruleset="Best Practices" package="fr.istic.taa.jaxrs.domain" class="Utilisateur" variable="typeUtilisateur" externalInfoUrl="https://pmd.github.io/pmd-6.29.0/pmd_rules_java_bestpractices.html#unusedprivatefield" priority="3">
+<violation beginline="70" endline="70" begincolumn="20" endcolumn="34" rule="UnusedPrivateField" ruleset="Best Practices" package="fr.istic.taa.jaxrs.domain" class="Utilisateur" variable="typeUtilisateur" externalInfoUrl="https://pmd.github.io/pmd-6.29.0/pmd_rules_java_bestpractices.html#unusedprivatefield" priority="3">
 Avoid unused private fields such as 'typeUtilisateur'.
-</violation>
-</file>
-<file name="C:\Users\chris\Desktop\M1\SIR\JaxRSOpenAPI\src\main\java\fr\istic\taa\jaxrs\rest\SwaggerResource.java">
-<violation beginline="10" endline="10" begincolumn="1" endcolumn="32" rule="UnusedImports" ruleset="Best Practices" package="fr.istic.taa.jaxrs.rest" class="SwaggerResource" externalInfoUrl="https://pmd.github.io/pmd-6.29.0/pmd_rules_java_bestpractices.html#unusedimports" priority="4">
-Avoid unused imports such as 'java.util.logging.Logger'
 </violation>
 </file>
 </pmd>

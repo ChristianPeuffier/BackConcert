@@ -8,16 +8,31 @@ import java.sql.Date;
 
 public class TicketDTO {
 
-
+    /**
+     * Ticket status.
+     */
     private StatutTicket statut;
+
+    /**
+     * Ticket purchase date.
+     */
     private Date date;
+
+    /**
+     * Event location.
+     */
     private String lieu;
+
+    /**
+     * User.
+     */
     private UtilisateurDTO utilisateur;
 
-    public TicketDTO() {
-    }
-
-    public TicketDTO(Ticket ticket) {
+    /**
+     * Constructor.
+     * @param ticket Ticket.
+     */
+    public TicketDTO(final Ticket ticket) {
         this.statut = ticket.getStatut();
         this.date = ticket.getDateAchat();
         this.lieu = ticket.getEvenement().getLieu();
@@ -25,34 +40,66 @@ public class TicketDTO {
 
     }
 
-    public void setStatut(StatutTicket statut) {
-        this.statut = statut;
+    /**
+     * Setter for statut.
+     * @param paramStatut Statut.
+     */
+    public void setStatut(final StatutTicket paramStatut) {
+        this.statut = paramStatut;
     }
 
+    /**
+     * Getter for statut.
+     * @return Statut.
+     */
     public StatutTicket getStatut() {
         return statut;
     }
 
-    public void setDate(Date date) {
-        this.date = date;
+    /**
+     * Setter for date.
+     * @param paramDate Date.
+     */
+    public void setDate(final Date paramDate) {
+        this.date = paramDate;
     }
 
+    /**
+     * Getter for date.
+     * @return Date.
+     */
     public Date getDate() {
         return date;
     }
 
-    public void setLieu(String lieu) {
-        this.lieu = lieu;
+    /**
+     * Setter for lieu.
+     * @param paramLieu Lieu.
+     */
+    public void setLieu(final String paramLieu) {
+        this.lieu = paramLieu;
     }
 
+    /**
+     * Getter for lieu.
+     * @return Lieu.
+     */
     public String getLieu() {
         return lieu;
     }
 
-    public void setUtilisateur(Utilisateur utilisateur) {
-        this.utilisateur = new UtilisateurDTO(utilisateur);
+    /**
+     * Setter for utilisateur.
+     * @param paramUtilisateur Utilisateur.
+     */
+    public void setUtilisateur(final Utilisateur paramUtilisateur) {
+        this.utilisateur = new UtilisateurDTO(paramUtilisateur);
     }
 
+    /**
+     * Getter for utilisateur.
+     * @return Utilisateur.
+     */
     public UtilisateurDTO getUtilisateur() {
         return utilisateur;
     }

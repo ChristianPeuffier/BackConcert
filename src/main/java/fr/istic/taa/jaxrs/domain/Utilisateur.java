@@ -1,6 +1,15 @@
 package fr.istic.taa.jaxrs.domain;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Id;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Table;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.Inheritance;
+import jakarta.persistence.InheritanceType;
+import jakarta.persistence.DiscriminatorColumn;
+import jakarta.persistence.DiscriminatorType;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -11,72 +20,156 @@ import java.util.List;
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name = "type_utilisateur", discriminatorType = DiscriminatorType.STRING)
  public class Utilisateur implements Serializable {
+
+   /**
+    * The maximum length for Columns in database.
+    */
+   private static final int MAX_LENGTH = 100;
+
+    /**
+     * The id attribute as a long.
+     */
     @Id
     @GeneratedValue
     private long id;
-    @Column(length = 100, name = "nom")
+
+    /**
+     * The nom attribute as a String.
+     */
+    @Column(length = MAX_LENGTH, name = "nom")
     private String nom;
-    @Column(length = 100, name = "prenom")
+
+    /**
+     * The prenom attribute as a String.
+     */
+    @Column(length = MAX_LENGTH, name = "prenom")
     private String prenom;
-    @Column(length = 100, name = "email")
+
+    /**
+     * The email attribute as a String.
+     */
+    @Column(length = MAX_LENGTH, name = "email")
     private String email;
-    @Column(length = 100, name = "password")
+
+    /**
+     * The password attribute as a String.
+     */
+    @Column(length = MAX_LENGTH, name = "password")
     private String password;
+
+    /**
+     * The list of tickets.
+     */
     @OneToMany(mappedBy = "utilisateur")
     private List<Ticket> tickets;
+
+    /**
+     * The type of the user as a String.
+     */
     @Column(name = "type_utilisateur", insertable = false, updatable = false)
     private String typeUtilisateur;
 
 
+    /**
+     * Default constructor.
+     */
     public Utilisateur() {
         this.tickets = new ArrayList<>();
     }
 
+    /**
+     * Getter for the id.
+     * @return the id
+     */
     public long getId() {
         return id;
     }
 
-    public void setId(long id) {
-        this.id = id;
+    /**
+     * Setter for the id.
+     * @param paramId the id
+     */
+    public void setId(final long paramId) {
+        this.id = paramId;
     }
 
+    /**
+     * Getter for the nom.
+     * @return the nom
+     */
     public String getNom() {
         return nom;
     }
 
-    public void setNom(String nom) {
-        this.nom = nom;
+    /**
+     * Setter for the nom.
+     * @param paramNom the nom
+     */
+    public void setNom(final String paramNom) {
+        this.nom = paramNom;
     }
 
+    /**
+     * Getter for the prenom.
+     * @return the prenom
+     */
     public String getPrenom() {
         return prenom;
     }
 
-    public void setPrenom(String prenom) {
-        this.prenom = prenom;
+    /**
+     * Setter for the prenom.
+     * @param paramPrenom the prenom
+     */
+    public void setPrenom(final String paramPrenom) {
+        this.prenom = paramPrenom;
     }
 
+    /**
+     * Getter for the email.
+     * @return the email
+     */
     public String getEmail() {
         return email;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    /**
+     * Setter for the email.
+     * @param paramEmail the email
+     */
+    public void setEmail(final String paramEmail) {
+        this.email = paramEmail;
     }
 
+    /**
+     * Getter for the password.
+     * @return the password
+     */
     public String getPassword() {
         return password;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    /**
+     * Setter for the password.
+     * @param paramPassword the password
+     */
+    public void setPassword(final String paramPassword) {
+        this.password = paramPassword;
     }
 
+    /**
+     * Getter for the tickets.
+     * @return the tickets
+     */
     public List<Ticket> getTickets() {
         return tickets;
     }
 
-    public void setTickets(List<Ticket> tickets) {
-        this.tickets = tickets;
+    /**
+     * Setter for the tickets.
+     * @param paramTickets the tickets
+     */
+    public void setTickets(final List<Ticket> paramTickets) {
+        this.tickets = paramTickets;
     }
 }

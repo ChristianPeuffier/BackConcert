@@ -12,11 +12,14 @@ import java.util.List;
 @DiscriminatorValue("organisateur")
 public class Organisateur extends Utilisateur implements Serializable {
 
+    /**
+     * The list of events.
+     */
     @OneToMany(mappedBy = "organisateur")
     private List<Evenement> evenements;
 
     /**
-     * Constructeur par défaut
+     * Default constructor.
      */
     public Organisateur() {
         super();
@@ -24,18 +27,18 @@ public class Organisateur extends Utilisateur implements Serializable {
     }
 
     /**
-     * Getter de la liste des événements
-     * @return la liste des événements
+     * Getter for the list of events.
+     * @return the list of events
      */
     public List<Evenement> getEvenements() {
         return evenements;
     }
 
     /**
-     * Setter de la liste des événements
-     * @param evenements la liste des événements
+     * Setter for the list of events.
+     * @param paramEvenements the list of events
      */
-    public void setEvenements(List<Evenement> evenements) {
-        this.evenements = evenements;
+    public void setEvenements(final List<Evenement> paramEvenements) {
+        this.evenements = paramEvenements;
     }
 }

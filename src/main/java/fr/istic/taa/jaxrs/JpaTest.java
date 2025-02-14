@@ -13,57 +13,53 @@ import java.time.ZonedDateTime;
 
 public final class JpaTest {
 
-	/**
-	** constructor.
-	**/
-	private JpaTest() {
-	}
+    /**
+     * constructor.
+     **/
+    private JpaTest() {
+    }
 
-	/**
-	 * @param args the command line arguments
-	 **/
-	public static void main(final String[] args) {
+    /**
+     * @param args the command line arguments
+     **/
+    public static void main(final String[] args) {
 
-		try {
+        try {
 
-			EvenementDAO evenementDAO = new EvenementDAO();
-			OrganisateurDAO organisateurDAO = new OrganisateurDAO();
-			UtilisateurDAO utilisateurDAO = new UtilisateurDAO();
-			Organisateur organisateur = new Organisateur();
-			Utilisateur utilisateur = new Utilisateur();
-			Evenement evenement = new Evenement();
+            EvenementDAO evenementDAO = new EvenementDAO();
+            OrganisateurDAO organisateurDAO = new OrganisateurDAO();
+            UtilisateurDAO utilisateurDAO = new UtilisateurDAO();
+            Organisateur organisateur = new Organisateur();
+            Utilisateur utilisateur = new Utilisateur();
+            Evenement evenement = new Evenement();
 
-			utilisateur.setNom("Peuffier");
-			utilisateur.setPrenom("Christian");
-			utilisateur.setEmail("christian.peuffier@gmail.com");
-			utilisateur.setPassword("password");
-			utilisateurDAO.save(utilisateur);
+            utilisateur.setNom("Peuffier");
+            utilisateur.setPrenom("Christian");
+            utilisateur.setEmail("christian.peuffier@gmail.com");
+            utilisateur.setPassword("password");
+            utilisateurDAO.save(utilisateur);
 
-			organisateur.setNom("Raulais");
-			organisateur.setPrenom("Alexandre");
-			organisateur.setEmail("AlexandreR0910@gmail.com");
-			organisateur.setPassword("password");
-			organisateurDAO.save(organisateur);
+            organisateur.setNom("Raulais");
+            organisateur.setPrenom("Alexandre");
+            organisateur.setEmail("AlexandreR0910@gmail.com");
+            organisateur.setPassword("password");
+            organisateurDAO.save(organisateur);
 
-			evenement.setNom("Gims Tour");
-			evenement.setLieu("Rennes");
-			evenement.setDescription("Tournée de france de l'artiste Gims");
-			evenement.setGenre("Pop et R&B");
-			evenement.setDate(Date.valueOf(ZonedDateTime.now().toLocalDate()));
-			evenement.setOrganisateur(organisateur);
-			evenementDAO.save(evenement);
-			organisateur.getEvenements().add(evenement);
-			organisateurDAO.update(organisateur);
+            evenement.setNom("Gims Tour");
+            evenement.setLieu("Rennes");
+            evenement.setDescription("Tournée de france de l'artiste Gims");
+            evenement.setGenre("Pop et R&B");
+            evenement.setDate(Date.valueOf(ZonedDateTime.now().toLocalDate()));
+            evenement.setOrganisateur(organisateur);
+            evenementDAO.save(evenement);
+            organisateur.getEvenements().add(evenement);
+            organisateurDAO.update(organisateur);
 
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
-		EntityManagerHelper.closeEntityManagerFactory();
-		System.out.println(".. done");
-	}
-
-
-
-
+        EntityManagerHelper.closeEntityManagerFactory();
+        System.out.println(".. done");
+    }
 }

@@ -1,18 +1,29 @@
 package fr.istic.taa.jaxrs.service.business;
 
+import fr.istic.taa.jaxrs.dao.business.EvenementDAO;
 import fr.istic.taa.jaxrs.dao.generic.AbstractJpaDao;
 import fr.istic.taa.jaxrs.domain.Evenement;
 import fr.istic.taa.jaxrs.dto.EvenementDTO;
+import fr.istic.taa.jaxrs.service.generic.AbstractService;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class EvenementService extends AbstractJpaDao<Long, Evenement> {
+public class EvenementService extends AbstractService<Long, Evenement> {
+
+    /**
+     * Constructor.
+     */
     public EvenementService() {
-        super(Evenement.class);
+        super(new EvenementDAO());
     }
 
-    public EvenementDTO getEvenementById(Long id) {
+    /**
+     * Get an Evenement from the database by its id.
+     * @param id the id of the Organisateur
+     * @return the created Evenement DTO
+     */
+    public EvenementDTO getEvenementById(final Long id) {
         Evenement evenement = findOne(id);
         if (evenement != null) {
             return new EvenementDTO(evenement);
@@ -20,6 +31,10 @@ public class EvenementService extends AbstractJpaDao<Long, Evenement> {
         return null;
     }
 
+    /**
+     * Get all Evenements from the database.
+     * @return the created Evenement
+     */
     public List<EvenementDTO> getAllEvenements() {
         List<Evenement> evenements = findAll();
         List<EvenementDTO> evenementDTOs = new ArrayList<>();

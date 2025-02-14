@@ -1,99 +1,211 @@
 package fr.istic.taa.jaxrs.domain;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
+import jakarta.persistence.Temporal;
+import jakarta.persistence.TemporalType;
 import java.io.Serializable;
 import java.sql.Date;
 
 @Entity
 @Table(name = "evenement")
 public class Evenement implements Serializable {
+
+    /**
+     * The maximum length for Columns in database.
+     */
+    private static final int MAX_LENGTH = 100;
+
+    /**
+     * The maximum length for Description Column in database.
+     */
+    private static final int MAX_LENGTH_DESCRIPTION = 1000;
+
+    /**
+     * The maximum length for Lieu Column in database.
+     */
+    private static final int MAX_LENGTH_LIEU = 255;
+
+    /**
+     * The id attribute as an int.
+     */
     @Id
     @GeneratedValue
     private int id;
 
-    @Column(length = 100, name = "nom")
+    /**
+     * The nom attribute as a String.
+     */
+    @Column(length = MAX_LENGTH, name = "nom")
     private String nom;
 
+    /**
+     * The date attribute as a Date.
+     */
     @Temporal(TemporalType.DATE)
     private Date date;
 
-    @Column(length = 255, name = "lieu")
+    /**
+     * The lieu attribute as a String.
+     */
+    @Column(length = MAX_LENGTH_LIEU, name = "lieu")
     private String lieu;
 
-    @Column(length = 1000, name = "description")
+    /**
+     * The description attribute as a String.
+     */
+    @Column(length = MAX_LENGTH_DESCRIPTION, name = "description")
     private String description;
 
+    /**
+     * The organisateur attribute as an Organisateur.
+     */
     @ManyToOne
     @JoinColumn(name = "organisateur_id")
     private Organisateur organisateur;
 
-    @Column(length = 100, name = "artiste")
+    /**
+     * The artiste attribute as a String.
+     */
+    @Column(length = MAX_LENGTH, name = "artiste")
     private String artiste;
 
-    @Column(length = 100, name = "genre")
+    /**
+     * The genre attribute as a String.
+     */
+    @Column(length = MAX_LENGTH, name = "genre")
     private String genre;
 
+    /**
+     * Getter for the id attribute.
+     * @return the id attribute as an int.
+     */
     public int getId() {
         return id;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    /**
+     * Setter for the id attribute.
+     * @param paramId the id attribute to set.
+     */
+    public void setId(final int paramId) {
+        this.id = paramId;
     }
 
+    /**
+     * Getter for the nom attribute.
+     * @return the nom attribute as a String.
+     */
     public String getNom() {
         return nom;
     }
 
-    public void setNom(String nom) {
-        this.nom = nom;
+    /**
+     * Setter for the nom attribute.
+     * @param paramNom the nom attribute to set.
+     */
+    public void setNom(final String paramNom) {
+        this.nom = paramNom;
     }
 
+    /**
+     * Getter for the date attribute.
+     * @return the date attribute as a Date.
+     */
     public Date getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
-        this.date = date;
+    /**
+     * Setter for the date attribute.
+     * @param paramDate the date attribute to set.
+     */
+    public void setDate(final Date paramDate) {
+        this.date = paramDate;
     }
 
+    /**
+     * Getter for the lieu attribute.
+     * @return the lieu attribute as a String.
+     */
     public String getLieu() {
         return lieu;
     }
 
-    public void setLieu(String lieu) {
-        this.lieu = lieu;
+    /**
+     * Setter for the lieu attribute.
+     * @param paramLieu the lieu attribute to set.
+     */
+    public void setLieu(final String paramLieu) {
+        this.lieu = paramLieu;
     }
 
+    /**
+     * Getter for the description attribute.
+     * @return the description attribute as a String.
+     */
     public String getDescription() {
         return description;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    /**
+     * Setter for the description attribute.
+     * @param paramDescription the description attribute to set.
+     */
+    public void setDescription(final String paramDescription) {
+        this.description = paramDescription;
     }
 
+    /**
+     * Getter for the organisateur attribute.
+     * @return the organisateur attribute as an Organisateur.
+     */
     public Organisateur getOrganisateur() {
         return organisateur;
     }
 
-    public void setOrganisateur(Organisateur organisateur) {
-        this.organisateur = organisateur;
+    /**
+     * Setter for the organisateur attribute.
+     * @param paramOrganisateur the organisateur attribute to set.
+     */
+    public void setOrganisateur(final Organisateur paramOrganisateur) {
+        this.organisateur = paramOrganisateur;
     }
 
+    /**
+     * Getter for the artiste attribute.
+     * @return the artiste attribute as a String.
+     */
     public String getArtiste() {
         return artiste;
     }
 
-    public void setArtiste(String artiste) {
-        this.artiste = artiste;
+    /**
+     * Setter for the artiste attribute.
+     * @param paramArtiste the artiste attribute to set.
+     */
+    public void setArtiste(final String paramArtiste) {
+        this.artiste = paramArtiste;
     }
 
+    /**
+     * Getter for the genre attribute.
+     * @return the genre attribute as a String.
+     */
     public String getGenre() {
         return genre;
     }
 
-    public void setGenre(String genre) {
-        this.genre = genre;
+    /**
+     * Setter for the genre attribute.
+     * @param paramGenre the genre attribute to set.
+     */
+    public void setGenre(final String paramGenre) {
+        this.genre = paramGenre;
     }
 }

@@ -18,24 +18,41 @@ import java.util.List;
 @Produces({"application/json"})
 public class EvenementRessources {
 
-    EvenementService evenementService = new EvenementService();
+    /**
+     * The service to interact with the events.
+     */
+    private final EvenementService evenementService = new EvenementService();
 
+    /**
+     * Get all the events. Get request at /evenement/ path.
+     * @return the list of events
+     */
     @GET
     @Path("/")
     public List<EvenementDTO> getEvenements()  {
         return evenementService.getAllEvenements();
     }
 
+    /**
+     * Get an event by its id. Get request at /evenement/{id} path.
+     * @param id the id of the event
+     * @return the event
+     */
     @GET
     @Path("/{id}")
-    public EvenementDTO getEvenementById(@PathParam("id") Long id)  {
+    public EvenementDTO getEvenementById(@PathParam("id") final Long id)  {
         return evenementService.getEvenementById(id);
     }
 
+    /**
+     * Add an event. Post request at /evenement/ path.
+     * @param event the event to add
+     * @return the response
+     */
     @POST
     @Consumes("application/json")
     public Response addEvenement(
-        @Parameter(description = "User object that needs to be added to the store", required = true) Evenement event) {
+        @Parameter(description = "User object that needs to be added to the store", required = true) final Evenement event) {
             evenementService.save(event);
             return Response.ok().entity("SUCCESS").build();
         }

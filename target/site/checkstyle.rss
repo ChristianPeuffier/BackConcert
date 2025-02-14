@@ -25,8 +25,8 @@ under the License.
     <language>en-us</language>
     <copyright>&#169;2025</copyright>
     <item>
-      <title>File: 34,
-             Errors: 473,
+      <title>File: 42,
+             Errors: 23,
              Warnings: 0,
              Infos: 0
       </title>
@@ -55,7 +55,7 @@ under the License.
                   0
                 </td>
                 <td>
-                  6
+                  0
                 </td>
               </tr>
                           <tr>
@@ -69,7 +69,7 @@ under the License.
                   0
                 </td>
                 <td>
-                  23
+                  1
                 </td>
               </tr>
                           <tr>
@@ -83,7 +83,7 @@ under the License.
                   0
                 </td>
                 <td>
-                  45
+                  0
                 </td>
               </tr>
                           <tr>
@@ -97,7 +97,7 @@ under the License.
                   0
                 </td>
                 <td>
-                  15
+                  1
                 </td>
               </tr>
                           <tr>
@@ -111,7 +111,7 @@ under the License.
                   0
                 </td>
                 <td>
-                  12
+                  1
                 </td>
               </tr>
                           <tr>
@@ -139,7 +139,7 @@ under the License.
                   0
                 </td>
                 <td>
-                  15
+                  0
                 </td>
               </tr>
                           <tr>
@@ -153,7 +153,49 @@ under the License.
                   0
                 </td>
                 <td>
-                  50
+                  1
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="http://maven.apache.org/checkstyle.html#fr.istic.taa.jaxrs.dao.business.package-info.java">fr/istic/taa/jaxrs/dao/business/package-info.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="http://maven.apache.org/checkstyle.html#fr.istic.taa.jaxrs.package-info.java">fr/istic/taa/jaxrs/package-info.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="http://maven.apache.org/checkstyle.html#fr.istic.taa.jaxrs.dao.generic.package-info.java">fr/istic/taa/jaxrs/dao/generic/package-info.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
                 </td>
               </tr>
                           <tr>
@@ -167,7 +209,21 @@ under the License.
                   0
                 </td>
                 <td>
-                  18
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="http://maven.apache.org/checkstyle.html#fr.istic.taa.jaxrs.dto.package-info.java">fr/istic/taa/jaxrs/dto/package-info.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
                 </td>
               </tr>
                           <tr>
@@ -186,6 +242,20 @@ under the License.
               </tr>
                           <tr>
                 <td>
+                  <a href="http://maven.apache.org/checkstyle.html#fr.istic.taa.jaxrs.domain.package-info.java">fr/istic/taa/jaxrs/domain/package-info.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
                   <a href="http://maven.apache.org/checkstyle.html#fr.istic.taa.jaxrs.dto.UtilisateurDTO.java">fr/istic/taa/jaxrs/dto/UtilisateurDTO.java</a>
                 </td>
                 <td>
@@ -195,7 +265,7 @@ under the License.
                   0
                 </td>
                 <td>
-                  23
+                  0
                 </td>
               </tr>
                           <tr>
@@ -209,7 +279,7 @@ under the License.
                   0
                 </td>
                 <td>
-                  6
+                  0
                 </td>
               </tr>
                           <tr>
@@ -223,7 +293,7 @@ under the License.
                   0
                 </td>
                 <td>
-                  4
+                  0
                 </td>
               </tr>
                           <tr>
@@ -251,7 +321,7 @@ under the License.
                   0
                 </td>
                 <td>
-                  62
+                  0
                 </td>
               </tr>
                           <tr>
@@ -265,7 +335,7 @@ under the License.
                   0
                 </td>
                 <td>
-                  7
+                  0
                 </td>
               </tr>
                           <tr>
@@ -279,7 +349,7 @@ under the License.
                   0
                 </td>
                 <td>
-                  12
+                  0
                 </td>
               </tr>
                           <tr>
@@ -307,7 +377,21 @@ under the License.
                   0
                 </td>
                 <td>
-                  1
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="http://maven.apache.org/checkstyle.html#fr.istic.taa.jaxrs.rest.package-info.java">fr/istic/taa/jaxrs/rest/package-info.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
                 </td>
               </tr>
                           <tr>
@@ -321,7 +405,7 @@ under the License.
                   0
                 </td>
                 <td>
-                  44
+                  4
                 </td>
               </tr>
                           <tr>
@@ -335,7 +419,7 @@ under the License.
                   0
                 </td>
                 <td>
-                  1
+                  0
                 </td>
               </tr>
                           <tr>
@@ -349,7 +433,7 @@ under the License.
                   0
                 </td>
                 <td>
-                  8
+                  2
                 </td>
               </tr>
                           <tr>
@@ -377,7 +461,7 @@ under the License.
                   0
                 </td>
                 <td>
-                  4
+                  0
                 </td>
               </tr>
                           <tr>
@@ -391,7 +475,7 @@ under the License.
                   0
                 </td>
                 <td>
-                  13
+                  1
                 </td>
               </tr>
                           <tr>
@@ -405,7 +489,7 @@ under the License.
                   0
                 </td>
                 <td>
-                  13
+                  4
                 </td>
               </tr>
                           <tr>
@@ -419,7 +503,7 @@ under the License.
                   0
                 </td>
                 <td>
-                  13
+                  0
                 </td>
               </tr>
                           <tr>
@@ -447,7 +531,21 @@ under the License.
                   0
                 </td>
                 <td>
-                  31
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="http://maven.apache.org/checkstyle.html#fr.istic.taa.jaxrs.service.generic.package-info.java">fr/istic/taa/jaxrs/service/generic/package-info.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
                 </td>
               </tr>
                           <tr>
@@ -461,7 +559,7 @@ under the License.
                   0
                 </td>
                 <td>
-                  11
+                  1
                 </td>
               </tr>
                           <tr>
@@ -475,7 +573,7 @@ under the License.
                   0
                 </td>
                 <td>
-                  12
+                  2
                 </td>
               </tr>
                           <tr>
@@ -489,7 +587,7 @@ under the License.
                   0
                 </td>
                 <td>
-                  6
+                  0
                 </td>
               </tr>
                           <tr>
@@ -503,7 +601,21 @@ under the License.
                   0
                 </td>
                 <td>
-                  15
+                  2
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="http://maven.apache.org/checkstyle.html#fr.istic.taa.jaxrs.service.business.package-info.java">fr/istic/taa/jaxrs/service/business/package-info.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
                 </td>
               </tr>
                           <tr>
