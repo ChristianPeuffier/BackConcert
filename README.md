@@ -1,149 +1,77 @@
-## JaxRS + openAPI
+Pour lancer le serveur, la base de données et swagger.
 
-1. Import this project in your IDE, 
-2. Start the database
-3. Start the database viewer
-4. Start the backend. There is a main class to start the backend
+On doit lancer ces 3 fichiers :
+`run-hsqldb-server.bat ou .sh`
+`show-hsqldb.bat ou .sh`
+`RestServer.java`
 
+# Domain
 
+Pour réaliser ce projet, nous avons d'abord commencé par créer le domain, qui regroupe toutes nos classes principales permettant de modéliser les différents objets : **Utilisateur, Organisateur, Administrateur, Evenement, Stats et Ticket**.
 
+Chaque objet est une **entité** qui sera créée dans notre base de données.
 
-# Task Open API Integration 
+Les classes **Administrateur** et **Organisateur**, qui héritent de **Utilisateur**, possèdent un `@DiscriminatorValue`. Elle permet d'indiquer, lors de la création d'un administrateur ou d'un organisateur, le type spécifique de l'utilisateur dans la colonne `type_utilisateur`.
 
-Now, we would like to ensure that our API can be discovered. The OpenAPI Initiative (OAI) was created by a consortium of forward-looking industry experts who recognize the immense value of standardizing on how REST APIs are described. As an open governance structure under the Linux Foundation, the OAI is focused on creating, evolving and promoting a vendor neutral description format. 
+# Dao
 
-APIs form the connecting glue between modern applications. Nearly every application uses APIs to connect with corporate data sources, third party data services or other applications. Creating an open description format for API services that is vendor neutral, portable and open is critical to accelerating the vision of a truly connected world.
+Dans un second temps, nous avons poursuivi avec la mise en place des classes **DAO.** Elles permettent d’interagir avec la base de données et d’exécuter des opérations **CRUD** sur les entités.
 
-To do this integration first, I already add a dependencies to openAPI libraries. 
+Grâce à `extends AbstractJpaDao`, les classes bénéficient de la structure générique proposé par JPA qui permet d’effectuer des requêtes sans avoir à réécrire la logique et la persistance.
 
-```xml
-		<dependency>
-			<groupId>io.swagger.core.v3</groupId>
-			<artifactId>swagger-jaxrs2-jakarta</artifactId>
-			<version>2.2.15</version>
-		</dependency>
+Créer ces classes nous permet également d’isoler la logique d’accès aux données et de séparer les responsabilités dans l'application.
 
-		<dependency>
-			<groupId>io.swagger.core.v3</groupId>
-			<artifactId>swagger-jaxrs2-servlet-initializer-v2</artifactId>
-			<version>2.2.15</version>
-		</dependency>
-```
+# Service
 
-Next you have to add OpenAPI Resource to your application
+Nos classes service nous permettent de centraliser la logique métier, ce qui nous permet de créer nos différents besoinspour poursuivre l’application.
 
-Your application could be something like that. 
+Elles servent d’intermédiaire entre la couche DAO et la couche Ressource.
 
-```java
-@ApplicationPath("/")
-public class RestApplication extends Application {
+# Dto
 
-	@Override
-	public Set<Class<?>> getClasses() {
-		final Set<Class<?>> resources = new HashSet<>();
+La couche DTO permet de restituer uniquement les données nécessaires, contrairement à la DAO, qui retourne l’intégralité des données de l’objet.
 
+Cela permet de limiter l’exposition de données sensibles et améliore la sécurité en évitant d’exposer directement la structure de la base de données.
 
-		// SWAGGER endpoints
-		resources.add(OpenApiResource.class);
+Les données renvoyé sont sous un format json.
 
-        //Your own resources. 
-        resources.add(PersonResource.class);
-....
-		return resources;
-	}
-}
-```
+# Ressource
 
-Next start your server, you must have your api description available at [http://localhost:8080/openapi.json](http://localhost:8080/openapi.json)
+Les classes ressource permettent d’interagir avec la partie web. Elles interagissent avec les classes services et les requêtes HTTP des clients. On utilise les méthodes des services pour récupérer les données souhaitées.
 
-### Integrate Swagger UI. 
+# JPATEST
 
-Next we have to integrate Swagger UI. We will first download it.
-https://github.com/swagger-api/swagger-ui
+Dans cette classe, nous avons créé des utilisateurs, des événements, etc. Par la suite, si nous avons besoin de créer de nouveaux éléments, nous passerons par Swagger, pour des raisons de simplicité.
 
-Copy dist folder content in src/main/webapp/swagger in your project. 
+# Swagger
 
-Edit index.html file to automatically load your openapi.json file. 
+Pour accéder à swagger il faut aller sur l’url :
 
-At the end of the index.html, your must have something like that.
+http://localhost:8080/api/
 
-```js
-   // Build a system
-      const ui = SwaggerUIBundle({
-        url: "http://localhost:8080/openapi.json",
-        dom_id: '#swagger-ui',
-        
-        ...
-```
+# Pom.xml
 
-Next add a new resources to create a simple http server when your try to access to http://localhost:8080/api/.
+Dans le fichier `pom.xml`, nous avons ajouté plusieurs plugins de reporting pour assurer la qualité du code. Ces plugins incluent :
 
-This new resources can be developped as follows
+- **maven-javadoc-plugin** : génère la documentation du code source.
+- **maven-pmd-plugin** : détecte les erreurs potentielles et les mauvaises pratiques.
+- **maven-checkstyle-plugin** : applique les règles de style de code.
+- **maven-jxr-plugin** : facilite la navigation dans le code source.
 
-```java
-package app.web.rest;
+Pour générer les rapports, on utilise la commande `mvn clean sit`:
 
-import java.io.IOException;
-import java.nio.file.FileSystems;
-import java.nio.file.Files;
-import java.util.logging.Logger;
+On obtient le rapport sur la page html qui se trouve :  `target/site/index.html`.
 
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
+# TestApplication
 
-@Path("/api")
-public class SwaggerResource {
+Elle permet de configurer les ressources de l’application.
 
-    private static final Logger logger = Logger.getLogger(SwaggerResource.class.getName());
+L'annotation `@ApplicationPath("/")` définit le chemin racine de l'API, ce qui signifie que toutes les ressources seront accessibles à partir de l'URL de base du serveur.
 
-    @GET
-    public byte[] Get1() {
-        try {
-            return Files.readAllBytes(FileSystems.getDefault().getPath("src/main/webapp/swagger/index.html"));
-        } catch (IOException e) {
-            return null;
-        }
-    }
+Si on rajoute une classe nous devons le spécifier ici.
 
-    @GET
-    @Path("{path:.*}")
-    public byte[] Get(@PathParam("path") String path) {
-        try {
-            return Files.readAllBytes(FileSystems.getDefault().getPath("src/main/webapp/swagger/"+path));
-        } catch (IOException e) {
-            return null;
-        }
-    }
+Grâce à ça l’app peut gérer des requêtes REST et générer la documentation pour swagger.
 
-}
-```
+# RestServer
 
-Add this new resources in your application
-
-```java
-@ApplicationPath("/")
-public class RestApplication extends Application {
-
-
-	@Override
-	public Set<Class<?>> getClasses() {
-		final Set<Class<?>> resources = new HashSet<>();
-
-
-		// SWAGGER endpoints
-		resources.add(OpenApiResource.class);
-		resources.add(PersonResource.class);
-        //NEW LINE TO ADD
-		resources.add(SwaggerResource.class);
-
-		return resources;
-	}
-}
-```
-
-Restart your server and access to http://localhost:8080/api/, you should access to a swagger ui instance that provides documentation on your api. 
-
-You can follow this guide to show how you can specialise the documentation through annotations.
-
-https://github.com/swagger-api/swagger-samples/blob/2.0/java/java-resteasy-appclasses/src/main/java/io/swagger/sample/resource/PetResource.java
+La classe `RestServer` initialise et démarre un service sur le port **8080**. Elle déploie l'application `TestApplication`.
