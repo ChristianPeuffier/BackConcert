@@ -38,13 +38,13 @@ public final class TestApplication extends Application {
     public Set<Class<?>> getClasses() {
 
         final Set<Class<?>> clazzes = new HashSet<Class<?>>();
-
+        clazzes.add(SwaggerResource.class);
+        clazzes.add(OpenApiResource.class);
+        clazzes.add(AcceptHeaderOpenApiResource.class);
         clazzes.add(UtilisateurRessource.class);
         clazzes.add(EvenementRessources.class);
         clazzes.add(OrganisateurRessources.class);
-        clazzes.add(OpenApiResource.class);
-        clazzes.add(SwaggerResource.class);
-        clazzes.add(AcceptHeaderOpenApiResource.class);
+
 
         return clazzes;
     }

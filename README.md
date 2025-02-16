@@ -17,6 +17,7 @@ Ce projet a été réalisé dans le cadre du cours de Systèmes d'Information R�
 4. [Qualité du Code](#qualité-du-code)
 5. [Configuration](#configuration)
 6. [RestServer](#restserver)
+7. [A venir](#a-venir)
 
 ## Prérequis
    Avant de bien démarrer l'ensemble du projet, assurez-vous les éléments suivants :
@@ -146,3 +147,12 @@ Grâce à ça l’app peut gérer des requêtes REST et générer la documentati
 ## RestServer
 
 La classe `RestServer` initialise et démarre un service sur le port **8080**. Elle déploie l'application `TestApplication`.
+
+## A venir
+
+Pour le moment la structure globale du Back-End est en place, il reste à implémenter les fonctionnalités de l'application, telles que la gestion des utilisateurs, des événements, des tickets, etc.
+
+Dans l'idéal, il faudrait faire un premier jet du front pour pouvoir cibler les logiques métiers à implémenter.
+
+Il faudrait également ajouter des tests unitaires pour garantir le bon fonctionnement de l'application.
+

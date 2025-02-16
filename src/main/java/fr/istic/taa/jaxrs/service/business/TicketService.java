@@ -1,9 +1,7 @@
 package fr.istic.taa.jaxrs.service.business;
 
 import fr.istic.taa.jaxrs.dao.business.TicketDAO;
-import fr.istic.taa.jaxrs.dao.generic.AbstractJpaDao;
 import fr.istic.taa.jaxrs.domain.Ticket;
-import fr.istic.taa.jaxrs.domain.Utilisateur;
 import fr.istic.taa.jaxrs.dto.TicketDTO;
 import fr.istic.taa.jaxrs.service.generic.AbstractService;
 
