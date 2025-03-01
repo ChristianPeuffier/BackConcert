@@ -19,10 +19,7 @@ package fr.istic.taa.jaxrs;
 import java.util.HashSet;
 import java.util.Set;
 
-import fr.istic.taa.jaxrs.rest.EvenementRessources;
-import fr.istic.taa.jaxrs.rest.OrganisateurRessources;
-import fr.istic.taa.jaxrs.rest.SwaggerResource;
-import fr.istic.taa.jaxrs.rest.UtilisateurRessource;
+import fr.istic.taa.jaxrs.rest.*;
 import io.swagger.v3.jaxrs2.integration.resources.AcceptHeaderOpenApiResource;
 import io.swagger.v3.jaxrs2.integration.resources.OpenApiResource;
 import io.swagger.v3.oas.annotations.OpenAPIDefinition;
@@ -44,6 +41,7 @@ public final class TestApplication extends Application {
         clazzes.add(UtilisateurRessource.class);
         clazzes.add(EvenementRessources.class);
         clazzes.add(OrganisateurRessources.class);
+        clazzes.add(CorsFilter.class);
 
 
         return clazzes;

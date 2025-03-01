@@ -3,7 +3,6 @@ package fr.istic.taa.jaxrs.rest;
 import fr.istic.taa.jaxrs.domain.Utilisateur;
 import fr.istic.taa.jaxrs.dto.UtilisateurDTO;
 import fr.istic.taa.jaxrs.service.business.UtilisateurService;
-import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.GET;

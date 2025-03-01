@@ -1,0 +1,100 @@
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 30px;
+  background-color: #007bff;
+  color: white;
+  user-select: none;
+  box-sizing: border-box;
+}
+.leftSection {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+.rightSection {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+.logo a {
+  font-size: 1.5rem;
+  font-weight: bold;
+  text-decoration: none;
+  color: white;
+  font-family: "Century Gothic", serif;
+  font-style: italic;
+}
+
+.nav-links {
+  list-style: none;
+  display: flex;
+  gap: 20px;
+}
+
+.nav-links li {
+  display: inline;
+}
+
+.nav-links a {
+  text-decoration: none;
+  color: white;
+  font-size: 1.2rem;
+  transition: 0.3s;
+}
+
+.nav-links a:hover {
+  text-decoration: underline;
+}
+
+.search-container {
+  display: flex;
+  justify-content: end;
+  align-items: center;
+  background: #f1f1f1;
+  border-radius: 25px;
+  padding: 5px 10px;
+  width: 250px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.search-container input {
+  border: none;
+  background: transparent;
+  outline: none;
+  flex: 1;
+  padding: 5px;
+  font-size: 14px;
+}
+
+.search-container button {
+  border: none;
+  background: transparent;
+  cursor: pointer;
+}
+
+.search-container img {
+  width: 20px;
+  height: 20px;
+}
+
+
+.sign-in {
+  place-content: end;
+}
+.sign-in a {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  color: white;
+}
+
+.sign-in img {
+  width: 24px;
+  height: 24px;
+  margin-right: 8px;
+  cursor: pointer;
+}
+
+
