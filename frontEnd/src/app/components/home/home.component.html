@@ -6,7 +6,7 @@
   </p>
 
   <div class="buttons">
-    <a routerLink="/utilisateurs" class="btn">Voir les utilisateurs</a>
-    <a routerLink="/tickets" class="btn btn-secondary">Gérer les tickets</a>
+    <a routerLink="/utilisateurs" class="btn" *ngIf="!authService.isLoggedIn()">Voir les utilisateurs</a>
+    <a routerLink="/tickets" class="btn btn-secondary" *ngIf="authService.isLoggedIn()">Gérer les tickets</a>
   </div>
 </div>

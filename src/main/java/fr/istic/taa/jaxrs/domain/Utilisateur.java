@@ -10,6 +10,8 @@ import jakarta.persistence.Inheritance;
 import jakarta.persistence.InheritanceType;
 import jakarta.persistence.DiscriminatorColumn;
 import jakarta.persistence.DiscriminatorType;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.Size;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -36,25 +38,27 @@ import java.util.List;
     /**
      * The nom attribute as a String.
      */
-    @Column(length = MAX_LENGTH, name = "nom")
+    @Column(length = MAX_LENGTH, name = "nom", nullable = false)
     private String nom;
 
     /**
      * The prenom attribute as a String.
      */
-    @Column(length = MAX_LENGTH, name = "prenom")
+    @Size(min =8)
+    @Column(length = MAX_LENGTH, name = "prenom", nullable = false)
     private String prenom;
 
     /**
      * The email attribute as a String.
      */
-    @Column(length = MAX_LENGTH, name = "email")
+    @Email
+    @Column(length = MAX_LENGTH, name = "email", nullable = false)
     private String email;
 
     /**
      * The password attribute as a String.
      */
-    @Column(length = MAX_LENGTH, name = "password")
+    @Column(length = MAX_LENGTH, name = "password", nullable = false)
     private String password;
 
     /**

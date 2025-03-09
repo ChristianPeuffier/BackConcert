@@ -1,0 +1,34 @@
+<h2>Connexion</h2>
+
+<form (ngSubmit)="onLogin()">
+  <mat-form-field appearance="outline">
+    <mat-label>Enter your email</mat-label>
+    <input
+      matInput
+      type="email"
+      [(ngModel)]="email"
+      required
+      name="email"
+    />
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>Enter password</mat-label>
+    <input
+      matInput
+      type="password"
+      [(ngModel)]="password"
+      required
+      name="password"
+    />
+  </mat-form-field>
+
+  <div class="actions">
+    <button mat-button (click)="dialogRef.close()">Annuler</button>
+    <button mat-flat-button color="primary" type="submit">Se connecter</button>
+  </div>
+
+  <p *ngIf="errorMessage" class="error">{{ errorMessage }}</p>
+</form>
+
+

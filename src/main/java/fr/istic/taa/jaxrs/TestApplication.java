@@ -20,6 +20,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import fr.istic.taa.jaxrs.rest.*;
+import fr.istic.taa.jaxrs.utils.JwtFilter;
 import io.swagger.v3.jaxrs2.integration.resources.AcceptHeaderOpenApiResource;
 import io.swagger.v3.jaxrs2.integration.resources.OpenApiResource;
 import io.swagger.v3.oas.annotations.OpenAPIDefinition;
@@ -42,6 +43,7 @@ public final class TestApplication extends Application {
         clazzes.add(EvenementRessources.class);
         clazzes.add(OrganisateurRessources.class);
         clazzes.add(CorsFilter.class);
+        clazzes.add(JwtFilter.class);
 
 
         return clazzes;

@@ -1,31 +1,49 @@
-<nav class="navbar">
-  <div class="leftSection">
-  <div class="logo">
-    <a routerLink="/">🎟️ Ticket Miagester</a>
-  </div>
-  <ul class="nav-links">
-    <li><a routerLink="/">Accueil</a></li>
-    <li><a routerLink="/utilisateurs">Utilisateurs</a></li>
-    <li><a routerLink="/tickets">Tickets</a></li>
-  </ul>
-  </div>
+<mat-toolbar color="primary">
+  <!-- Logo & Nom du site -->
+  <span class="logo">
+    <a routerLink="/" class="logo-text">🎟️ Ticket Miagester</a>
+  </span>
+
+  <!-- Liens de navigation -->
+  <span class="spacer"></span>
+  <nav class = "nav-links">
+    <button mat-button routerLink="/">Accueil</button>
+    <button mat-button routerLink="/utilisateurs">Utilisateurs</button>
+    <button mat-button routerLink="/tickets">Mes Tickets</button>
+  </nav>
+
+  <span class="spacer"></span>
+
   <div class="rightSection">
-  <div class="search-container">
-    <input
-      type="text"
-      placeholder="Rechercher..."
-      [(ngModel)]="searchQuery"
-      (input)="onSearch()"
-    />
-    <button>
-      <img ngSrc="assets/search-icon.png" alt="Rechercher" height="50" width="50"/>
+    <div class="search-container">
+      <input
+        type="text"
+        placeholder="Rechercher..."
+        [(ngModel)]="searchQuery"
+        (input)="onSearch()"
+      />
+      <button class="searchIcon">
+        <img ngSrc="assets/search-icon.png" alt="Rechercher" height="32" width="32"/>
+      </button>
+    </div>
+
+
+  <span class="spacer"></span>
+
+  <!-- Menu utilisateur -->
+  <ng-container *ngIf="authService.isLoggedIn(); else loginButton">
+    <button mat-button [matMenuTriggerFor]="menu" class ="mat-button">{{ userFirstName }}</button>
+    <mat-menu #menu="matMenu">
+      <button mat-menu-item (click)="authService.logout()">Déconnexion</button>
+    </mat-menu>
+  </ng-container>
+
+  <!-- Bouton de connexion si non connecté -->
+  <ng-template #loginButton>
+    <button mat-button (click)="openLoginDialog()" class="mat-button">
+      <mat-icon>person</mat-icon> Se connecter
     </button>
+  </ng-template>
+
   </div>
-  <div class="sign-in">
-    <a routerLink="/login">
-      <img ngSrc="assets/user.png" alt="Connexion" height="50" width="50">
-      <span>Connexion</span>
-    </a>
-  </div>
-  </div>
-</nav>
+</mat-toolbar>
