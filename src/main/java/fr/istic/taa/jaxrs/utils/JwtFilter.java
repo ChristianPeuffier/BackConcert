@@ -23,7 +23,7 @@ public class JwtFilter implements ContainerRequestFilter {
 
         String path = requestContext.getUriInfo().getPath();
         System.out.println(path);
-        if (path.equals("/utilisateur/login")) {
+        if (path.equals("/utilisateur/login")||path.equals("/utilisateur/add")) {
             return; // Ne pas filtrer la requête de connexion
         }
 
@@ -31,6 +31,8 @@ public class JwtFilter implements ContainerRequestFilter {
 
         String authHeader = requestContext.getHeaderString(AUTH_HEADER);
         if (authHeader == null || !authHeader.startsWith(BEARER_PREFIX)) {
+            System.out.println(authHeader);
+            System.out.println(BEARER_PREFIX);
             abortRequest(requestContext, "Token manquant ou incorrect");
             return;
         }

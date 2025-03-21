@@ -18,6 +18,7 @@ import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 import jakarta.ws.rs.core.SecurityContext;
 
+import java.util.Collections;
 import java.util.List;
 
 @Path("utilisateur")
@@ -75,6 +76,7 @@ public class UtilisateurRessource {
    */
   @POST
   @Consumes("application/json")
+  @Path("add")
   public Response addUser(@Parameter(description = "User object that needs to be added to the store", required = true) final Utilisateur user) {
     try {
       if (user.getEmail() == null || user.getPassword() == null) {
@@ -88,7 +90,10 @@ public class UtilisateurRessource {
       if (emailValidationResult.equals("L'email est déjà utilisé")) {
         return Response.status(Response.Status.BAD_REQUEST).entity("L'email est déjà utilisé").build();
       }
-      return Response.status(Response.Status.CREATED).entity("Utilisateur créé avec succès").build();
+      return Response.status(Response.Status.CREATED)
+              .entity(Collections.singletonMap("message", "Utilisateur créé avec succès"))
+              .build();
+
     } catch (Exception e) {
       return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity("Erreur lors de la création de l'utilisateur").build();
     }

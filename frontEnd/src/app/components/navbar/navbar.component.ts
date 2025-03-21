@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {Router, RouterLink} from '@angular/router';
-import {NgIf, NgOptimizedImage} from '@angular/common';
+import {NgClass, NgIf, NgOptimizedImage} from '@angular/common';
 import {FormsModule} from '@angular/forms';
 import {AuthService} from '../../services/auth.service';
 import {MatMenu, MatMenuItem, MatMenuTrigger} from '@angular/material/menu';
@@ -27,7 +27,8 @@ import {LoginComponent} from '../login/login.component';
     MatIcon,
     MatInput,
     MatIconButton,
-    MatToolbar
+    MatToolbar,
+    NgClass
   ],
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.css'
@@ -63,7 +64,24 @@ export class NavbarComponent implements OnInit{
 
   openLoginDialog() {
     this.dialog.open(LoginComponent, {
-      width: '400px'
+      width: '90%', // S'adapte mieux sur mobile
+      maxWidth: '400px', // Limite la largeur max
+      height: 'auto', // Hauteur dynamique selon le contenu
+      autoFocus: false // Évite que le clavier prenne tout l'écran sur mobile
     });
   }
+
+
+  menuOpen = false;
+
+  toggleMenu() {
+    this.menuOpen = !this.menuOpen;
+  }
+
+  searchOpen = false;
+
+  toggleSearch() {
+    this.searchOpen = !this.searchOpen;
+  }
+
 }

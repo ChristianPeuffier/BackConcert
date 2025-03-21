@@ -1,0 +1,40 @@
+mat-tab-group {
+  user-select: none;
+  width: 100%;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding-top: 20px;
+  user-select: none;
+}
+
+mat-form-field {
+  width: 80%;
+  margin: 10px;
+}
+
+.actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin: 15px;
+}
+
+.error {
+  color: red;
+  font-size: 14px;
+  margin-top: 5px;
+}
+.success {
+  color: green;
+  font-weight: bold;
+}
+
+h2 {
+  text-align: center;
+  user-select: none;
+}
+

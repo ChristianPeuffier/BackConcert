@@ -1,34 +1,59 @@
-<h2>Connexion</h2>
+<h2>Authentification</h2>
 
-<form (ngSubmit)="onLogin()">
-  <mat-form-field appearance="outline">
-    <mat-label>Enter your email</mat-label>
-    <input
-      matInput
-      type="email"
-      [(ngModel)]="email"
-      required
-      name="email"
-    />
-  </mat-form-field>
+<mat-tab-group>
+  <!-- Onglet Connexion -->
+  <mat-tab label="Connexion">
+    <form (ngSubmit)="onLogin()">
+      <mat-form-field appearance="outline">
+        <mat-label>Email</mat-label>
+        <input matInput type="email" [(ngModel)]="email" required name="email" />
+      </mat-form-field>
 
-  <mat-form-field appearance="outline">
-    <mat-label>Enter password</mat-label>
-    <input
-      matInput
-      type="password"
-      [(ngModel)]="password"
-      required
-      name="password"
-    />
-  </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Mot de passe</mat-label>
+        <input matInput type="password" [(ngModel)]="password" required name="password" />
+      </mat-form-field>
 
-  <div class="actions">
-    <button mat-button (click)="dialogRef.close()">Annuler</button>
-    <button mat-flat-button color="primary" type="submit">Se connecter</button>
-  </div>
+      <div class="actions">
+        <button mat-button (click)="dialogRef.close()">Annuler</button>
+        <button mat-flat-button color="primary" type="submit">Se connecter</button>
+      </div>
 
-  <p *ngIf="errorMessage" class="error">{{ errorMessage }}</p>
-</form>
+      <p *ngIf="errorMessage" class="error">{{ errorMessage }}</p>
+    </form>
+  </mat-tab>
 
+  <!-- Onglet Inscription -->
+  <mat-tab label="Inscription">
+    <form (ngSubmit)="onSignup()">
+      <mat-form-field appearance="outline">
+        <mat-label>Email</mat-label>
+        <input matInput type="email" [(ngModel)]="signupEmail" required name="signupEmail" />
+      </mat-form-field>
 
+      <mat-form-field appearance="outline">
+        <mat-label>Mot de passe</mat-label>
+        <input matInput type="password" [(ngModel)]="signupPassword" required name="signupPassword" />
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Prénom</mat-label>
+        <input matInput type="text" [(ngModel)]="signupPrenom" required name="signupPrenom" />
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Nom</mat-label>
+        <input matInput type="text" [(ngModel)]="signupNom" required name="signupNom" />
+      </mat-form-field>
+
+      <div class="actions">
+        <button mat-button (click)="dialogRef.close()">Annuler</button>
+        <button mat-flat-button color="primary" type="submit">S'inscrire</button>
+      </div>
+
+      <p *ngIf="signupSuccessMessage" class="success">{{ signupSuccessMessage }}</p>
+      <p *ngIf="signupErrorMessage" class="error">{{signupErrorMessage}}</p>
+
+    </form>
+  </mat-tab>
+</mat-tab-group>

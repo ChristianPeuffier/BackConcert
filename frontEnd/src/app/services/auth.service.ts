@@ -44,4 +44,9 @@ export class AuthService {
   isLoggedIn(): boolean{
     return !!this.getToken();
   }
+
+  signup(newUser: { email: string; password: string; prenom: string; nom: string }): Observable<any> {
+    console.log("Envoi de la requête d'inscription :", newUser);
+    return this.http.post('http://localhost:8080/utilisateur/add', newUser);
+  }
 }
