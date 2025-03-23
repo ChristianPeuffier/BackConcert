@@ -92,21 +92,28 @@
   background-color: white !important;
   border-radius: 5px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  text-decoration: none;
 }
 
 .mat-menu-item {
   color: black !important; /* Texte noir pour être visible */
   background-color: white !important;
+  text-decoration: none;
 }
 
 .mat-menu-item:hover {
   background-color: rgba(0, 0, 0, 0.1) !important;
 }
 
+ItemLink {
+  text-decoration: none;
+}
+
 /* Liens dans les boutons Angular Material */
 .nav-links .mat-button a {
   margin-right: 10px;
   color: white;
+  text-decoration: none;
 }
 
 .login-button {

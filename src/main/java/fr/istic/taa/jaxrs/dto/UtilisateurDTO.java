@@ -20,6 +20,11 @@ public class UtilisateurDTO {
     private String email;
 
     /**
+     * id of the user.
+     */
+    private Long idUtilisateur;
+
+    /**
      * Constructor.
      * @param utilisateur User.
      */
@@ -27,6 +32,7 @@ public class UtilisateurDTO {
         this.nom = utilisateur.getNom();
         this.prenom = utilisateur.getPrenom();
         this.email = utilisateur.getEmail();
+        this.idUtilisateur = utilisateur.getId();
     }
 
     /**
@@ -75,5 +81,21 @@ public class UtilisateurDTO {
      */
     public String getEmail() {
         return email;
+    }
+
+    /**
+     * Setter for the id.
+     * @param paramId the id
+     */
+    public void setIdUtilisateur(final Long paramId) {
+        this.idUtilisateur = paramId;
+    }
+
+    /**
+     * Getter for the id.
+     * @return the id
+     */
+    public Long getIdUtilisateur() {
+        return idUtilisateur;
     }
 }

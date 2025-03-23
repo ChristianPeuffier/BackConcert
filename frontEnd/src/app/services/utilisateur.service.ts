@@ -11,6 +11,7 @@ export class UtilisateurService {
 
   getUtilisateurs(): Observable<any[]> {
     const token = localStorage.getItem('token');
+
     if (!token) {
       return new Observable(observer => observer.error('Token non trouvé'));
     }
@@ -19,7 +20,8 @@ export class UtilisateurService {
     return this.http.get<any[]>(this.apiUrl, { headers });
   }
 
-  getUtilisateur(id: number): Observable<any> {
-    return this.http.get<any>(`${this.apiUrl}/${id}`);
+  getUtilisateur(id: number, token: string): Observable<any> {
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+    return this.http.get<any>(`${this.apiUrl}/${id}`, { headers });
   }
 }

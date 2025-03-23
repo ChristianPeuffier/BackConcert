@@ -26,7 +26,8 @@
   <ng-container *ngIf="authService.isLoggedIn(); else loginButton">
     <button mat-button [matMenuTriggerFor]="menu">{{ userFirstName }}</button>
     <mat-menu #menu="matMenu">
-      <button mat-menu-item (click)="authService.logout()">Déconnexion</button>
+      <button mat-menu-item routerLink="/dashboard"><mat-icon>dashboard</mat-icon>Dashboard</button>
+      <button mat-menu-item (click)="authService.logout()"><mat-icon>logout</mat-icon>Déconnexion</button>
     </mat-menu>
   </ng-container>
 

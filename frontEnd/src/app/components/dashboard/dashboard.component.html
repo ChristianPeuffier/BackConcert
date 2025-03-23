@@ -1,0 +1,22 @@
+<mat-toolbar color="primary">
+  <span>Dashboard Utilisateur</span>
+</mat-toolbar>
+
+<div class="dashboard-container">
+  <mat-card class="user-card">
+    <mat-card-title>Bienvenue {{ user?.prenom }}</mat-card-title>
+    <mat-card-content>
+      <p>Email : {{ user?.email }}</p>
+      <p>Rôle : {{ user?.role }}</p>
+    </mat-card-content>
+  </mat-card>
+
+  <mat-card class="activity-card">
+    <mat-card-title>Activités récentes</mat-card-title>
+    <mat-list>
+      <mat-list-item *ngFor="let ticket of tickets">
+        {{ ticket }}
+      </mat-list-item>
+    </mat-list>
+  </mat-card>
+</div>

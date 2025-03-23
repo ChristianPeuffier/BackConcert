@@ -23,8 +23,8 @@ public class JwtFilter implements ContainerRequestFilter {
 
         String path = requestContext.getUriInfo().getPath();
         System.out.println(path);
-        if (path.equals("/utilisateur/login")||path.equals("/utilisateur/add")) {
-            return; // Ne pas filtrer la requête de connexion
+        if (path.equals("/utilisateur/login")||path.equals("/utilisateur/add") || path.equals("/ticket/add") || path.equals("/evenement/add")) {
+            return;
         }
 
         System.out.println("🔍 JWT Filter exécuté !");

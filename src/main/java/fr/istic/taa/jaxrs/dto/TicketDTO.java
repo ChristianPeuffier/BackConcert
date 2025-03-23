@@ -23,6 +23,12 @@ public class TicketDTO {
      */
     private String lieu;
 
+
+    /**
+     * Prix
+     */
+    private Double prix;
+
     /**
      * User.
      */
@@ -37,6 +43,7 @@ public class TicketDTO {
         this.date = ticket.getDateAchat();
         this.lieu = ticket.getEvenement().getLieu();
         this.utilisateur = new UtilisateurDTO(ticket.getUtilisateur());
+        this.prix = ticket.getPrix();
 
     }
 

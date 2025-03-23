@@ -42,6 +42,7 @@ public final class TestApplication extends Application {
         clazzes.add(UtilisateurRessource.class);
         clazzes.add(EvenementRessources.class);
         clazzes.add(OrganisateurRessources.class);
+        clazzes.add(TicketRessources.class);
         clazzes.add(CorsFilter.class);
         clazzes.add(JwtFilter.class);
 

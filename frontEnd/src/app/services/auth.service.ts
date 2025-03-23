@@ -26,6 +26,14 @@ export class AuthService {
     return localStorage.getItem('token');
   }
 
+  saveId(id: string){
+    localStorage.setItem('id', id);
+  }
+
+  getId(): number {
+    return parseInt(localStorage.getItem('id') || '0', 10);
+  }
+
   getUserInfo(): Observable<any> {
     const token = this.getToken();
     if (!token) {
@@ -39,6 +47,7 @@ export class AuthService {
 
   logout(){
     localStorage.removeItem('token');
+    localStorage.removeItem('userId');
   }
 
   isLoggedIn(): boolean{

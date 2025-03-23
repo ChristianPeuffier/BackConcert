@@ -43,4 +43,28 @@ public class TicketService extends AbstractService<Long, Ticket> {
         }
         return ticketDTOs;
     }
+
+    /**
+     * Create a ticket.
+     * @param ticket ticket to create
+     */
+    public void createTicket(final Ticket ticket) {
+        save(ticket);
+    }
+
+    /**
+     * Update a ticket.
+     * @param ticket ticket to update
+     */
+    public void updateTicket(final Ticket ticket) {
+        update(ticket);
+    }
+
+    /**
+     * Delete a ticket.
+     * @param ticket ticket to delete
+     */
+    public void deleteTicket(final Ticket ticket) {
+        delete(ticket);
+    }
 }

@@ -3,11 +3,7 @@ package fr.istic.taa.jaxrs.rest;
 import fr.istic.taa.jaxrs.domain.Ticket;
 import fr.istic.taa.jaxrs.dto.TicketDTO;
 import fr.istic.taa.jaxrs.service.business.TicketService;
-import jakarta.ws.rs.GET;
-import jakarta.ws.rs.POST;
-import jakarta.ws.rs.Path;
-import jakarta.ws.rs.Produces;
-import jakarta.ws.rs.Consumes;
+import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.Response;
 import io.swagger.v3.oas.annotations.Parameter;
 
@@ -28,8 +24,9 @@ public class TicketRessources {
      */
     @GET
     @Path("/")
-    public List<TicketDTO> getTicket()  {
-        return ticketService.getAllTickets();
+    public Response getTicket()  {
+        List<TicketDTO> tickets = ticketService.getAllTickets();
+        return Response.ok().entity(tickets).build();
     }
 
     /**
@@ -39,19 +36,56 @@ public class TicketRessources {
      */
     @GET
     @Path("/{id}")
-    public TicketDTO getTicketById(final Long id)  {
-        return ticketService.getTicketById(id);
+    public Response getTicketById(final Long id)  {
+        TicketDTO ticket = ticketService.getTicketById(id);
+        if(ticket == null) {
+            return Response.status(Response.Status.BAD_REQUEST).entity("Ticket not found").build();
+        }
+        return Response.ok().entity(ticket).build();
     }
 
     /**
-     * Add a ticket. Post request at /ticket/.
-     * @param ticket Ticket to add.
+     * Create a ticket. Post request at /ticket/.
+     * @param ticket Ticket to create.
      * @return Response.
      */
     @POST
     @Consumes("application/json")
-    public Response addTicket(@Parameter(description = "User object that needs to be added to the store", required = true) final Ticket ticket) {
-        ticketService.save(ticket);
-        return Response.ok().entity("SUCCESS").build();
+    @Produces("application/json")
+    @Path("/add")
+    public Response createTicket(@Parameter(description = "Ticket to create", required = true) final Ticket ticket) {
+        ticketService.createTicket(ticket);
+        return Response.status(Response.Status.CREATED).entity(ticket).build();
+    }
+
+    /**
+     * Update a ticket. Post request at /ticket/.
+     * @param ticket Ticket to update.
+     * @return Response.
+     */
+    @PUT
+    @Path("/{id}")
+    @Consumes("application/json")
+    @Produces("application/json")
+    public Response updateTicket(@PathParam("id") final int id, final Ticket ticket) {
+        ticket.setId(id);
+        ticketService.updateTicket(ticket);
+        return Response.status(Response.Status.OK).entity(ticket).build();
+    }
+
+    /**
+     * Delete a ticket. Delete request at /ticket/{id}.
+     * @param id Ticket id.
+     * @return Response.
+     */
+    @DELETE
+    @Path("/{id}")
+    public Response deleteTicket(@PathParam("id") final long id) {
+        Ticket ticket = ticketService.findOne(id);
+        if(ticket == null) {
+            return Response.status(Response.Status.BAD_REQUEST).entity("Ticket not found").build();
+        }
+        ticketService.deleteTicket(ticket);
+        return Response.status(Response.Status.OK).entity("Ticket deleted").build();
     }
 }

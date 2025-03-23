@@ -2,9 +2,11 @@ package fr.istic.taa.jaxrs.utils;
 
 public class AuthResponse {
     private String token;
+    private Long id;
 
-    public AuthResponse(final String token) {
+    public AuthResponse(final String token, final Long id) {
         this.token = token;
+        this.id = id;
     }
 
     public String getToken() {
@@ -13,5 +15,9 @@ public class AuthResponse {
 
     public void setToken(String token) {
         this.token = token;
+    }
+
+    public Long getId() {
+        return id;
     }
 }

@@ -37,7 +37,7 @@ public class UtilisateurRessource {
    */
   @GET
   @Path("/{id}")
-  public UtilisateurDTO getUserById(@PathParam("id") final Long id)  {
+  public UtilisateurDTO getUserById(@PathParam("id") final Long id, @Context SecurityContext securityContext){
       return utilisateurService.getUtilisateurById(id);
   }
 
@@ -119,7 +119,7 @@ public class UtilisateurRessource {
         System.out.println("good");
         String token = TokenUtil.generateToken(userFound.getEmail(), "utilisateur");
         System.out.println("token: " + token);
-      return Response.status(Response.Status.OK).entity(new AuthResponse(token)).build();
+      return Response.status(Response.Status.OK).entity(new AuthResponse(token, userFound.getIdUtilisateur())).build();
     }
     catch (Exception e) {
       return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity("Erreur lors de la connexion").build();
@@ -136,4 +136,5 @@ public class UtilisateurRessource {
     }
     return Response.ok( utilisateurService.getAllUtilisateurs()).build();
   }
+
 }

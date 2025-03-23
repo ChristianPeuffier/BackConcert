@@ -44,4 +44,28 @@ public class EvenementService extends AbstractService<Long, Evenement> {
         }
         return evenementDTOs;
     }
+
+    /**
+     * Create an Evenement in the database.
+     * @param evenement the Evenement to create
+     */
+    public void createEvenement(final Evenement evenement) {
+        save(evenement);
+    }
+
+    /**
+     * Update an Evenement in the database.
+     * @param evenement the Evenement to update
+     */
+    public void updateEvenement(final Evenement evenement) {
+        update(evenement);
+    }
+
+    /**
+     * Delete an Evenement from the database.
+     * @param evenement the Evenement to delete
+     */
+    public void deleteEvenement(final Evenement evenement) {
+        delete(evenement);
+    }
 }

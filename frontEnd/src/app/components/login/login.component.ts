@@ -47,6 +47,7 @@ export class LoginComponent {
         console.log("Token reçu :", response.token);
         // @ts-ignore
         this.authService.saveToken(response.token);
+        this.authService.saveId(response.id);
         this.dialogRef.close();
       },
       error: (err) => {
