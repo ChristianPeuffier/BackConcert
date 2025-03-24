@@ -1,0 +1,47 @@
+<form [formGroup]="concertForm" (ngSubmit)="onSubmit()">
+  <mat-form-field appearance="outline">
+    <mat-label>Nom du concert</mat-label>
+    <input matInput formControlName="nom">
+    <mat-error *ngIf="concertForm.get('nom')?.invalid && concertForm.get('nom')?.touched">
+      Le nom est requis.
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>Date</mat-label>
+    <input matInput [matDatepicker]="picker" formControlName="date">
+    <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker #picker></mat-datepicker>
+    <mat-error *ngIf="concertForm.get('date')?.invalid && concertForm.get('date')?.touched">
+      La date est requise.
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>Lieu</mat-label>
+    <input matInput formControlName="lieu">
+    <mat-error *ngIf="concertForm.get('lieu')?.invalid && concertForm.get('lieu')?.touched">
+      Le lieu est requis.
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>Prix</mat-label>
+    <input matInput type="number" formControlName="prix">
+    <mat-error *ngIf="concertForm.get('prix')?.invalid && concertForm.get('prix')?.touched">
+      Prix invalide (minimum 0).
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>Description</mat-label>
+    <textarea matInput formControlName="description"></textarea>
+    <mat-error *ngIf="concertForm.get('description')?.invalid && concertForm.get('description')?.touched">
+      La description doit faire au moins 10 caractères.
+    </mat-error>
+  </mat-form-field>
+
+  <button mat-raised-button color="primary" type="submit" [disabled]="concertForm.invalid">
+    Créer le concert
+  </button>
+</form>
