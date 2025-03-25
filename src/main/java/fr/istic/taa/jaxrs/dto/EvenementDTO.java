@@ -150,22 +150,12 @@ public class EvenementDTO {
         return genre;
     }
 
-    /**
-     * Getter for the price of the event with two decimal places.
-     * @return the price of the event formatted to 2 decimal places
-     */
-    @JsonFormat(shape = JsonFormat.Shape.STRING)
-    public String getPriceFormatted() {
-        return String.format("%.2f", price);
-    }
-
-    /**
-     * Setter for the price of the event.
-     * @param paramPrice the price of the event
-     */
-    public void setPrice(final double paramPrice) {
-        this.price = paramPrice;
-    }
+        /**
+         * Setter for the price of the event.
+         */
+        public void setPrice(final double price) {
+            this.price = price;
+        }
 
     /**
      * Getter for the price of the event (raw price without formatting).

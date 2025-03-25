@@ -17,7 +17,7 @@ export class EvenementService {
                   description: string,
                   artiste: string,
                   genre: string,
-                  price: number
+                  price: double
                 }): Observable<any> {
     console.log("Envoi de la requête de création d'un événement :", newEvent);
     const token = localStorage.getItem('token');
