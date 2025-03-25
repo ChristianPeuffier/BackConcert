@@ -46,6 +46,7 @@ public final class JpaTest {
             organisateurDAO.save(organisateur);
 
             evenement.setNom("Gims Tour");
+            evenement.setPrice(2);
             evenement.setLieu("Rennes");
             evenement.setDescription("Tournée de france de l'artiste Gims");
             evenement.setGenre("Pop et R&B");
