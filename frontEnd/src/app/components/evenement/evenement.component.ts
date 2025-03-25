@@ -5,10 +5,10 @@ import {MatDatepicker, MatDatepickerInput, MatDatepickerToggle} from '@angular/m
 import {MatInput} from '@angular/material/input';
 import {MatButton} from '@angular/material/button';
 import {NgIf} from '@angular/common';
-import {ConcertService} from '../../services/concert.service';
+import {EvenementService} from '../../services/evenement.service';
 
 @Component({
-  selector: 'app-concerts',
+  selector: 'app-evenement',
   imports: [
     MatFormField,
     ReactiveFormsModule,
@@ -21,49 +21,55 @@ import {ConcertService} from '../../services/concert.service';
     MatLabel,
     MatError
   ],
-  templateUrl: './concerts.component.html',
-  styleUrl: './concerts.component.css'
+  templateUrl: './evenement.component.html',
+  styleUrl: './evenement.css'
 })
-export class ConcertsComponent implements  OnInit {
+export class EvenementComponent implements  OnInit {
 
-  concertForm!: FormGroup;
+  evenementForm!: FormGroup;
 
   eventErrorMessage='';
   eventSuccessMessage='';
 
-  constructor(private form: FormBuilder, private concertService: ConcertService) {
+  constructor(private form: FormBuilder, private evenementService: EvenementService) {
   }
 
   ngOnInit() {
-    this.concertForm = this.form.group({
+    this.evenementForm = this.form.group({
       nom: ['', Validators.required],
       date: [''],
       lieu: ['', Validators.required],
-      description: ['', [Validators.required, Validators.minLength(10)]]
+      description: ['', [Validators.required, Validators.minLength(10)]],
+      artiste: [''],
+      genre: [''],
+      price: ['']
     });
   }
 
 
   onSubmit() {
     const newEvent = {
-      nom: this.concertForm.value.nom,
-      date: this.concertForm.value.date,
-      lieu: this.concertForm.value.lieu,
-      description: this.concertForm.value.description
+      nom: this.evenementForm.value.nom,
+      date: this.evenementForm.value.date,
+      lieu: this.evenementForm.value.lieu,
+      description: this.evenementForm.value.description,
+      artiste: this.evenementForm.value.artiste,
+      genre: this.evenementForm.value.genre,
+      price: this.evenementForm.value.price
     };
 
     console.log("Formulaire en cours d'envoi...");
-    this.concertService.addEvenement(newEvent).subscribe({
+    this.evenementService.addEvenement(newEvent).subscribe({
       next: (response) => {
-        console.log("Concert créé avec succès");
-        this.eventSuccessMessage = "Concert créé avec succès";
+        console.log("Evénement créé avec succès");
+        this.eventSuccessMessage = "Evénement créé avec succès";
 
       },
 
       error: (err) => {
         console.error("Erreur de création", err);
         console.log("Réponse API :", err);
-        this.eventErrorMessage = "Échec de la création du concert";
+        this.eventErrorMessage = "Échec de la création du événement";
       }
     });
   }

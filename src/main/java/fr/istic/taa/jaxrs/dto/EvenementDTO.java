@@ -23,9 +23,18 @@ public class EvenementDTO {
      */
     private String lieu;
     /**
+     * Artiste of the event.
+     */
+    private String artiste;
+    /**
      * Genre of the event.
      */
     private String genre;
+
+    /**
+     * Price of the event.
+     */
+    private double price;
 
 
     /**
@@ -37,7 +46,9 @@ public class EvenementDTO {
         this.description = evenement.getDescription();
         this.date = Date.valueOf(evenement.getDate().toLocalDate());
         this.lieu = evenement.getLieu();
+        this.artiste = evenement.getArtiste();
         this.genre = evenement.getGenre();
+        this.price = evenement.getPrice();
 
     }
 
@@ -77,7 +88,7 @@ public class EvenementDTO {
      * Setter for the date of the event. JsonFormat is used to specify the format of the date as Europe/Paris timezone.
      * @param paramDate the date of the event
      */
-    @JsonFormat(pattern = "yyyy-MM-dd", timezone = "Europe/Paris")  // Vous pouvez choisir le format souhaité
+    @JsonFormat(pattern = "yyyy-MM-dd", timezone = "Europe/Paris")
     public void setDate(final Date paramDate) {
         this.date = paramDate;
     }
@@ -86,7 +97,7 @@ public class EvenementDTO {
      * Getter for the date of the event. JsonFormat is used to specify the format of the date as Europe/Paris timezone.
      * @return the date of the event
      */
-    @JsonFormat(pattern = "yyyy-MM-dd", timezone = "Europe/Paris")  // Vous pouvez choisir le format souhaité
+    @JsonFormat(pattern = "yyyy-MM-dd", timezone = "Europe/Paris")
     public Date getDate() {
         return date;
     }
@@ -108,6 +119,22 @@ public class EvenementDTO {
     }
 
     /**
+     * Setter for the artiste of the event.
+     * @param paramArtiste the artiste of the event
+     */
+    public void setArtiste(final String paramArtiste) {
+        this.artiste = paramArtiste;
+    }
+
+    /**
+     * Getter for the artiste of the event.
+     * @return the artiste of the event
+     */
+    public String getArtiste() {
+        return artiste;
+    }
+
+    /**
      * Setter for the genre of the event.
      * @param paramGenre the genre of the event
      */
@@ -122,5 +149,31 @@ public class EvenementDTO {
     public String getGenre() {
         return genre;
     }
+
+    /**
+     * Getter for the price of the event with two decimal places.
+     * @return the price of the event formatted to 2 decimal places
+     */
+    @JsonFormat(shape = JsonFormat.Shape.STRING)
+    public String getPriceFormatted() {
+        return String.format("%.2f", price);
+    }
+
+    /**
+     * Setter for the price of the event.
+     * @param paramPrice the price of the event
+     */
+    public void setPrice(final double paramPrice) {
+        this.price = paramPrice;
+    }
+
+    /**
+     * Getter for the price of the event (raw price without formatting).
+     * @return the raw price of the event
+     */
+    public double getPrice() {
+        return price;
+    }
+
 
 }

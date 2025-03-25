@@ -3,13 +3,13 @@ import {HomeComponent} from './components/home/home.component';
 import {UtilisateurComponent} from './components/utilisateur/utilisateur.component';
 import {LoginComponent} from './components/login/login.component';
 import {DashboardComponent} from './components/dashboard/dashboard.component';
-import {ConcertsComponent} from './components/concerts/concerts.component';
+import {EvenementComponent} from './components/evenement/evenement.component';
 
 export const routes: Routes = [
   {path: 'utilisateurs', component: UtilisateurComponent},
   {path: 'login', component: LoginComponent},
   {path: 'dashboard', component: DashboardComponent},
-  {path: 'concerts', component: ConcertsComponent},
+  {path: 'evenement', component: EvenementComponent},
   {path: '', component: HomeComponent},
   {path: '**', redirectTo: '', pathMatch: 'full'}
 ];

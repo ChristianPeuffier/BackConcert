@@ -82,6 +82,12 @@ public class Evenement implements Serializable {
     private String genre;
 
     /**
+     * Price of the event.
+     */
+    @Column(length = MAX_LENGTH,name = "price")
+    private double price;
+
+    /**
      * Getter for the id attribute.
      * @return the id attribute as an int.
      */
@@ -207,5 +213,22 @@ public class Evenement implements Serializable {
      */
     public void setGenre(final String paramGenre) {
         this.genre = paramGenre;
+    }
+
+    /**
+     * Getter for the price attribute.
+     * @return the price attribute as a double.
+     */
+    public double getPrice() {
+        return price;
+    }
+
+    /**
+     * Setter for the price attribute.
+     * @param paramPrice the price attribute to set.
+     */
+
+    public void setPrice(final double paramPrice) {
+        this.price = paramPrice;
     }
 }
