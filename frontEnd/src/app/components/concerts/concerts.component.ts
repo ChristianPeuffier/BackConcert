@@ -5,6 +5,7 @@ import {MatDatepicker, MatDatepickerInput, MatDatepickerToggle} from '@angular/m
 import {MatInput} from '@angular/material/input';
 import {MatButton} from '@angular/material/button';
 import {NgIf} from '@angular/common';
+import {ConcertService} from '../../services/concert.service';
 
 @Component({
   selector: 'app-concerts',
@@ -23,25 +24,50 @@ import {NgIf} from '@angular/common';
   templateUrl: './concerts.component.html',
   styleUrl: './concerts.component.css'
 })
-export class ConcertsComponent implements  OnInit{
+export class ConcertsComponent implements  OnInit {
 
   concertForm!: FormGroup;
 
-  constructor(private form: FormBuilder) {}
+  eventErrorMessage='';
+  eventSuccessMessage='';
+
+  constructor(private form: FormBuilder, private concertService: ConcertService) {
+  }
 
   ngOnInit() {
     this.concertForm = this.form.group({
       nom: ['', Validators.required],
-      date: ['', Validators.required],
+      date: [''],
       lieu: ['', Validators.required],
-      prix: [0, [Validators.required, Validators.min(0)]],
       description: ['', [Validators.required, Validators.minLength(10)]]
     });
   }
 
+
   onSubmit() {
-    if (this.concertForm.valid) {
-      console.log("Concert créé avec succès :", this.concertForm.value);
-    }
+    const newEvent = {
+      nom: this.concertForm.value.nom,
+      date: this.concertForm.value.date,
+      lieu: this.concertForm.value.lieu,
+      description: this.concertForm.value.description
+    };
+
+    console.log("Formulaire en cours d'envoi...");
+    this.concertService.addEvenement(newEvent).subscribe({
+      next: (response) => {
+        console.log("Concert créé avec succès");
+        this.eventSuccessMessage = "Concert créé avec succès";
+
+      },
+
+      error: (err) => {
+        console.error("Erreur de création", err);
+        console.log("Réponse API :", err);
+        this.eventErrorMessage = "Échec de la création du concert";
+      }
+    });
   }
 }
+
+
+

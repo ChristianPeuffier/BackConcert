@@ -24,3 +24,13 @@ button {
   padding: 12px;
   font-weight: bold;
 }
+
+.error {
+  color: red;
+  font-size: 14px;
+  margin-top: 5px;
+}
+.success {
+  color: green;
+  font-weight: bold;
+}

@@ -4,9 +4,12 @@ import fr.istic.taa.jaxrs.domain.Evenement;
 import fr.istic.taa.jaxrs.dto.EvenementDTO;
 import fr.istic.taa.jaxrs.service.business.EvenementService;
 import jakarta.ws.rs.*;
+import jakarta.ws.rs.core.Context;
 import jakarta.ws.rs.core.Response;
 import io.swagger.v3.oas.annotations.Parameter;
+import jakarta.ws.rs.core.SecurityContext;
 
+import java.util.Collections;
 import java.util.List;
 
 @Path("evenement")
@@ -49,10 +52,11 @@ public class EvenementRessources {
     @Produces("application/json")
     @Path("/add")
     public Response addEvenement(
-        @Parameter(description = "User object that needs to be added to the store", required = true) final Evenement event)
+            @Parameter(description = "User object that needs to be added to the store", required = true) final Evenement event,
+            @Context SecurityContext securityContext)
     {
         evenementService.save(event);
-        return Response.ok().entity("SUCCESS").build();
+        return Response.status(Response.Status.CREATED).entity(Collections.singletonMap("message","Evénement Créé")).build();
     }
 
     /**

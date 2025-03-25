@@ -9,12 +9,13 @@ export class AuthService {
 
   private apiUrl = 'http://localhost:8080/utilisateur/login';
   private userInfoUrl = 'http://localhost:8080/utilisateur/email';
+  private userAdd = 'http://localhost:8080/utilisateur/add';
 
   constructor(private http : HttpClient) { }
 
   login(email: string, password: string): Observable<any> {
     console.log("Envoi de la requête de login :", { email, password });
-    return this.http.post('http://localhost:8080/utilisateur/login', { email, password });
+    return this.http.post(this.apiUrl, { email, password });
   }
 
 
@@ -56,6 +57,6 @@ export class AuthService {
 
   signup(newUser: { email: string; password: string; prenom: string; nom: string }): Observable<any> {
     console.log("Envoi de la requête d'inscription :", newUser);
-    return this.http.post('http://localhost:8080/utilisateur/add', newUser);
+    return this.http.post(this.userAdd, newUser);
   }
 }

@@ -1,3 +1,7 @@
+Front ( dans un terminale ) : cd frontend / ng serve
+Back ( un autre terminal ) : run-hsqldb-server.bat / show-hsqldb.sh / RestServer.java ( dans src / java et restserv) )
+Créer un service dans le front (rentrer dans front/service) : ng genere service service <nom>
+
 # Ticket Miagester
 
 Ce projet a été réalisé dans le cadre du cours de Systèmes d'Information Répartis (SIR), et a pour but de mettre en place une application web et mobile permettant aux utilisateurs d'acheter des tickets de concert en ligne.
