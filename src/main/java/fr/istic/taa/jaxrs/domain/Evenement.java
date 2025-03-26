@@ -1,14 +1,7 @@
 package fr.istic.taa.jaxrs.domain;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Table;
-import jakarta.persistence.Temporal;
-import jakarta.persistence.TemporalType;
+import jakarta.persistence.*;
+
 import java.io.Serializable;
 import java.sql.Date;
 
@@ -86,6 +79,13 @@ public class Evenement implements Serializable {
      */
     @Column(length = MAX_LENGTH,name = "price")
     private double price;
+
+    /**
+     * Image of the event.
+     */
+    @Lob
+    @Column(columnDefinition = "LONGBLOB") // Permet de stocker des images en BDD
+    private byte[] image;
 
     /**
      * Getter for the id attribute.
@@ -231,4 +231,20 @@ public class Evenement implements Serializable {
     public void setPrice(final double paramPrice) {
         this.price = paramPrice;
     }
+
+    /**
+     * Getter for the image attribute.
+     */
+    public byte[] getImage() {
+        return image;
+    }
+
+    /**
+     * Setter for the image attribute.
+     * @param paramImage the image attribute to set.
+     */
+    public void setImage(final byte[] paramImage) {
+        this.image = paramImage;
+    }
+
 }

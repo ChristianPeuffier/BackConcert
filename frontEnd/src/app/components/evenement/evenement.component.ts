@@ -1,11 +1,18 @@
-import {Component, OnInit} from '@angular/core';
-import {MatError, MatFormField, MatLabel} from '@angular/material/form-field';
+import {ChangeDetectionStrategy, Component, OnInit} from '@angular/core';
+import {MatError, MatFormField, MatFormFieldModule, MatLabel} from '@angular/material/form-field';
 import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
-import {MatDatepicker, MatDatepickerInput, MatDatepickerToggle} from '@angular/material/datepicker';
-import {MatInput} from '@angular/material/input';
+import {
+  MatDatepicker,
+  MatDatepickerInput,
+  MatDatepickerModule,
+  MatDatepickerToggle
+} from '@angular/material/datepicker';
+import {MatInput, MatInputModule} from '@angular/material/input';
 import {MatButton} from '@angular/material/button';
-import {NgIf} from '@angular/common';
+import {NgForOf, NgIf} from '@angular/common';
 import {EvenementService} from '../../services/evenement.service';
+import {MatOption, provideNativeDateAdapter} from '@angular/material/core';
+import {MatSelect} from '@angular/material/select';
 
 @Component({
   selector: 'app-evenement',
@@ -19,10 +26,18 @@ import {EvenementService} from '../../services/evenement.service';
     MatButton,
     NgIf,
     MatLabel,
-    MatError
+    MatError,
+    MatOption,
+    MatSelect,
+    NgForOf,
+    MatFormFieldModule,
+    MatInputModule,
+    MatDatepickerModule
   ],
   templateUrl: './evenement.component.html',
-  styleUrl: './evenement.css'
+  styleUrl: './evenement.css',
+  providers: [provideNativeDateAdapter()],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class EvenementComponent implements  OnInit {
 
@@ -54,7 +69,7 @@ export class EvenementComponent implements  OnInit {
       lieu: this.evenementForm.value.lieu,
       description: this.evenementForm.value.description,
       artiste: this.evenementForm.value.artiste,
-      genre: this.evenementForm.value.genre,
+      genre: this.evenementForm.value.genre.join(', '),
       price: this.evenementForm.value.price
     };
 
@@ -73,6 +88,13 @@ export class EvenementComponent implements  OnInit {
       }
     });
   }
+
+  genres: string[] = [
+    'Rock', 'Pop', 'Jazz', 'Blues', 'Hip-hop', 'Classique', 'Reggae',
+    'Electro', 'Metal', 'Folk', 'R&B', 'Country', 'Latino', 'Soul', 'Punk'
+  ];
+
+
 }
 
 

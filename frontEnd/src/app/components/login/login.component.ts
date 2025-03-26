@@ -24,7 +24,9 @@ import {MatTab, MatTabGroup} from '@angular/material/tabs';
     MatTabGroup,
     MatTab
   ],
-  styleUrls: ['./login.component.css']
+  styleUrls: ['./login.component.css'],
+
+
 })
 export class LoginComponent {
   email: string = '';

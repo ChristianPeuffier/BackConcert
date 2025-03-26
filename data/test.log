@@ -1,44 +1,6 @@
-/*C6*/SET SCHEMA PUBLIC
-INSERT INTO UTILISATEUR VALUES(702,'Utilisateur','christian.peuffier@gmail.com','Peuffier','password','Christian')
-ALTER SEQUENCE PUBLIC.UTILISATEUR_SEQ RESTART WITH 801
-COMMIT
-INSERT INTO UTILISATEUR VALUES(703,'organisateur','AlexandreR0910@gmail.com','Raulais','password','Alexandre')
-COMMIT
-ALTER SEQUENCE PUBLIC.EVENEMENT_SEQ RESTART WITH 951
-DISCONNECT
-/*C7*/SET SCHEMA PUBLIC
-INSERT INTO UTILISATEUR VALUES(752,'Utilisateur','christian.peuffier@gmail.com','Peuffier','password','Christian')
-ALTER SEQUENCE PUBLIC.UTILISATEUR_SEQ RESTART WITH 851
-COMMIT
-INSERT INTO UTILISATEUR VALUES(753,'organisateur','AlexandreR0910@gmail.com','Raulais','password','Alexandre')
-COMMIT
-ALTER SEQUENCE PUBLIC.EVENEMENT_SEQ RESTART WITH 1001
-DISCONNECT
-/*C5*/SET SCHEMA PUBLIC
-DROP TABLE public.ticket
-DROP TABLE public.stats
-DROP TABLE public.evenement
-/*C8*/SET SCHEMA PUBLIC
-create table evenement (date date, id integer not null, price float(53), organisateur_id bigint, artiste varchar(100), genre varchar(100), nom varchar(100), description varchar(1000), lieu varchar(255), primary key (id))
-create table Stats (evenement_id integer, id integer not null, primary key (id))
-create table ticket (dateAchat date, evenement_id integer, id integer not null, prix float(53), utilisateur_id bigint, statut varchar(100) check (statut in ('ACHETE','ANNULE','REMBOURSE','RESERVE')), primary key (id))
-alter table evenement add constraint FKjh9v630rxbsdflex9ij94rjai foreign key (organisateur_id) references utilisateur
-alter table Stats add constraint FKnx30p674yasit6i7549ejsuqf foreign key (evenement_id) references evenement
-alter table ticket add constraint FK4l049kq87r4dhky2rijk4r0f5 foreign key (evenement_id) references evenement
-alter table ticket add constraint FKr6p65raty6l8vrfssxrdolnee foreign key (utilisateur_id) references utilisateur
-INSERT INTO UTILISATEUR VALUES(802,'Utilisateur','christian.peuffier@gmail.com','Peuffier','password','Christian')
-ALTER SEQUENCE PUBLIC.UTILISATEUR_SEQ RESTART WITH 901
-COMMIT
-INSERT INTO UTILISATEUR VALUES(803,'organisateur','AlexandreR0910@gmail.com','Raulais','password','Alexandre')
-COMMIT
-INSERT INTO EVENEMENT VALUES('2025-03-25',952,2.0E0,803,NULL,'Pop et R&B','Gims Tour','Tourn\u00e9e de france de l''artiste Gims','Rennes')
-ALTER SEQUENCE PUBLIC.EVENEMENT_SEQ RESTART WITH 1051
-COMMIT
-DISCONNECT
-/*C10*/SET SCHEMA PUBLIC
-INSERT INTO EVENEMENT VALUES(NULL,1002,0.0E0,NULL,'','','test50','testttttttttt','Rennes')
-ALTER SEQUENCE PUBLIC.EVENEMENT_SEQ RESTART WITH 1101
-COMMIT
-DISCONNECT
 /*C9*/SET SCHEMA PUBLIC
-DISCONNECT
+INSERT INTO EVENEMENT VALUES(NULL,1052,0.0E0,NULL,'','Rock, Pop, Blues','testliste','testttttttt','rennes')
+ALTER SEQUENCE PUBLIC.EVENEMENT_SEQ RESTART WITH 1151
+COMMIT
+INSERT INTO EVENEMENT VALUES(NULL,1053,6.0E0,NULL,'','Rock, Pop, Blues','testliste2','testttttttt','rennes')
+COMMIT
