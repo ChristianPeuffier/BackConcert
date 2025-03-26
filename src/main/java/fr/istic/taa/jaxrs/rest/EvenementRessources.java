@@ -5,7 +5,6 @@ import fr.istic.taa.jaxrs.dto.EvenementDTO;
 import fr.istic.taa.jaxrs.service.business.EvenementService;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.Context;
-import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 import io.swagger.v3.oas.annotations.Parameter;
 import jakarta.ws.rs.core.SecurityContext;
@@ -49,8 +48,8 @@ public class EvenementRessources {
      * @return the response
      */
     @POST
-    @Consumes(MediaType.MULTIPART_FORM_DATA)
-    @Produces(MediaType.APPLICATION_JSON)
+    @Consumes("application/json")
+    @Produces("application/json")
     @Path("/add")
     public Response addEvenement(
             @Parameter(description = "User object that needs to be added to the store", required = true) final Evenement event,

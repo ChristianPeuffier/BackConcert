@@ -52,7 +52,7 @@ export class EvenementComponent implements  OnInit {
   ngOnInit() {
     this.evenementForm = this.form.group({
       nom: ['', Validators.required],
-      date: [''],
+      date: ['', Validators.required],
       lieu: ['', Validators.required],
       description: ['', [Validators.required, Validators.minLength(10)]],
       artiste: [''],
@@ -69,7 +69,9 @@ export class EvenementComponent implements  OnInit {
       lieu: this.evenementForm.value.lieu,
       description: this.evenementForm.value.description,
       artiste: this.evenementForm.value.artiste,
-      genre: this.evenementForm.value.genre.join(', '),
+      genre: this.evenementForm.value.genre && this.evenementForm.value.genre.length > 0
+        ? this.evenementForm.value.genre.join(', ')
+        : null,
       price: this.evenementForm.value.price
     };
 

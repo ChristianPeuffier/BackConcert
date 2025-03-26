@@ -7,6 +7,7 @@ import {Observable} from 'rxjs';
 })
 export class EvenementService {
   private apiUrl = 'http://localhost:8080/evenement/add';
+  private getUrl = 'http://localhost:8080/evenement/';
   constructor( private http: HttpClient ) {}
 
   addEvenement(newEvent :
@@ -23,6 +24,10 @@ export class EvenementService {
     const token = localStorage.getItem('token');
     const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
     return this.http.post(this.apiUrl, newEvent, {headers});
+  }
+
+  getEvenements(): Observable<any[]> {
+    return this.http.get<any[]>(this.getUrl);
   }
 }
 

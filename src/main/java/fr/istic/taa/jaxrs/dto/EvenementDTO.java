@@ -37,10 +37,6 @@ public class EvenementDTO {
      */
     private double price;
 
-    /**
-     * Image of the event.
-     */
-    private String image;
 
 
     /**
@@ -55,7 +51,6 @@ public class EvenementDTO {
         this.artiste = evenement.getArtiste();
         this.genre = evenement.getGenre();
         this.price = evenement.getPrice();
-        this.image = Base64.getEncoder().encodeToString(evenement.getImage());
     }
 
     /**
@@ -171,20 +166,6 @@ public class EvenementDTO {
         return price;
     }
 
-    /**
-     * Getter for the image of the event.
-     * @return the image of the event
-     */
-    public String getImage() {
-        return image;
-    }
-
-    /**
-     * Setter for the image of the event.
-     */
-    public void setImage(final String image) {
-        this.image = image;
-    }
 
 
 }

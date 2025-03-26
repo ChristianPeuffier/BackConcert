@@ -1,12 +1,53 @@
-<div class="home-container">
-  <h1>Bienvenue sur notre plateforme de gestion de tickets ! 🎟️</h1>
-  <p>
-    Cette application vous permet de gérer vos utilisateurs et leurs tickets en toute simplicité.
-    Naviguez entre les différentes sections pour découvrir les fonctionnalités.
-  </p>
+<div class="home-container" *ngIf="authService.isLoggedIn()">
 
+  <!-- Carte de Bienvenue -->
+  <mat-card class="welcome-card">
+    <mat-card-header class="header-card">
+      <mat-card-title class="welcome-title">
+        Bienvenue sur notre plateforme de gestion de tickets ! 🎟️
+      </mat-card-title>
+    </mat-card-header>
+  </mat-card>
+
+  <!-- Buttons Section -->
   <div class="buttons">
-    <a routerLink="/utilisateurs" class="btn" *ngIf="!authService.isLoggedIn()">Voir les utilisateurs</a>
-    <a routerLink="/tickets" class="btn btn-secondary" *ngIf="authService.isLoggedIn()">Gérer les tickets</a>
+    <button mat-raised-button color="primary" routerLink="/utilisateurs" *ngIf="!authService.isLoggedIn()">
+      Voir les utilisateurs
+    </button>
+    <button mat-raised-button color="accent" routerLink="/tickets" *ngIf="authService.isLoggedIn()">
+      Gérer les tickets
+    </button>
+  </div>
+
+  <!-- Divider -->
+  <mat-divider class="divider"></mat-divider>
+
+  <!-- Events List Section -->
+  <h2 class="section-title">Liste des événements</h2>
+
+  <!-- Empty state -->
+  <div *ngIf="evenements.length === 0">
+    <mat-card class="empty-card">
+      <mat-card-content>Aucun événement disponible pour le moment.</mat-card-content>
+    </mat-card>
+  </div>
+
+  <!-- Event List -->
+  <div class="events-container" *ngIf="evenements.length > 0">
+    <mat-card *ngFor="let evenement of evenements" class="event-card">
+      <mat-card-header>
+        <mat-card-title>{{evenement.nom}}</mat-card-title>
+        <mat-card-subtitle>{{ evenement.date}} - {{evenement.lieu}}</mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-content>
+        <p><strong>Description:</strong> {{evenement.description }</p>
+        <p><strong>Artiste:</strong> {{evenement.artiste}}</p>
+        <p><strong>Genre:</strong> {{evenement.genre}}</p>
+        <p><strong>Prix:</strong> {{evenement.price}}€</p>
+      </mat-card-content>
+      <mat-card-actions>
+        <button mat-button color="primary">Plus d'infos</button>
+      </mat-card-actions>
+    </mat-card>
   </div>
 </div>
