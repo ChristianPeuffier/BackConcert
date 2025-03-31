@@ -1,28 +1,54 @@
 <div class="achat-container">
-  <mat-card class="achat-card">
-    <mat-card-header>
-      <mat-card-title>Achat de ticket pour {{ evenement?.nom }}</mat-card-title>
-      <mat-card-subtitle>{{ evenement?.date }} - {{ evenement?.lieu }}</mat-card-subtitle>
-    </mat-card-header>
+  <h2>Achat de tickets pour {{ evenement?.nom }}</h2>
+  <h3>{{ evenement?.date }} - {{ evenement?.lieu }}</h3>
 
-    <mat-card-content>
-      <p><strong>Description:</strong> {{ evenement?.description }}</p>
+  <mat-stepper linear #stepper>
+    <!-- Étape 1 : Sélection du nombre de tickets -->
+    <mat-step [stepControl]="step1Form">
+      <form [formGroup]="step1Form">
+        <ng-template matStepLabel>Sélection des tickets</ng-template>
+        <label>Nombre de tickets :</label>
+        <input type="number" formControlName="quantite" min="1" (change)="calculerTotal()">
+        <div class="step-actions">
+          <button mat-button matStepperNext [disabled]="step1Form.invalid">Suivant</button>
+        </div>
+      </form>
+    </mat-step>
+
+    <!-- Étape 2 : Confirmation -->
+    <mat-step>
+      <ng-template matStepLabel>Confirmation</ng-template>
+      <p><strong>Événement:</strong> {{ evenement?.nom }}</p>
+      <p><strong>Date:</strong> {{ evenement?.date }}</p>
+      <p><strong>Lieu:</strong> {{ evenement?.lieu }}</p>
       <p><strong>Artiste:</strong> {{ evenement?.artiste }}</p>
       <p><strong>Genre:</strong> {{ evenement?.genre }}</p>
-      <p><strong>Prix:</strong> {{ evenement?.price }}€ par ticket</p>
-
-      <!-- Sélection du nombre de tickets -->
-      <mat-form-field appearance="outline">
-        <mat-label>Nombre de tickets</mat-label>
-        <input matInput type="number" [(ngModel)]="quantite" min="1" (change)="calculerTotal()">
-      </mat-form-field>
-
+      <p><strong>Prix unitaire:</strong> {{ evenement?.price }}€</p>
+      <p><strong>Nombre de tickets:</strong> {{ quantite }}</p>
       <h3>Total: {{ total }}€</h3>
-    </mat-card-content>
+      <div class="step-actions">
+        <button mat-button matStepperPrevious>Retour</button>
+        <button mat-button matStepperNext>Suivant</button>
+      </div>
+    </mat-step>
 
-    <mat-card-actions align="end">
-      <button mat-button routerLink="/">Annuler</button>
-      <button mat-raised-button color="primary" (click)="acheterTicket()">Payer</button>
-    </mat-card-actions>
-  </mat-card>
+    <!-- Étape 3 : Paiement -->
+    <mat-step>
+      <ng-template matStepLabel>Paiement</ng-template>
+      <p>Veuillez entrer vos informations de paiement :</p>
+      <label>Numéro de carte :</label>
+      <input type="text" placeholder="**** **** **** ****">
+
+      <label>Date d'expiration :</label>
+      <input type="text" placeholder="MM/AA">
+
+      <label>CVV :</label>
+      <input type="text" placeholder="123">
+
+      <div class="step-actions">
+        <button mat-button matStepperPrevious>Retour</button>
+        <button mat-raised-button color="primary" (click)="acheterTicket()">Payer</button>
+      </div>
+    </mat-step>
+  </mat-stepper>
 </div>

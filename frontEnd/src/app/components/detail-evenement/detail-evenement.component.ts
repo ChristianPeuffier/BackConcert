@@ -24,14 +24,6 @@ import {
   selector: 'app-detail-evenement',
   imports: [
     MatButton,
-    MatCard,
-    MatCardContent,
-    MatCardHeader,
-    MatCardSubtitle,
-    MatCardTitle,
-    MatDivider,
-    NgForOf,
-    NgIf,
     RouterLink,
     MatDialogContent,
     MatDialogTitle,
@@ -53,7 +45,19 @@ export class DetailEvenementComponent implements OnInit{
   }
 
   acheterTicket(evenement: any) {
+    console.log("Tentative d'achat de ticket pour l'événement :", evenement);
+    this.router.navigate(['/achatTicket'], {
+      queryParams: {
+        nom: evenement.nom,
+        date: evenement.date,
+        lieu: evenement.lieu,
+        price: evenement.price,
+        id: evenement.id,
+        artiste: evenement.artiste,
+        genre: evenement.genre,
+      },
+      queryParamsHandling: 'merge'
+    }).then(r =>  console.log("Redirection vers la page d'achat de ticket"));
     this.dialogRef.close();
-    this.router.navigate(['/achatTicket'], {state: {evenement}}).then(r => console.log("Redirection vers la page d'achat de ticket"));
-   }
+  }
 }

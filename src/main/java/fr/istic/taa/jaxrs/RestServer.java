@@ -8,7 +8,8 @@ import java.util.logging.Logger;
 /**
  * RESTfull microservice, based on JAX-RS and JBoss Undertow.
  * */
-public final class RestServer {
+public final class
+RestServer {
 
     private RestServer() {
         throw new UnsupportedOperationException("No RestServer instances for you!");

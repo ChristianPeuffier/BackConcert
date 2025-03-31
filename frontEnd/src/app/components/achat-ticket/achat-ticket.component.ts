@@ -11,47 +11,65 @@ import {MatFormField, MatLabel} from '@angular/material/form-field';
 import {MatButton} from '@angular/material/button';
 import {ActivatedRoute, Router, RouterLink} from '@angular/router';
 import {EvenementService} from '../../services/evenement.service';
-import {FormsModule} from '@angular/forms';
+import {FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators} from '@angular/forms';
 import {MatInput} from '@angular/material/input';
 import {AuthService} from '../../services/auth.service';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
+import {MatStep, MatStepLabel, MatStepper, MatStepperNext, MatStepperPrevious} from '@angular/material/stepper';
 
 @Component({
   selector: 'app-achat-ticket',
   imports: [
-    MatCardActions,
     MatButton,
     MatCardHeader,
     MatCard,
     MatCardContent,
     MatFormField,
     MatLabel,
-    RouterLink,
     FormsModule,
     MatCardTitle,
     MatCardSubtitle,
-    MatInput
+    MatInput,
+    MatStep,
+    MatStepper,
+    ReactiveFormsModule,
+    MatStepperPrevious,
+    MatStepLabel,
+    MatStepperNext
   ],
   templateUrl: './achat-ticket.component.html',
   styleUrl: './achat-ticket.component.css'
 })
 export class AchatTicketComponent implements OnInit {
   evenement: any;
+  step1Form!: FormGroup;
   quantite: number = 1;
   total: number = 0;
 
-  constructor(private route: ActivatedRoute, private evenementService: EvenementService, protected authService: AuthService,
-              @Inject(MAT_DIALOG_DATA) public data: any, private router : Router) {}
+  constructor(private route: ActivatedRoute,
+              private evenementService: EvenementService,
+              protected authService: AuthService,
+              private router: Router,
+              private fb: FormBuilder) {}
 
   ngOnInit() {
-    const navigation = this.router.getCurrentNavigation();
-    this.evenement = navigation?.extras.state?.['evenement'];
-
-    if (!this.evenement) {
-      // Si aucune donnée n'a été passée, rediriger vers la liste des événements
-      this.router.navigate(['/evenements']);
-    }
-
+    this.step1Form = this.fb.group({
+      quantite: [1, [Validators.required, Validators.min(1)]]
+    });
+    this.route.queryParams.subscribe(params => {
+      console.log("Params récupérés :", params);
+      this.evenement = {
+        nom: params['nom'],
+        date: params['date'],
+        lieu: params['lieu'],
+        price: params['price'],
+        description: params['description'],
+        artiste: params['artiste'],
+        genre: params['genre']
+      };
+    });
+    console.log("Evenement récupéré :", this.evenement);
+    this.calculerTotal();
   }
 
   calculerTotal() {
