@@ -6,8 +6,7 @@ import {EvenementService} from '../../services/evenement.service';
 import {MatCard, MatCardContent, MatCardHeader,MatCardModule, MatCardTitle} from '@angular/material/card';
 import {MatDivider} from '@angular/material/divider';
 import {MatButton} from '@angular/material/button';
-import {MatDialog, MatDialogRef} from '@angular/material/dialog';
-import {LoginComponent} from '../login/login.component';
+import {MatDialog} from '@angular/material/dialog';
 import {DetailEvenementComponent} from '../detail-evenement/detail-evenement.component';
 
 @Component({
@@ -41,17 +40,17 @@ export class HomeComponent implements OnInit{
   ngOnInit() {
     if(this.authService.isLoggedIn()){
       this.authService.getUserInfo().subscribe({
-        next:(userInfo) => {
+        next:(userInfo: { prenom: string; }) => {
           this.userFirstName = userInfo.prenom;
         },
-        error: (err) => {
+        error: (err: any) => {
           console.error("Erreur de récupération des informations de l'utilisateur", err);
         }
       });
     }
 
     this.evenementService.getEvenements().subscribe(
-      (data) => {
+      (data: any[]) => {
         this.evenements = data;
       }
     );

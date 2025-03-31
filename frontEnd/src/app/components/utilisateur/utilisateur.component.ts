@@ -17,7 +17,7 @@ export class UtilisateurComponent {
 
   ngOnInit() {
     this.utilisateurService.getUtilisateurs().subscribe(
-      (data) => {
+      (data: any[]) => {
         this.utilisateurs = data;
       }
     );

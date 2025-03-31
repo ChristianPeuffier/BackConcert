@@ -1,14 +1,4 @@
 import {Component, Inject, OnInit} from '@angular/core';
-import {
-    MatCard,
-    MatCardActions,
-    MatCardContent,
-    MatCardHeader,
-    MatCardSubtitle,
-    MatCardTitle
-} from "@angular/material/card";
-import {MatDivider} from "@angular/material/divider";
-import {NgForOf, NgIf} from "@angular/common";
 import {Router, RouterLink} from "@angular/router";
 import {AuthService} from '../../services/auth.service';
 import {MatButton} from '@angular/material/button';

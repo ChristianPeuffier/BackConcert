@@ -77,13 +77,12 @@ export class EvenementComponent implements  OnInit {
 
     console.log("Formulaire en cours d'envoi...");
     this.evenementService.addEvenement(newEvent).subscribe({
-      next: (response) => {
-        console.log("Evénement créé avec succès");
+      next: ( userInfo : {nom : string}) => {
+        console.log(userInfo.nom + "créé avec succès");
         this.eventSuccessMessage = "Evénement créé avec succès";
+        },
 
-      },
-
-      error: (err) => {
+      error: (err: any) => {
         console.error("Erreur de création", err);
         console.log("Réponse API :", err);
         this.eventErrorMessage = "Échec de la création du événement";

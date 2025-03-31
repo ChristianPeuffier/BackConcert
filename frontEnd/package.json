@@ -21,10 +21,11 @@
     "@angular/platform-browser-dynamic": "^19.2.3",
     "@angular/router": "^19.2.3",
     "@coreui/angular": "^5.3.16",
+    "ajv": "^8.17.1",
     "ngx-owl-carousel-o": "^19.0.0",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
-    "zone.js": "~0.15.0"
+    "zone.js": "^0.15.0"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "^19.2.4",

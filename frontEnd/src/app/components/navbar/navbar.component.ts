@@ -23,10 +23,7 @@ import {LoginComponent} from '../login/login.component';
     MatMenuTrigger,
     MatButton,
     MatMenuItem,
-    MatFormField,
     MatIcon,
-    MatInput,
-    MatIconButton,
     MatToolbar,
     NgClass
   ],
@@ -47,10 +44,10 @@ export class NavbarComponent implements OnInit{
   ngOnInit() {
     if(this.authService.isLoggedIn()){
       this.authService.getUserInfo().subscribe({
-        next:(userInfo) => {
+        next:(userInfo: { prenom: string; }) => {
           this.userFirstName = userInfo.prenom;
         },
-        error: (err) => {
+        error: (err: any) => {
           console.error("Erreur de récupération des informations de l'utilisateur", err);
         }
       });

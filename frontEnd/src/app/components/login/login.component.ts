@@ -45,14 +45,14 @@ export class LoginComponent {
   onLogin() {
     console.log("Tentative de connexion...");
     this.authService.login(this.email, this.password).subscribe({
-      next: (response) => {
+      next: (response: { token: string; id: string; }) => {
         console.log("Token reçu :", response.token);
         // @ts-ignore
         this.authService.saveToken(response.token);
         this.authService.saveId(response.id);
         this.dialogRef.close();
       },
-      error: (err) => {
+      error: (err: any) => {
         console.error("Erreur de connexion", err);
         console.log("Réponse API :", err);
         this.errorMessage = "Échec de la connexion. Vérifiez vos identifiants.";
@@ -70,12 +70,12 @@ export class LoginComponent {
     };
 
     this.authService.signup(newUser).subscribe({
-      next: (response) => {
+      next: (response: { message: string; }) => {
         console.log("Réponse du back :", response);
         this.signupSuccessMessage = response.message || "Inscription réussie ! Vous pouvez vous connecter.";
         this.signupErrorMessage = ""; // Effacer un éventuel message d'erreur
       },
-      error: (err) => {
+      error: (err: { error: string; }) => {
         console.error("Erreur : ", err);
         this.signupErrorMessage = err.error || "Une erreur est survenue.";
         this.signupSuccessMessage = "";

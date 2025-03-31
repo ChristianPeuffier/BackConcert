@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
+// @ts-ignore
 import {Observable} from 'rxjs';
 
 @Injectable({
@@ -13,7 +14,7 @@ export class UtilisateurService {
     const token = localStorage.getItem('token');
 
     if (!token) {
-      return new Observable(observer => observer.error('Token non trouvé'));
+      return new Observable((observer: { error: (arg0: string) => any; }) => observer.error('Token non trouvé'));
     }
 
     const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
