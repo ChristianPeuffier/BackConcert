@@ -40,14 +40,17 @@
         <mat-card-subtitle>{{ evenement.date}} - {{evenement.lieu}}</mat-card-subtitle>
       </mat-card-header>
       <mat-card-content>
-        <p><strong>Description:</strong> {{evenement.description }</p>
+        <p><strong>Description:</strong> {{evenement.description}}</p>
         <p><strong>Artiste:</strong> {{evenement.artiste}}</p>
         <p><strong>Genre:</strong> {{evenement.genre}}</p>
         <p><strong>Prix:</strong> {{evenement.price}}€</p>
       </mat-card-content>
       <mat-card-actions>
-        <button mat-button color="primary">Plus d'infos</button>
+        <button mat-button color="primary" (click)="openEvenementDialog(evenement)">Plus d'infos</button>
       </mat-card-actions>
     </mat-card>
   </div>
+
+
+
 </div>

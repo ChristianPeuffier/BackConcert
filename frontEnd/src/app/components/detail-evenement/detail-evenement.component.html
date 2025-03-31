@@ -1,0 +1,13 @@
+<h2 mat-dialog-title>{{ data.nom }}</h2>
+<mat-dialog-content>
+  <p><strong>Date:</strong> {{ data.date }}</p>
+  <p><strong>Lieu:</strong> {{ data.lieu }}</p>
+  <p><strong>Description:</strong> {{ data.description }}</p>
+  <p><strong>Artiste:</strong> {{ data.artiste }}</p>
+  <p><strong>Genre:</strong> {{ data.genre }}</p>
+  <p><strong>Prix:</strong> {{ data.price }}€</p>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button color="primary" routerLink="/achatTicket" (click)="acheterTicket(data)">Acheter un ticket</button>
+  <button mat-button (click)="closeDialog()">Fermer</button>
+</mat-dialog-actions>

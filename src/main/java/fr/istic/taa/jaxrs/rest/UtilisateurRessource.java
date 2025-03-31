@@ -104,15 +104,19 @@ public class UtilisateurRessource {
   @Consumes("application/json")
   @Produces("application/json")
   public Response login(@Parameter(description = "User login credentials", required = true) final Utilisateur user ){
+    System.out.println("login : " + user.getEmail() + " " + user.getPassword());
     try {
       if(user.getEmail() == null || user.getPassword() == null) {
         return Response.status(Response.Status.BAD_REQUEST).entity("Email et mot de passe requis").build();
       }
       UtilisateurDTO userFound = utilisateurService.getUtilisateurByEmail(user.getEmail());
+      System.out.println("userFound");
         if(userFound == null) {
             return Response.status(Response.Status.BAD_REQUEST).entity("Utilisateur non trouvé").build();
         }
+
         boolean passwordMatch = utilisateurService.checkPassword(user.getEmail(), user.getPassword());
+        System.out.println("passwordMatch");
         if(!passwordMatch) {
           return Response.status(Response.Status.BAD_REQUEST).entity("Mot de passe incorrect").build();
         }

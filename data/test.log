@@ -1,66 +1,31 @@
-/*C3*/SET SCHEMA PUBLIC
-drop table ticket
-drop table stats
-drop table evenement
-/*C4*/SET SCHEMA PUBLIC
-create table evenement (date date, id integer not null, price float(53), organisateur_id bigint, artiste varchar(100), genre varchar(100), nom varchar(100), description varchar(1000), lieu varchar(255), primary key (id))
-create table Stats (evenement_id integer, id integer not null, primary key (id))
-create table ticket (dateAchat date, evenement_id integer, id integer not null, prix float(53), utilisateur_id bigint, statut varchar(100) check (statut in ('ACHETE','ANNULE','REMBOURSE','RESERVE')), primary key (id))
-alter table evenement add constraint FKjh9v630rxbsdflex9ij94rjai foreign key (organisateur_id) references utilisateur
-alter table Stats add constraint FKnx30p674yasit6i7549ejsuqf foreign key (evenement_id) references evenement
-alter table ticket add constraint FK4l049kq87r4dhky2rijk4r0f5 foreign key (evenement_id) references evenement
-alter table ticket add constraint FKr6p65raty6l8vrfssxrdolnee foreign key (utilisateur_id) references utilisateur
-INSERT INTO UTILISATEUR VALUES(852,'Utilisateur','christian.peuffier@gmail.com','Peuffier','password','Christian')
-ALTER SEQUENCE PUBLIC.UTILISATEUR_SEQ RESTART WITH 951
-COMMIT
-INSERT INTO UTILISATEUR VALUES(853,'organisateur','AlexandreR0910@gmail.com','Raulais','password','Alexandre')
-COMMIT
-INSERT INTO EVENEMENT VALUES('2025-03-26',1102,0.0E0,853,NULL,'Pop et R&B','Gims Tour','Tourn\u00e9e de france de l''artiste Gims','Rennes')
-ALTER SEQUENCE PUBLIC.EVENEMENT_SEQ RESTART WITH 1201
+/*C12*/SET SCHEMA PUBLIC
+DISCONNECT
+/*C13*/SET SCHEMA PUBLIC
+INSERT INTO UTILISATEUR VALUES(952,'Utilisateur','test@hfjh.com','test','$2a$12$uzU1hvTOwCWbSx2kXJWXreExrP4DSjDvu/YMR3KVJRsKVDJ.aGt66','test')
+ALTER SEQUENCE PUBLIC.UTILISATEUR_SEQ RESTART WITH 1051
 COMMIT
 DISCONNECT
-/*C5*/SET SCHEMA PUBLIC
-INSERT INTO EVENEMENT VALUES('2025-03-28',1152,70.0E0,NULL,'Gims',NULL,'testGenres','evenement \u00e0 rennes','Rennes')
-ALTER SEQUENCE PUBLIC.EVENEMENT_SEQ RESTART WITH 1251
-COMMIT
-INSERT INTO EVENEMENT VALUES('2025-03-28',1153,70.0E0,NULL,'Gims','Pop, Jazz, Blues','testGenres2','evenement \u00e0 rennes','Rennes')
-COMMIT
+/*C14*/SET SCHEMA PUBLIC
 DISCONNECT
-/*C8*/SET SCHEMA PUBLIC
-INSERT INTO EVENEMENT VALUES('2025-03-13',1202,0.0E0,NULL,'',NULL,'testtttt','refzczfcze','rennes')
-ALTER SEQUENCE PUBLIC.EVENEMENT_SEQ RESTART WITH 1301
-COMMIT
-/*C6*/SET SCHEMA PUBLIC
-INSERT INTO EVENEMENT VALUES(NULL,1203,0.0E0,NULL,'',NULL,'testant','dezdezdezdd','dedzed')
-COMMIT
-/*C8*/DISCONNECT
-/*C7*/SET SCHEMA PUBLIC
-DISCONNECT
-/*C6*/DISCONNECT
-/*C3*/drop table ticket
-drop table stats
-drop table evenement
 /*C11*/SET SCHEMA PUBLIC
-create table evenement (date date, id integer not null, price float(53), organisateur_id bigint, artiste varchar(100), genre varchar(100), nom varchar(100), description varchar(1000), lieu varchar(255), primary key (id))
-create table Stats (evenement_id integer, id integer not null, primary key (id))
-create table ticket (dateAchat date, evenement_id integer, id integer not null, prix float(53), utilisateur_id bigint, statut varchar(100) check (statut in ('ACHETE','ANNULE','REMBOURSE','RESERVE')), primary key (id))
-alter table evenement add constraint FKjh9v630rxbsdflex9ij94rjai foreign key (organisateur_id) references utilisateur
-alter table Stats add constraint FKnx30p674yasit6i7549ejsuqf foreign key (evenement_id) references evenement
-alter table ticket add constraint FK4l049kq87r4dhky2rijk4r0f5 foreign key (evenement_id) references evenement
-alter table ticket add constraint FKr6p65raty6l8vrfssxrdolnee foreign key (utilisateur_id) references utilisateur
-INSERT INTO UTILISATEUR VALUES(902,'Utilisateur','christian.peuffier@gmail.com','Peuffier','password','Christian')
-ALTER SEQUENCE PUBLIC.UTILISATEUR_SEQ RESTART WITH 1001
+DELETE FROM EVENEMENT WHERE ID=1252
 COMMIT
-INSERT INTO UTILISATEUR VALUES(903,'organisateur','AlexandreR0910@gmail.com','Raulais','password','Alexandre')
+DELETE FROM UTILISATEUR WHERE ID=702
+DELETE FROM UTILISATEUR WHERE ID=703
+DELETE FROM UTILISATEUR WHERE ID=752
+DELETE FROM UTILISATEUR WHERE ID=753
+DELETE FROM UTILISATEUR WHERE ID=802
+DELETE FROM UTILISATEUR WHERE ID=803
+DELETE FROM UTILISATEUR WHERE ID=852
+DELETE FROM UTILISATEUR WHERE ID=853
+DELETE FROM UTILISATEUR WHERE ID=902
+DELETE FROM UTILISATEUR WHERE ID=903
+DELETE FROM UTILISATEUR WHERE ID=952
 COMMIT
-INSERT INTO EVENEMENT VALUES('2025-03-26',1252,0.0E0,903,NULL,'Pop et R&B','Gims Tour','Tourn\u00e9e de france de l''artiste Gims','Rennes')
-ALTER SEQUENCE PUBLIC.EVENEMENT_SEQ RESTART WITH 1351
+/*C16*/SET SCHEMA PUBLIC
+INSERT INTO EVENEMENT VALUES('2025-03-28',1352,23.0E0,NULL,'gims','Hip-hop','test details','je suis un super \u00e9venement','quiberon')
+ALTER SEQUENCE PUBLIC.EVENEMENT_SEQ RESTART WITH 1451
 COMMIT
 DISCONNECT
-/*C10*/SET SCHEMA PUBLIC
-INSERT INTO EVENEMENT VALUES('2025-03-27',1302,0.0E0,NULL,'',NULL,'rennes','efzefczeae','rennes')
-ALTER SEQUENCE PUBLIC.EVENEMENT_SEQ RESTART WITH 1401
-COMMIT
-/*C9*/SET SCHEMA PUBLIC
+/*C15*/SET SCHEMA PUBLIC
 DISCONNECT
-/*C10*/DISCONNECT

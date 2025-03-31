@@ -1,0 +1,28 @@
+<div class="achat-container">
+  <mat-card class="achat-card">
+    <mat-card-header>
+      <mat-card-title>Achat de ticket pour {{ evenement?.nom }}</mat-card-title>
+      <mat-card-subtitle>{{ evenement?.date }} - {{ evenement?.lieu }}</mat-card-subtitle>
+    </mat-card-header>
+
+    <mat-card-content>
+      <p><strong>Description:</strong> {{ evenement?.description }}</p>
+      <p><strong>Artiste:</strong> {{ evenement?.artiste }}</p>
+      <p><strong>Genre:</strong> {{ evenement?.genre }}</p>
+      <p><strong>Prix:</strong> {{ evenement?.price }}€ par ticket</p>
+
+      <!-- Sélection du nombre de tickets -->
+      <mat-form-field appearance="outline">
+        <mat-label>Nombre de tickets</mat-label>
+        <input matInput type="number" [(ngModel)]="quantite" min="1" (change)="calculerTotal()">
+      </mat-form-field>
+
+      <h3>Total: {{ total }}€</h3>
+    </mat-card-content>
+
+    <mat-card-actions align="end">
+      <button mat-button routerLink="/">Annuler</button>
+      <button mat-raised-button color="primary" (click)="acheterTicket()">Payer</button>
+    </mat-card-actions>
+  </mat-card>
+</div>
