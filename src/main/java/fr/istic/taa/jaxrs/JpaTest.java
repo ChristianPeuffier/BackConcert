@@ -26,34 +26,7 @@ public final class JpaTest {
 
         try {
 
-            EvenementDAO evenementDAO = new EvenementDAO();
-            OrganisateurDAO organisateurDAO = new OrganisateurDAO();
-            UtilisateurDAO utilisateurDAO = new UtilisateurDAO();
-            Organisateur organisateur = new Organisateur();
-            Utilisateur utilisateur = new Utilisateur();
-            Evenement evenement = new Evenement();
 
-            utilisateur.setNom("Peuffier");
-            utilisateur.setPrenom("Christian");
-            utilisateur.setEmail("christian.peuffier@gmail.com");
-            utilisateur.setPassword("password");
-            utilisateurDAO.save(utilisateur);
-
-            organisateur.setNom("Raulais");
-            organisateur.setPrenom("Alexandre");
-            organisateur.setEmail("AlexandreR0910@gmail.com");
-            organisateur.setPassword("password");
-            organisateurDAO.save(organisateur);
-
-            evenement.setNom("Gims Tour");
-            evenement.setLieu("Rennes");
-            evenement.setDescription("Tournée de france de l'artiste Gims");
-            evenement.setGenre("Pop et R&B");
-            evenement.setDate(Date.valueOf(ZonedDateTime.now().toLocalDate()));
-            evenement.setOrganisateur(organisateur);
-            evenementDAO.save(evenement);
-            organisateur.getEvenements().add(evenement);
-            organisateurDAO.update(organisateur);
 
         } catch (Exception e) {
             e.printStackTrace();

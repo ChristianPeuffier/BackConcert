@@ -5,6 +5,7 @@ import {EvenementService} from '../../services/evenement.service';
 import {FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators} from '@angular/forms';
 import {AuthService} from '../../services/auth.service';
 import {MatStep, MatStepLabel, MatStepper, MatStepperNext, MatStepperPrevious} from '@angular/material/stepper';
+import {TicketService} from '../../services/ticket.service';
 
 @Component({
   selector: 'app-achat-ticket',
@@ -28,8 +29,10 @@ export class AchatTicketComponent implements OnInit {
   total: number = 0;
 
   constructor(private route: ActivatedRoute,
-              protected authService: AuthService,
-              private fb: FormBuilder) {}
+              private fb: FormBuilder,
+              private ticketService : TicketService,
+              private router: Router,
+  ) {}
 
   ngOnInit() {
     this.step1Form = this.fb.group({
@@ -38,6 +41,7 @@ export class AchatTicketComponent implements OnInit {
     this.route.queryParams.subscribe((params: { [x: string]: any; }) => {
       console.log("Params récupérés :", params);
       this.evenement = {
+        idEvenement: params['idEvenement'],
         nom: params['nom'],
         date: params['date'],
         lieu: params['lieu'],
@@ -56,7 +60,23 @@ export class AchatTicketComponent implements OnInit {
   }
 
   acheterTicket() {
-    alert(`Achat confirmé ! Vous avez acheté ${this.quantite} ticket(s) pour ${this.evenement.nom}`);
-    // Ici, tu peux ajouter une redirection ou un appel API pour finaliser l'achat
-  }
-}
+    console.log(`Achat confirmé ! Vous avez acheté ${this.quantite} ticket(s) pour ${this.evenement.nom}`);
+
+
+    this.ticketService.addTicket( {
+      prix : this.evenement.price,
+      utilisateur: {id: Number(localStorage.getItem('id'))},
+      evenement: {id: Number(this.evenement.idEvenement)},
+      dateAchat: new Date()
+    }).subscribe({
+      next: (response) => {
+        console.log("Réponse du serveur :",  response);
+        this.router.navigate(['/home']).then(r =>  console.log("Redirection vers la page d'accueil"));
+        alert("Achat effectué avec succès !");
+      },
+      error: (error) => {
+        console.error("Erreur lors de l'achat :", error);
+        alert("Erreur lors de l'achat. Veuillez réessayer.");
+      }
+    });
+  }}

@@ -51,6 +51,7 @@ export class EvenementComponent implements  OnInit {
 
   ngOnInit() {
     this.evenementForm = this.form.group({
+      id: [''],
       nom: ['', Validators.required],
       date: ['', Validators.required],
       lieu: ['', Validators.required],

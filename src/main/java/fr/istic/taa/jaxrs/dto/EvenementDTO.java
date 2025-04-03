@@ -37,6 +37,11 @@ public class EvenementDTO {
      */
     private double price;
 
+    /**
+     * Id of the event.
+     */
+    private int idEvenement;
+
 
 
     /**
@@ -44,6 +49,7 @@ public class EvenementDTO {
      * @param evenement the event.
      */
     public EvenementDTO(final Evenement evenement) {
+        this.idEvenement = evenement.getId();
         this.nom = evenement.getNom();
         this.description = evenement.getDescription();
         this.date = Date.valueOf(evenement.getDate().toLocalDate());
@@ -166,6 +172,21 @@ public class EvenementDTO {
         return price;
     }
 
+    /**
+     * Getter for the id of the event.
+     * @return the id of the event
+     */
+    public int getIdEvenement() {
+        return idEvenement;
+    }
+
+    /**
+     * Setter for the id of the event.
+     * @param paramIdEvenement the id of the event
+     */
+    public void setIdEvenement(final int paramIdEvenement) {
+        this.idEvenement = paramIdEvenement;
+    }
 
 
 }

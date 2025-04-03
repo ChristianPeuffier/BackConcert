@@ -1,12 +1,17 @@
 package fr.istic.taa.jaxrs.rest;
 
+import fr.istic.taa.jaxrs.domain.StatutTicket;
 import fr.istic.taa.jaxrs.domain.Ticket;
 import fr.istic.taa.jaxrs.dto.TicketDTO;
 import fr.istic.taa.jaxrs.service.business.TicketService;
 import jakarta.ws.rs.*;
+import jakarta.ws.rs.core.Context;
 import jakarta.ws.rs.core.Response;
 import io.swagger.v3.oas.annotations.Parameter;
+import jakarta.ws.rs.core.SecurityContext;
 
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 @Path("ticket")
@@ -53,9 +58,10 @@ public class TicketRessources {
     @Consumes("application/json")
     @Produces("application/json")
     @Path("/add")
-    public Response createTicket(@Parameter(description = "Ticket to create", required = true) final Ticket ticket) {
-        ticketService.createTicket(ticket);
-        return Response.status(Response.Status.CREATED).entity(ticket).build();
+    public Response addTicket(@Parameter(description = "Ticket to create", required = true) final Ticket ticket, @Context SecurityContext securityContext) {
+        ticket.setStatut(StatutTicket.ACHETE);
+        ticketService.save(ticket);
+        return Response.status(Response.Status.CREATED).entity(Collections.singletonMap("ticket", ticket)).build();
     }
 
     /**

@@ -24,7 +24,7 @@ public class JwtFilter implements ContainerRequestFilter {
         String path = requestContext.getUriInfo().getPath();
         System.out.println(path);
         if (path.equals("/utilisateur/login")||path.equals("/utilisateur/add")
-                || path.equals("/ticket/add") || path.equals("/evenement/add")
+                 || path.equals("/evenement/add")
                 || path.equals("/evenement/"
         )) {
             return;
@@ -37,6 +37,7 @@ public class JwtFilter implements ContainerRequestFilter {
             System.out.println(authHeader);
             System.out.println(BEARER_PREFIX);
             abortRequest(requestContext, "Token manquant ou incorrect");
+            System.out.println("Token manquant ou incorrect");
             return;
         }
 
@@ -45,16 +46,17 @@ public class JwtFilter implements ContainerRequestFilter {
 
         if (claims == null) {
             abortRequest(requestContext, "Token invalide ou expiré");
+            System.out.println("Token invalide ou expiré");
             return;
         }
 
         String email = claims.getSubject();
         String role = claims.get("role", String.class); // Le rôle est récupéré depuis le token
 
-
         final Principal principal = new Principal() {
             @Override
             public String getName() {
+                System.out.println("getName");
                 return email;
             }
         };
@@ -63,21 +65,25 @@ public class JwtFilter implements ContainerRequestFilter {
         requestContext.setSecurityContext(new SecurityContext() {
             @Override
             public Principal getUserPrincipal() {
+                System.out.println("getUserPrincipal");
                 return principal;
             }
 
             @Override
             public boolean isUserInRole(String requestedRole) {
+                System.out.println("isUserInRole");
                 return role != null && role.equals(requestedRole);
             }
 
             @Override
             public boolean isSecure() {
+                System.out.println("isSecure");
                 return securityContext.isSecure();
             }
 
             @Override
             public String getAuthenticationScheme() {
+                System.out.println("getAuthenticationScheme");
                 return "Bearer";
             }
         });
@@ -86,6 +92,7 @@ public class JwtFilter implements ContainerRequestFilter {
 
 
     private void abortRequest(ContainerRequestContext requestContext, String message) {
+        System.out.println("abortRequest");
         requestContext.abortWith(Response.status(Response.Status.UNAUTHORIZED)
                 .entity("{\"error\":\"" + message + "\"}")
                 .build());
