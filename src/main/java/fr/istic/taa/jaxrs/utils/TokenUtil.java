@@ -13,12 +13,11 @@ public class TokenUtil {
     private static final String SECRET_KEY = "ma_clé_secrète_tres_longue_et_securisee_123456";
 
     public static String generateToken(String email, String role) {
-        long expirationTime = 86400000L; // 1 day in milliseconds
+        long expirationTime = 86400000L;
         Date now = new Date();
         Date expirationDate = new Date(now.getTime() + expirationTime);
         System.out.println("Token expiration time: " + expirationTime);
 
-        // Créer un objet Key à partir de la chaîne secrète
         Key key = Keys.hmacShaKeyFor(SECRET_KEY.getBytes(StandardCharsets.UTF_8));
 
         return Jwts.builder()
@@ -33,7 +32,6 @@ public class TokenUtil {
     public static Claims validateToken(String token) {
         try {
             Key key = Keys.hmacShaKeyFor(SECRET_KEY.getBytes(StandardCharsets.UTF_8));
-            // Utilise Jwts.parserBuilder() qui n'est pas déprécié
             return Jwts.parser()
                     .setSigningKey(key)
                     .build()

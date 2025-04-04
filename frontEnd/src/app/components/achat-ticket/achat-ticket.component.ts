@@ -1,9 +1,7 @@
-import {Component, Inject, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {MatButton} from '@angular/material/button';
-import {ActivatedRoute, Router, RouterLink} from '@angular/router';
-import {EvenementService} from '../../services/evenement.service';
+import {ActivatedRoute, Router} from '@angular/router';
 import {FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators} from '@angular/forms';
-import {AuthService} from '../../services/auth.service';
 import {MatStep, MatStepLabel, MatStepper, MatStepperNext, MatStepperPrevious} from '@angular/material/stepper';
 import {TicketService} from '../../services/ticket.service';
 
@@ -28,10 +26,10 @@ export class AchatTicketComponent implements OnInit {
   quantite: number = 1;
   total: number = 0;
 
-  constructor(private route: ActivatedRoute,
-              private fb: FormBuilder,
-              private ticketService : TicketService,
-              private router: Router,
+  constructor(private readonly route: ActivatedRoute,
+              private readonly fb: FormBuilder,
+              private readonly ticketService : TicketService,
+              private readonly router: Router,
   ) {}
 
   ngOnInit() {
@@ -62,21 +60,30 @@ export class AchatTicketComponent implements OnInit {
   acheterTicket() {
     console.log(`Achat confirmé ! Vous avez acheté ${this.quantite} ticket(s) pour ${this.evenement.nom}`);
 
-
     this.ticketService.addTicket( {
       prix : this.evenement.price,
       utilisateur: {id: Number(localStorage.getItem('id'))},
       evenement: {id: Number(this.evenement.idEvenement)},
       dateAchat: new Date()
     }).subscribe({
-      next: (response) => {
-        console.log("Réponse du serveur :",  response);
-        this.router.navigate(['/home']).then(r =>  console.log("Redirection vers la page d'accueil"));
-        alert("Achat effectué avec succès !");
+      next: (blob) => {
+        // Traitement du fichier reçu
+        const url = window.URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'ticket.pdf';
+        a.click();
+        window.URL.revokeObjectURL(url);
+        console.log('Téléchargement du PDF terminé');
+        alert('Ticket acheté avec succès !');
+        this.router.navigate(['/dashboard']).then(r =>  console.log("Redirection vers le dashboard"));
       },
-      error: (error) => {
-        console.error("Erreur lors de l'achat :", error);
-        alert("Erreur lors de l'achat. Veuillez réessayer.");
+      error: (err) => {
+        console.error('Erreur lors du téléchargement du PDF :', err);
+        alert('Une erreur est survenue. Veuillez réessayer.');
+      },
+      complete: () => {
+        console.log('Téléchargement du PDF terminé');
       }
     });
   }}

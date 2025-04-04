@@ -38,9 +38,9 @@ public class EvenementDTO {
     private double price;
 
     /**
-     * Id of the event.
+     * ID of the event.
      */
-    private int idEvenement;
+    private Long idEvenement;
 
 
 
@@ -176,7 +176,7 @@ public class EvenementDTO {
      * Getter for the id of the event.
      * @return the id of the event
      */
-    public int getIdEvenement() {
+    public Long getIdEvenement() {
         return idEvenement;
     }
 
@@ -184,7 +184,7 @@ public class EvenementDTO {
      * Setter for the id of the event.
      * @param paramIdEvenement the id of the event
      */
-    public void setIdEvenement(final int paramIdEvenement) {
+    public void setIdEvenement(final Long paramIdEvenement) {
         this.idEvenement = paramIdEvenement;
     }
 

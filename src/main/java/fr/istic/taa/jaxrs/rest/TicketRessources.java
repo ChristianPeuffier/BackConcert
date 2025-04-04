@@ -4,12 +4,15 @@ import fr.istic.taa.jaxrs.domain.StatutTicket;
 import fr.istic.taa.jaxrs.domain.Ticket;
 import fr.istic.taa.jaxrs.dto.TicketDTO;
 import fr.istic.taa.jaxrs.service.business.TicketService;
+import fr.istic.taa.jaxrs.utils.TicketToPDF;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.Context;
 import jakarta.ws.rs.core.Response;
 import io.swagger.v3.oas.annotations.Parameter;
 import jakarta.ws.rs.core.SecurityContext;
+import javassist.bytecode.ByteArray;
 
+import java.io.ByteArrayOutputStream;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
@@ -60,8 +63,20 @@ public class TicketRessources {
     @Path("/add")
     public Response addTicket(@Parameter(description = "Ticket to create", required = true) final Ticket ticket, @Context SecurityContext securityContext) {
         ticket.setStatut(StatutTicket.ACHETE);
-        ticketService.save(ticket);
-        return Response.status(Response.Status.CREATED).entity(Collections.singletonMap("ticket", ticket)).build();
+        try {
+            System.out.println("Création du ticket...");
+            ticketService.save(ticket);
+            System.out.println("id du ticket : " + ticket.getId());
+
+            ByteArrayOutputStream pdfStream = TicketToPDF.generateTicketPdf(ticket);
+            return Response.ok(pdfStream.toByteArray())
+                    .type("application/pdf")
+                    .header("Content-Disposition", "attachment; filename=ticket_" + ticket.getId() + ".pdf")
+                    .build();
+
+        } catch (Exception e) {
+            return Response.serverError().entity("Erreur lors de la création du ticket et de son PDF").build();
+        }
     }
 
     /**

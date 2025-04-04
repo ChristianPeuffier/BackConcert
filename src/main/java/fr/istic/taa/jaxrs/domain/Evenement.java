@@ -83,9 +83,10 @@ public class Evenement implements Serializable {
 
     /**
      * Getter for the id attribute.
+     *
      * @return the id attribute as an int.
      */
-    public int getId() {
+    public long getId() {
         return id;
     }
 

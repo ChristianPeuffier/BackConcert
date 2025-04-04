@@ -23,6 +23,6 @@ export class TicketService {
     console.log("Envoi de la requête de création d'un ticket :", newTicket);
     const token = localStorage.getItem('token');
     const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
-    return this.http.post(this.addUrl, newTicket, {headers});
+    return this.http.post(this.addUrl, newTicket, {headers,responseType: 'blob'});
   }
 }
