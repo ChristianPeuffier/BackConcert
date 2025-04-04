@@ -1,18 +1,8 @@
 package fr.istic.taa.jaxrs.utils;
 
-
-import com.itextpdf.barcodes.BarcodeQRCode;
-import com.itextpdf.kernel.colors.ColorConstants;
-import com.itextpdf.kernel.font.PdfFont;
-import com.itextpdf.kernel.font.PdfFontFactory;
-import com.itextpdf.kernel.pdf.PdfDocument;
-import com.itextpdf.kernel.pdf.PdfWriter;
-import com.itextpdf.kernel.pdf.canvas.draw.SolidLine;
-import com.itextpdf.layout.Document;
-import com.itextpdf.layout.element.*;
-import com.itextpdf.layout.properties.HorizontalAlignment;
-import com.itextpdf.layout.properties.TextAlignment;
-import com.itextpdf.layout.properties.UnitValue;
+import com.itextpdf.text.*;
+import com.itextpdf.text.pdf.*;
+import com.itextpdf.text.pdf.draw.LineSeparator;
 import fr.istic.taa.jaxrs.domain.Ticket;
 import fr.istic.taa.jaxrs.dto.EvenementDTO;
 import fr.istic.taa.jaxrs.service.business.EvenementService;
@@ -30,29 +20,23 @@ public class TicketToPDF {
 
 	public static ByteArrayOutputStream generateTicketPdf(Ticket ticket) {
 		try (ByteArrayOutputStream baos = new ByteArrayOutputStream()) {
-			PdfWriter writer = new PdfWriter(baos);
-			PdfDocument pdf = new PdfDocument(writer);
-			Document document = new Document(pdf);
+			Document document = new Document();
+			document.open();
 
 			EvenementService evenementService = new EvenementService();
 			System.out.println("Ticket evenement id: " + ticket.getEvenement().getId());
 			EvenementDTO evenement = evenementService.getEvenementById(ticket.getEvenement().getId());
 
-
-			PdfFont font = PdfFontFactory.createFont();
-			Paragraph title = new Paragraph("🎟️ Ticket de Concert")
-					.setFont(font)
-					.setFontSize(18)
-					.setBold()
-					.setFontColor(ColorConstants.BLUE)
-					.setTextAlignment(TextAlignment.CENTER);
+			Font titleFont = new Font(Font.FontFamily.HELVETICA, 18, Font.BOLD, BaseColor.BLUE);
+			Paragraph title = new Paragraph("🎟️ Ticket de Concert", titleFont);
+			title.setAlignment(Element.ALIGN_CENTER);
 			document.add(title);
 
-			document.add(new LineSeparator(new SolidLine()));
+			document.add(new Chunk(new LineSeparator()));
 
-			Table table = new Table(new float[]{3, 7});
-			table.setHorizontalAlignment(HorizontalAlignment.CENTER);
-			table.setWidth(UnitValue.createPercentValue(100));
+			PdfPTable table = new PdfPTable(2);
+			table.setWidthPercentage(100);
+			table.setHorizontalAlignment(Element.ALIGN_CENTER);
 
 			table.addCell(getStyledCell("Événement :", true));
 			table.addCell(getStyledCell(evenement.getNom(), false));
@@ -71,15 +55,15 @@ public class TicketToPDF {
 
 			document.add(table);
 
-			BarcodeQRCode qrCode = new BarcodeQRCode("Ticket ID: " + ticket.getId());
-			Image qrCodeImage = new Image(qrCode.createFormXObject(pdf)).setWidth(100).setHeight(100);
-			qrCodeImage.setTextAlignment(TextAlignment.CENTER);
-			document.add(new Paragraph("\n").add(qrCodeImage).setTextAlignment(TextAlignment.CENTER));
+			BarcodeQRCode qrCode = new BarcodeQRCode("Ticket ID: " , 100, 100, null);
+			Image qrCodeImage = qrCode.getImage();
+			qrCodeImage.setAlignment(Image.ALIGN_CENTER);
+			qrCodeImage.scaleToFit(100f, 100f);
+			document.add(qrCodeImage);
 
-			Paragraph message = new Paragraph("Merci pour votre achat !\nPrésentez ce ticket à l'entrée.")
-					.setFontSize(12)
-					.setItalic()
-					.setTextAlignment(TextAlignment.CENTER);
+			Font messageFont = new Font(Font.FontFamily.HELVETICA, 12, Font.ITALIC);
+			Paragraph message = new Paragraph("Merci pour votre achat !\nPrésentez ce ticket à l'entrée.", messageFont);
+			message.setAlignment(Element.ALIGN_CENTER);
 			document.add(message);
 
 			document.close();
@@ -90,16 +74,15 @@ public class TicketToPDF {
 		}
 	}
 
-	private static Cell getStyledCell(String text, boolean isHeader) {
+	private static PdfPCell getStyledCell(String text, boolean isHeader) {
 		text = (text != null) ? text : "Non spécifié";
 
-		Cell cell = new Cell().add(new Paragraph(text));
+		PdfPCell cell = new PdfPCell(new Phrase(text));
 		cell.setPadding(5);
 		if (isHeader) {
-			cell.setBold();
-			cell.setBackgroundColor(ColorConstants.LIGHT_GRAY);
+			cell.setBackgroundColor(BaseColor.LIGHT_GRAY);
+			cell.setPhrase(new Phrase(text, new Font(Font.FontFamily.HELVETICA, 12, Font.BOLD)));
 		}
 		return cell;
 	}
-
 }
