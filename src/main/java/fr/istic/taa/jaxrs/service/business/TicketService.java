@@ -10,6 +10,8 @@ import java.util.List;
 
 public class TicketService extends AbstractService<Long, Ticket> {
 
+    private TicketDAO ticketDAO = new TicketDAO();
+
     /**
      * Constructor.
      */
@@ -37,6 +39,21 @@ public class TicketService extends AbstractService<Long, Ticket> {
      */
     public List<TicketDTO> getAllTickets() {
         List<Ticket> tickets = findAll();
+        List<TicketDTO> ticketDTOs = new ArrayList<>();
+        for (Ticket ticket : tickets) {
+            ticketDTOs.add(new TicketDTO(ticket));
+        }
+        return ticketDTOs;
+    }
+
+    /**
+     * Get tickets by user id.
+     * @param userId user id
+     * @return List of TicketDTO
+     */
+    public List<TicketDTO> getTicketsByUserId(final Long userId) {
+
+        List<Ticket> tickets = ticketDAO.findByUserId(userId);
         List<TicketDTO> ticketDTOs = new ArrayList<>();
         for (Ticket ticket : tickets) {
             ticketDTOs.add(new TicketDTO(ticket));

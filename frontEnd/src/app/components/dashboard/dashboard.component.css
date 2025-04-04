@@ -6,10 +6,6 @@
 }
 
 .user-card,
-.activity-card {
-  max-width: 500px;
-  margin: auto;
-}
 
 mat-toolbar {
   display: flex;
@@ -21,3 +17,49 @@ mat-card-title {
   font-size: 1.5rem;
   text-align: center;
 }
+
+.activity-card {
+  padding: 16px;
+  max-height: 400px;
+  overflow-y: auto;
+}
+
+.ticket-item {
+  align-items: start;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid #eee;
+}
+
+.ticket-content {
+  display: flex;
+  flex-direction: column;
+}
+
+.ticket-status,
+.ticket-date {
+  font-size: 14px;
+}
+
+.status-label,
+.date-label {
+  font-weight: 600;
+}
+.carousel-card {
+  max-width: 400px;
+  margin: auto;
+  padding: 16px;
+}
+
+.ticket-view {
+  margin: 16px 0;
+  font-size: 14px;
+}
+
+.carousel-buttons {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+

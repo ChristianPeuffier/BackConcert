@@ -11,12 +11,31 @@
     </mat-card-content>
   </mat-card>
 
-  <mat-card class="activity-card">
+  <mat-card class="carousel-card">
     <mat-card-title>Activités récentes</mat-card-title>
-    <mat-list>
-      <mat-list-item *ngFor="let ticket of tickets">
-        {{ ticket }}
-      </mat-list-item>
-    </mat-list>
+    <mat-divider></mat-divider>
+
+    <ng-container *ngIf="tickets.length > 0">
+      <div class="ticket-view">
+        <p><strong>Statut :</strong> {{ tickets[currentIndex].statut }}</p>
+        <p><strong>Date d'achat :</strong> {{ tickets[currentIndex].date | date:'dd/MM/yyyy' }}</p>
+      </div>
+
+      <div class="carousel-buttons">
+        <button mat-icon-button (click)="prev()" [disabled]="currentIndex === 0">
+          <mat-icon>chevron_left</mat-icon>
+        </button>
+        <span>{{ currentIndex + 1 }} / {{ tickets.length }}</span>
+        <button mat-icon-button (click)="next()" [disabled]="currentIndex === tickets.length - 1">
+          <mat-icon>chevron_right</mat-icon>
+        </button>
+      </div>
+    </ng-container>
+
+    <ng-container *ngIf="tickets.length === 0">
+      <p>Aucun ticket à afficher.</p>
+    </ng-container>
   </mat-card>
+
+
 </div>

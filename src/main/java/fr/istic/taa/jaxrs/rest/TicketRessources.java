@@ -53,6 +53,23 @@ public class TicketRessources {
     }
 
     /**
+     * Get tickets by user id. Get request at /ticket/user/{id}.
+     * @param id User id.
+     * @return List of tickets.
+     */
+    @GET
+    @Path("/user/{id}")
+    @Produces("application/json")
+    public Response getTicketsByUserId(@PathParam("id") final Long id)  {
+        System.out.println("id du user : " + id);
+        List<TicketDTO> tickets = ticketService.getTicketsByUserId(id);
+        if(tickets == null) {
+            return Response.status(Response.Status.BAD_REQUEST).entity("Tickets not found").build();
+        }
+        return Response.status(Response.Status.OK).entity(tickets).build();
+    }
+
+    /**
      * Create a ticket. Post request at /ticket/.
      * @param ticket Ticket to create.
      * @return Response.
