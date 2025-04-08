@@ -20,7 +20,12 @@ public class TicketToPDF {
 
 	public static ByteArrayOutputStream generateTicketPdf(Ticket ticket) {
 		try (ByteArrayOutputStream baos = new ByteArrayOutputStream()) {
+			// Création du document
 			Document document = new Document();
+
+			// Crée le PdfWriter pour écrire dans le ByteArrayOutputStream
+			PdfWriter.getInstance(document, baos);
+
 			document.open();
 
 			EvenementService evenementService = new EvenementService();
@@ -34,6 +39,7 @@ public class TicketToPDF {
 
 			document.add(new Chunk(new LineSeparator()));
 
+			// Crée une table pour afficher les informations du ticket
 			PdfPTable table = new PdfPTable(2);
 			table.setWidthPercentage(100);
 			table.setHorizontalAlignment(Element.ALIGN_CENTER);
@@ -55,7 +61,8 @@ public class TicketToPDF {
 
 			document.add(table);
 
-			BarcodeQRCode qrCode = new BarcodeQRCode("Ticket ID: " , 100, 100, null);
+			// Génère un QR code
+			BarcodeQRCode qrCode = new BarcodeQRCode("Ticket ID: " + ticket.getId(), 100, 100, null);
 			Image qrCodeImage = qrCode.getImage();
 			qrCodeImage.setAlignment(Image.ALIGN_CENTER);
 			qrCodeImage.scaleToFit(100f, 100f);
@@ -66,13 +73,15 @@ public class TicketToPDF {
 			message.setAlignment(Element.ALIGN_CENTER);
 			document.add(message);
 
-			document.close();
-			return baos;
+			document.close();  // Ferme le document et écrit dans le flux de sortie
+
+			return baos;  // Retourne le ByteArrayOutputStream qui contient le PDF
 		} catch (Exception e) {
 			e.printStackTrace();
 			return null;
 		}
 	}
+
 
 	private static PdfPCell getStyledCell(String text, boolean isHeader) {
 		text = (text != null) ? text : "Non spécifié";

@@ -22,8 +22,10 @@ public class EvenementDAO extends AbstractJpaDao<Long, Evenement> {
     public void updateNbSold(final Evenement evenement, final int nbBuy) {
         EntityManager em = getEntityManager();
         em.getTransaction().begin();
-        evenement.setNbSold(evenement.getNbSold() - nbBuy);
-        em.merge(evenement);
+        em.createQuery( "update Evenement e set e.nbSold = e.nbSold - :nbBuy where e.id = :id")
+                .setParameter("nbBuy", nbBuy)
+                .setParameter("id", evenement.getId())
+                .executeUpdate();
         em.getTransaction().commit();
     }
 }

@@ -83,7 +83,7 @@ public class TicketRessources {
      */
     @POST
     @Consumes("application/json")
-    @Produces("application/json")
+    @Produces("application/pdf")
     @Path("/add/{nbBuy}")
     public Response addTicket(@Parameter(description = "Ticket to create", required = true) final Ticket ticket, @PathParam("nbBuy") final int nbBuy, @Context SecurityContext securityContext) {
         ticket.setStatut(StatutTicket.ACHETE);
@@ -96,16 +96,24 @@ public class TicketRessources {
             ticketService.save(ticket);
             System.out.println("id du ticket : " + ticket.getId());
 
+            Ticket ticketSaved = ticketService.getTicketById((long) ticket.getId()); // à adapter selon ton service
+            System.out.println("Ticket rechargé : " + ticketSaved);
+
            evenement.setId((int) evenementService.getEvenementById(ticket.getEvenement().getId()).getIdEvenement());
            evenementService.updateNbSold(evenement, nbBuy );
 
-            ByteArrayOutputStream pdfStream = TicketToPDF.generateTicketPdf(ticket);
+            ByteArrayOutputStream pdfStream = TicketToPDF.generateTicketPdf(ticketSaved);
+            if (pdfStream == null || pdfStream.size() == 0) {
+                System.err.println("PDF généré vide !");
+                return Response.serverError().entity("Erreur lors de la génération du PDF").build();
+            }
             return Response.ok(pdfStream.toByteArray())
                     .type("application/pdf")
-                    .header("Content-Disposition", "attachment; filename=ticket_" + ticket.getId() + ".pdf")
+                    .header("Content-Disposition", "attachment; filename=ticket_" + ticketSaved.getId() + ".pdf")
                     .build();
 
         } catch (Exception e) {
+            e.printStackTrace();
             return Response.serverError().entity("Erreur lors de la création du ticket et de son PDF").build();
         }
 
