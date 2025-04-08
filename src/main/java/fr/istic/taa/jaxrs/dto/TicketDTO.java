@@ -9,6 +9,11 @@ import java.sql.Date;
 public class TicketDTO {
 
     /**
+     * ID of the ticket.
+     */
+    private Long id;
+
+    /**
      * Ticket status.
      */
     private StatutTicket statut;
@@ -39,12 +44,12 @@ public class TicketDTO {
      * @param ticket Ticket.
      */
     public TicketDTO(final Ticket ticket) {
+        this.id = (long) ticket.getId();
         this.statut = ticket.getStatut();
         this.date = ticket.getDateAchat();
         this.lieu = ticket.getEvenement().getLieu();
         this.utilisateur = new UtilisateurDTO(ticket.getUtilisateur());
         this.prix = ticket.getPrix();
-
     }
 
     /**
@@ -109,5 +114,37 @@ public class TicketDTO {
      */
     public UtilisateurDTO getUtilisateur() {
         return utilisateur;
+    }
+
+    /**
+     * Getter for prix.
+     * @return Prix.
+     */
+    public Double getPrix() {
+        return prix;
+    }
+
+    /**
+     * Setter for prix.
+     * @param paramPrix Prix.
+     */
+    public void setPrix(final Double paramPrix) {
+        this.prix = paramPrix;
+    }
+
+    /**
+     * Getter for id.
+     * @return ID.
+     */
+    public Long getId() {
+        return id;
+    }
+
+    /**
+     * Setter for id.
+     * @param paramId ID.
+     */
+    public void setId(final Long paramId) {
+        this.id = paramId;
     }
 }

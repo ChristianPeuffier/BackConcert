@@ -25,12 +25,8 @@ public class TicketService extends AbstractService<Long, Ticket> {
      * @param id ticket id
      * @return TicketDTO
      */
-    public TicketDTO getTicketById(final Long id) {
-        Ticket ticket = findOne(id);
-        if (ticket != null) {
-            return new TicketDTO(ticket);
-        }
-        return null;
+    public Ticket getTicketById(final Long id) {
+		return findOne(id);
     }
 
     /**
@@ -84,4 +80,14 @@ public class TicketService extends AbstractService<Long, Ticket> {
     public void deleteTicket(final Ticket ticket) {
         delete(ticket);
     }
+
+    /**
+     * Update user id of a ticket.
+     * @param ticket ticket to update
+     * @param userId user id
+     */
+    public void updateUserId(final Ticket ticket, final Long userId) {
+        ticketDAO.updateUserId(ticket, userId);
+    }
+
 }

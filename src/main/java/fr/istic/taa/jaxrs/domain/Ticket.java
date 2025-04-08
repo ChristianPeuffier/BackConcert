@@ -1,5 +1,6 @@
 package fr.istic.taa.jaxrs.domain;
 
+import fr.istic.taa.jaxrs.dto.UtilisateurDTO;
 import jakarta.persistence.Id;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Entity;

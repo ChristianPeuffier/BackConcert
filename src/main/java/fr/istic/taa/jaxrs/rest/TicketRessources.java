@@ -2,8 +2,11 @@ package fr.istic.taa.jaxrs.rest;
 
 import fr.istic.taa.jaxrs.domain.StatutTicket;
 import fr.istic.taa.jaxrs.domain.Ticket;
+import fr.istic.taa.jaxrs.domain.Utilisateur;
 import fr.istic.taa.jaxrs.dto.TicketDTO;
+import fr.istic.taa.jaxrs.dto.UtilisateurDTO;
 import fr.istic.taa.jaxrs.service.business.TicketService;
+import fr.istic.taa.jaxrs.service.business.UtilisateurService;
 import fr.istic.taa.jaxrs.utils.TicketToPDF;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.Context;
@@ -45,7 +48,7 @@ public class TicketRessources {
     @GET
     @Path("/{id}")
     public Response getTicketById(final Long id)  {
-        TicketDTO ticket = ticketService.getTicketById(id);
+        Ticket ticket = ticketService.getTicketById(id);
         if(ticket == null) {
             return Response.status(Response.Status.BAD_REQUEST).entity("Ticket not found").build();
         }
@@ -125,5 +128,24 @@ public class TicketRessources {
         }
         ticketService.deleteTicket(ticket);
         return Response.status(Response.Status.OK).entity("Ticket deleted").build();
+    }
+
+    /**
+     * Change the user of a ticket. Post request at /ticket/{id}/user/{email}.
+     * @param newUserEmail New user email.
+     */
+    @POST
+    @Path("/update/{id}/user/{userId}")
+    @Consumes("application/json")
+    public Response changeTicketUser(@PathParam("id") final long idTicket, @PathParam("userId") final String newUserEmail, @Context SecurityContext securityContext) {
+        Ticket ticket = ticketService.getTicketById(idTicket);
+        UtilisateurService userService = new UtilisateurService();
+        UtilisateurDTO newUser = userService.getUtilisateurByEmail(newUserEmail);
+
+        if(ticket == null) {
+            return Response.status(Response.Status.BAD_REQUEST).entity("Ticket not found").build();
+        }
+        ticketService.updateUserId(ticket, newUser.getIdUtilisateur());
+        return Response.status(Response.Status.OK).entity("Ticket user updated").build();
     }
 }
