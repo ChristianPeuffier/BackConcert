@@ -1,8 +1,10 @@
 package fr.istic.taa.jaxrs.service.business;
 
 import fr.istic.taa.jaxrs.dao.business.EvenementDAO;
+import fr.istic.taa.jaxrs.dao.business.TicketDAO;
 import fr.istic.taa.jaxrs.dao.generic.AbstractJpaDao;
 import fr.istic.taa.jaxrs.domain.Evenement;
+import fr.istic.taa.jaxrs.domain.Ticket;
 import fr.istic.taa.jaxrs.dto.EvenementDTO;
 import fr.istic.taa.jaxrs.service.generic.AbstractService;
 
@@ -17,6 +19,8 @@ public class EvenementService extends AbstractService<Long, Evenement> {
     public EvenementService() {
         super(new EvenementDAO());
     }
+
+    private EvenementDAO evenementDAO = new EvenementDAO();
 
     /**
      * Get an Evenement from the database by its id.
@@ -68,4 +72,14 @@ public class EvenementService extends AbstractService<Long, Evenement> {
     public void deleteEvenement(final Evenement evenement) {
         delete(evenement);
     }
+
+    /**
+     * Update nbSold of an Evenement.
+     * @param evenement the Evenement to update
+     */
+    public void updateNbSold(final Evenement evenement, final int nbBuy) {
+      evenementDAO.updateNbSold(evenement, nbBuy);
+    }
+
+
 }

@@ -1,10 +1,12 @@
 package fr.istic.taa.jaxrs.rest;
 
+import fr.istic.taa.jaxrs.domain.Evenement;
 import fr.istic.taa.jaxrs.domain.StatutTicket;
 import fr.istic.taa.jaxrs.domain.Ticket;
 import fr.istic.taa.jaxrs.domain.Utilisateur;
 import fr.istic.taa.jaxrs.dto.TicketDTO;
 import fr.istic.taa.jaxrs.dto.UtilisateurDTO;
+import fr.istic.taa.jaxrs.service.business.EvenementService;
 import fr.istic.taa.jaxrs.service.business.TicketService;
 import fr.istic.taa.jaxrs.service.business.UtilisateurService;
 import fr.istic.taa.jaxrs.utils.TicketToPDF;
@@ -28,6 +30,8 @@ public class TicketRessources {
      * Ticket service.
      */
     private final TicketService ticketService = new TicketService();
+
+
 
     /**
      * Get all tickets. Get request at /ticket/.
@@ -80,13 +84,20 @@ public class TicketRessources {
     @POST
     @Consumes("application/json")
     @Produces("application/json")
-    @Path("/add")
-    public Response addTicket(@Parameter(description = "Ticket to create", required = true) final Ticket ticket, @Context SecurityContext securityContext) {
+    @Path("/add/{nbBuy}")
+    public Response addTicket(@Parameter(description = "Ticket to create", required = true) final Ticket ticket, @PathParam("nbBuy") final int nbBuy, @Context SecurityContext securityContext) {
         ticket.setStatut(StatutTicket.ACHETE);
+
+        final EvenementService evenementService = new EvenementService();
+        Evenement evenement =  new Evenement();
+
         try {
             System.out.println("Création du ticket...");
             ticketService.save(ticket);
             System.out.println("id du ticket : " + ticket.getId());
+
+           evenement.setId((int) evenementService.getEvenementById(ticket.getEvenement().getId()).getIdEvenement());
+           evenementService.updateNbSold(evenement, nbBuy );
 
             ByteArrayOutputStream pdfStream = TicketToPDF.generateTicketPdf(ticket);
             return Response.ok(pdfStream.toByteArray())
@@ -97,6 +108,7 @@ public class TicketRessources {
         } catch (Exception e) {
             return Response.serverError().entity("Erreur lors de la création du ticket et de son PDF").build();
         }
+
     }
 
     /**

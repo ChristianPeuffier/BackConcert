@@ -80,6 +80,17 @@ public class Evenement implements Serializable {
     @Column(length = MAX_LENGTH,name = "price")
     private double price;
 
+    /**
+     * Number of tickets maximum.
+     */
+    @Column(length = MAX_LENGTH,name = "nbMax")
+    private int nbMax;
+
+    /**
+     * Number of tickets sold.
+     */
+    @Column(length = MAX_LENGTH,name = "nbSold")
+    private int nbSold;
 
     /**
      * Getter for the id attribute.
@@ -226,6 +237,39 @@ public class Evenement implements Serializable {
     public void setPrice(final double paramPrice) {
         this.price = paramPrice;
     }
+
+    /**
+     * Getter for the nbMax attribute.
+     * @return the nbMax attribute as an int.
+     */
+    public int getNbMax() {
+        return nbMax;
+    }
+
+    /**
+     * Setter for the nbMax attribute.
+     * @param paramNbMax the nbMax attribute to set.
+     */
+    public void setNbMax(final int paramNbMax) {
+        this.nbMax = paramNbMax;
+    }
+
+    /**
+     * Getter for the nbSold attribute.
+     * @return the nbSold attribute as an int.
+     */
+    public int getNbSold() {
+        return nbSold;
+    }
+
+    /**
+     * Setter for the nbSold attribute.
+     * @param paramNbSold the nbSold attribute to set.
+     */
+    public void setNbSold(final int paramNbSold) {
+        this.nbSold = paramNbSold;
+    }
+
 
 
 }

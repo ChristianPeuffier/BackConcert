@@ -3,7 +3,6 @@ package fr.istic.taa.jaxrs.dto;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import fr.istic.taa.jaxrs.domain.Evenement;
 import java.sql.Date;
-import java.util.Base64;
 
 public class EvenementDTO {
 
@@ -42,6 +41,15 @@ public class EvenementDTO {
      */
     private Long idEvenement;
 
+    /**
+     * Nb places max of the event.
+     */
+    private int nbMax;
+
+    /**
+     * Nb places available of the event.
+     */
+    private int nbSold;
 
 
     /**
@@ -57,6 +65,8 @@ public class EvenementDTO {
         this.artiste = evenement.getArtiste();
         this.genre = evenement.getGenre();
         this.price = evenement.getPrice();
+        this.nbMax = evenement.getNbMax();
+        this.nbSold = evenement.getNbSold();
     }
 
     /**
@@ -174,9 +184,10 @@ public class EvenementDTO {
 
     /**
      * Getter for the id of the event.
+     *
      * @return the id of the event
      */
-    public Long getIdEvenement() {
+    public long getIdEvenement() {
         return idEvenement;
     }
 
@@ -188,5 +199,36 @@ public class EvenementDTO {
         this.idEvenement = paramIdEvenement;
     }
 
+    /**
+     * Getter for the nbMax of the event.
+     * @return the nbMax of the event
+     */
+    public int getNbMax() {
+        return nbMax;
+    }
+
+    /**
+     * Setter for the nbMax of the event.
+     * @param paramNbMax the nbMax of the event
+     */
+    public void setNbMax(final int paramNbMax) {
+        this.nbMax = paramNbMax;
+    }
+
+    /**
+     * Getter for the nbSold of the event.
+     * @return the nbSold of the event
+     */
+    public int getNbSold() {
+        return nbSold;
+    }
+
+    /**
+     * Setter for the nbSold of the event.
+     * @param paramNbSold the nbSold of the event
+     */
+    public void setNbSold(final int paramNbSold) {
+        this.nbSold = paramNbSold;
+    }
 
 }
