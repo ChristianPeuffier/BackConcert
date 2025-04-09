@@ -25,6 +25,11 @@ public class UtilisateurDTO {
     private Long idUtilisateur;
 
     /**
+     * Role of the user.
+     */
+    private String role;
+
+    /**
      * Constructor.
      * @param utilisateur User.
      */
@@ -33,6 +38,7 @@ public class UtilisateurDTO {
         this.prenom = utilisateur.getPrenom();
         this.email = utilisateur.getEmail();
         this.idUtilisateur = utilisateur.getId();
+        this.role = utilisateur.getTypeUtilisateur();
     }
 
     /**
@@ -97,5 +103,21 @@ public class UtilisateurDTO {
      */
     public Long getIdUtilisateur() {
         return idUtilisateur;
+    }
+
+    /**
+     * Setter for the role.
+     * @param paramRole the role
+     */
+    public void setRole(final String paramRole) {
+        this.role = paramRole;
+    }
+
+    /**
+     * Getter for the role.
+     * @return the role
+     */
+    public String getRole() {
+        return role;
     }
 }

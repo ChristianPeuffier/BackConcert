@@ -176,4 +176,20 @@ import java.util.List;
     public void setTickets(final List<Ticket> paramTickets) {
         this.tickets = paramTickets;
     }
+
+    /**
+     * Getter for the typeUtilisateur.
+     * @return the typeUtilisateur
+     */
+    public String getTypeUtilisateur() {
+     return typeUtilisateur;
+    }
+
+    /**
+     * Setter for the typeUtilisateur.
+     * @param paramTypeUtilisateur the typeUtilisateur
+     */
+    public void setTypeUtilisateur(final String paramTypeUtilisateur) {
+        this.typeUtilisateur = paramTypeUtilisateur;
+    }
 }
