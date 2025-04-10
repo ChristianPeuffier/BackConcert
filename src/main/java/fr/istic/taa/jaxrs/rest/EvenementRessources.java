@@ -1,8 +1,12 @@
 package fr.istic.taa.jaxrs.rest;
 
 import fr.istic.taa.jaxrs.domain.Evenement;
+import fr.istic.taa.jaxrs.domain.Organisateur;
+import fr.istic.taa.jaxrs.domain.Utilisateur;
 import fr.istic.taa.jaxrs.dto.EvenementDTO;
+import fr.istic.taa.jaxrs.dto.UtilisateurDTO;
 import fr.istic.taa.jaxrs.service.business.EvenementService;
+import fr.istic.taa.jaxrs.service.business.UtilisateurService;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.Context;
 import jakarta.ws.rs.core.Response;
@@ -55,8 +59,20 @@ public class EvenementRessources {
             @Parameter(description = "User object that needs to be added to the store", required = true) final Evenement event,
             @Context SecurityContext securityContext)
     {
-        evenementService.save(event);
-        return Response.status(Response.Status.CREATED).entity(Collections.singletonMap("message","Evénement Créé")).build();
+        if(securityContext.isUserInRole("organisateur")){
+            String email = securityContext.getUserPrincipal().getName();
+            UtilisateurService utilisateurService = new UtilisateurService();
+            Utilisateur user = utilisateurService.getUtilisateurByEmail(email);
+
+            if (user instanceof Organisateur){
+                Organisateur org = (Organisateur)user;
+                event.setOrganisateur(org);
+            }
+
+            evenementService.save(event);
+            return Response.status(Response.Status.CREATED).entity(Collections.singletonMap("message","Evénement Créé")).build();
+        }
+        return Response.status(Response.Status.FORBIDDEN).entity(Collections.singletonMap("message","Vous n'avez pas le droit de créer un événement")).build();
     }
 
     /**
@@ -69,10 +85,22 @@ public class EvenementRessources {
     @Produces("application/json")
     @Path("/update")
     public Response updateEvenement(
-        @Parameter(description = "User object that needs to be added to the store", required = true) final Evenement event)
+        @Parameter(description = "User object that needs to be added to the store", required = true) final Evenement event,
+        @Context SecurityContext securityContext)
     {
+        System.out.println(event.getId());
+        if(securityContext.isUserInRole("organisateur")){
+            String email = securityContext.getUserPrincipal().getName();
+            UtilisateurService utilisateurService = new UtilisateurService();
+            Utilisateur user = utilisateurService.getUtilisateurByEmail(email);
+
+            if (user instanceof Organisateur){
+                Organisateur org = (Organisateur)user;
+                event.setOrganisateur(org);
+            }
+        }
         evenementService.update(event);
-        return Response.ok().entity("SUCCESS").build();
+        return Response.status( Response.Status.OK).entity(Collections.singletonMap("message","Evénement modifié")).build();
     }
 
     /**
@@ -89,6 +117,21 @@ public class EvenementRessources {
         }
         evenementService.delete(event);
         return Response.ok().entity("SUCCESS").build();
+    }
+
+    /**
+     * Get all the events of an organizer. Get request at /evenement/organisateur/{id} path.
+     * @param id the id of the organizer
+     * @return the list of events
+     */
+    @GET
+    @Path("/organisateur/{id}")
+    public Response getOrganisateur(@PathParam("id") final Long id)  {
+        List<EvenementDTO> evenements = evenementService.getEvenementByOrganisateur(id);
+        if(evenements == null) {
+            return Response.status(Response.Status.BAD_REQUEST).entity("Evenements not found").build();
+        }
+        return Response.status(Response.Status.OK).entity(evenements).build();
     }
 
 }

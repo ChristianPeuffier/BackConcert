@@ -82,4 +82,12 @@ public class EvenementService extends AbstractService<Long, Evenement> {
     }
 
 
+    public List<EvenementDTO> getEvenementByOrganisateur(Long id) {
+    List<Evenement> evenements = evenementDAO.findByOrganisateurId(id);
+        List<EvenementDTO> evenementDTOs = new ArrayList<>();
+        for (Evenement evenement : evenements) {
+            evenementDTOs.add(new EvenementDTO(evenement));
+        }
+        return evenementDTOs;
+    }
 }

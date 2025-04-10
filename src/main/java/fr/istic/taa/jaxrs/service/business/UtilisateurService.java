@@ -70,13 +70,9 @@ public class UtilisateurService extends AbstractService<Long, Utilisateur> {
      * @param email the email of the Utilisateur
      * @return the created Utilisateur DTO
      */
-    public UtilisateurDTO getUtilisateurByEmail(final String email) {
-        Utilisateur user = utilisateurDAO.findByEmail(email);
-        if (user != null) {
-            return new UtilisateurDTO(user);
-        }
-        return null;
-    }
+    public Utilisateur getUtilisateurByEmail(final String email) {
+		return utilisateurDAO.findByEmail(email);
+	}
 
     /**
      * Check if password is correct.

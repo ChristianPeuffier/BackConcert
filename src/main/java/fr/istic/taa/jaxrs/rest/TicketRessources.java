@@ -160,8 +160,8 @@ public class TicketRessources {
     public Response changeTicketUser(@PathParam("id") final long idTicket, @PathParam("userId") final String newUserEmail, @Context SecurityContext securityContext) {
         Ticket ticket = ticketService.getTicketById(idTicket);
         UtilisateurService userService = new UtilisateurService();
-        UtilisateurDTO newUser = userService.getUtilisateurByEmail(newUserEmail);
-
+        Utilisateur user = userService.getUtilisateurByEmail(newUserEmail);
+        UtilisateurDTO newUser = new UtilisateurDTO(user);
         if(ticket == null) {
             return Response.status(Response.Status.BAD_REQUEST).entity("Ticket not found").build();
         }

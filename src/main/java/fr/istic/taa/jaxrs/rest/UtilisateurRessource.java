@@ -51,13 +51,14 @@ public class UtilisateurRessource {
     public Response getUserByEmail(@Context SecurityContext securityContext){
       String email = securityContext.getUserPrincipal().getName();
 
-        UtilisateurDTO user = utilisateurService.getUtilisateurByEmail(email);
-
-        if(user == null) {
-            return Response.status(Response.Status.BAD_REQUEST).entity("Utilisateur non trouvé").build();
+        Utilisateur user = utilisateurService.getUtilisateurByEmail(email);
+        if(user != null) {
+            UtilisateurDTO userDTO = new UtilisateurDTO(user);
+            return Response.ok(userDTO).build();
         }
-        return Response.ok(user).build();
-    }
+
+		return Response.status(Response.Status.BAD_REQUEST).entity("Utilisateur non trouvé").build();
+	}
 
   /**
      * Get the user's list.
@@ -108,7 +109,7 @@ public class UtilisateurRessource {
       if(user.getEmail() == null || user.getPassword() == null) {
         return Response.status(Response.Status.BAD_REQUEST).entity("Email et mot de passe requis").build();
       }
-      UtilisateurDTO userFound = utilisateurService.getUtilisateurByEmail(user.getEmail());
+      Utilisateur userFound = utilisateurService.getUtilisateurByEmail(user.getEmail());
         if(userFound == null) {
             return Response.status(Response.Status.BAD_REQUEST).entity("Utilisateur non trouvé").build();
         }
@@ -117,9 +118,9 @@ public class UtilisateurRessource {
         if(!passwordMatch) {
           return Response.status(Response.Status.BAD_REQUEST).entity("Mot de passe incorrect").build();
         }
-        System.out.println("Role : " + userFound.getRole());
-        String token = TokenUtil.generateToken(userFound.getEmail(), userFound.getRole());
-      return Response.status(Response.Status.OK).entity(new AuthResponse(token, userFound.getIdUtilisateur())).build();
+        System.out.println("Role : " + userFound.getTypeUtilisateur());
+        String token = TokenUtil.generateToken(userFound.getEmail(), userFound.getTypeUtilisateur());
+      return Response.status(Response.Status.OK).entity(new AuthResponse(token, userFound.getId())).build();
     }
     catch (Exception e) {
       return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity("Erreur lors de la connexion").build();

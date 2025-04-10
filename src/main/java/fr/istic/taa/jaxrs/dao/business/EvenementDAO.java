@@ -7,6 +7,8 @@ import fr.istic.taa.jaxrs.domain.Ticket;
 import fr.istic.taa.jaxrs.domain.Utilisateur;
 import jakarta.persistence.EntityManager;
 
+import java.util.List;
+
 public class EvenementDAO extends AbstractJpaDao<Long, Evenement> {
 
     /**
@@ -27,5 +29,12 @@ public class EvenementDAO extends AbstractJpaDao<Long, Evenement> {
                 .setParameter("id", evenement.getId())
                 .executeUpdate();
         em.getTransaction().commit();
+    }
+
+    public List<Evenement> findByOrganisateurId(Long id) {
+        EntityManager em = getEntityManager();
+        return em.createQuery("select e from Evenement e where e.organisateur.id = :id", Evenement.class)
+                .setParameter("id", id)
+                .getResultList();
     }
 }

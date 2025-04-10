@@ -24,7 +24,6 @@ public class JwtFilter implements ContainerRequestFilter {
         String path = requestContext.getUriInfo().getPath();
         System.out.println(path);
         if (path.equals("/utilisateur/login")||path.equals("/utilisateur/add")
-                 || path.equals("/evenement/add")
                 || path.equals("/evenement/"))
         {
             return;
