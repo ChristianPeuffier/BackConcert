@@ -109,14 +109,16 @@ public class EvenementRessources {
      * @return the response
      */
     @DELETE
-    @Path("/{id}")
-    public Response deleteEvenement(@PathParam("id") final Long id)  {
+    @Path("/delete/{id}")
+    public Response deleteEvenement(@PathParam("id") final Long id, @Context SecurityContext securityContext)  {
+        if(securityContext.isUserInRole("organisateur")){
         Evenement event = evenementService.findOne(id);
         if (event == null) {
             return Response.status(Response.Status.BAD_REQUEST).entity("Event not found").build();
         }
         evenementService.delete(event);
-        return Response.ok().entity("SUCCESS").build();
+        return Response.status(Response.Status.OK).build();}
+        return Response.status(Response.Status.FORBIDDEN).entity(Collections.singletonMap("message","Vous n'avez pas le droit de supprimer un événement")).build();
     }
 
     /**
