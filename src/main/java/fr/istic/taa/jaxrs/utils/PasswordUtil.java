@@ -12,4 +12,8 @@ public class PasswordUtil {
         System.out.println("password: " + password);
         return BCrypt.checkpw(password, hashedPassword);
     }
+
+    public static String decryptPassword(String password) {
+        return BCrypt.hashpw(password, BCrypt.gensalt(12));
+    }
 }

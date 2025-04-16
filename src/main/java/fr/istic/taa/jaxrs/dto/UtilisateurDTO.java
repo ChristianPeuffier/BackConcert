@@ -30,6 +30,12 @@ public class UtilisateurDTO {
     private String role;
 
     /**
+     * Default constructor.
+     */
+    public UtilisateurDTO() {
+    }
+
+    /**
      * Constructor.
      * @param utilisateur User.
      */
@@ -120,4 +126,5 @@ public class UtilisateurDTO {
     public String getRole() {
         return role;
     }
+
 }

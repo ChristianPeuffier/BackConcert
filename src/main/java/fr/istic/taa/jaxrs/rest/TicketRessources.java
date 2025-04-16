@@ -51,12 +51,11 @@ public class TicketRessources {
      */
     @GET
     @Path("/{id}")
-    public Response getTicketById(final Long id)  {
+    @Produces("application/json")
+    public Response getTicketById(@PathParam("id") final Long id)  {
         Ticket ticket = ticketService.getTicketById(id);
-        if(ticket == null) {
-            return Response.status(Response.Status.BAD_REQUEST).entity("Ticket not found").build();
-        }
-        return Response.ok().entity(ticket).build();
+        TicketDTO ticketDTO = new TicketDTO(ticket);
+        return Response.status(Response.Status.OK).entity(ticketDTO).build();
     }
 
     /**

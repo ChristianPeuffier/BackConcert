@@ -33,4 +33,15 @@ public class UtilisateurDAO extends AbstractJpaDao<Long, Utilisateur> {
                 .setParameter("email", email)
                 .getSingleResult();
     }
+
+    public void updateUtilisateur(Utilisateur utilisateur) {
+        EntityManager em = getEntityManager();
+        em.getTransaction().begin();
+        em.createQuery("update Utilisateur u set u.typeUtilisateur = :role where u.id = :id")
+                .setParameter("role", utilisateur.getTypeUtilisateur())
+                .setParameter("id", utilisateur.getId())
+                .executeUpdate();
+        em.getTransaction().commit();
+    }
+
 }

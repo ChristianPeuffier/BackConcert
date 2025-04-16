@@ -40,6 +40,11 @@ public class TicketDTO {
     private UtilisateurDTO utilisateur;
 
     /**
+     * Id of the event.
+     */
+    private Long idEvenement;
+
+    /**
      * Constructor.
      * @param ticket Ticket.
      */
@@ -50,6 +55,7 @@ public class TicketDTO {
         this.lieu = ticket.getEvenement().getLieu();
         this.utilisateur = new UtilisateurDTO(ticket.getUtilisateur());
         this.prix = ticket.getPrix();
+        this.idEvenement = ticket.getEvenement().getId();
     }
 
     /**
@@ -146,5 +152,21 @@ public class TicketDTO {
      */
     public void setId(final Long paramId) {
         this.id = paramId;
+    }
+
+    /**
+     * Getter for idEvenement.
+     * @return ID of the event.
+     */
+    public Long getIdEvenement() {
+        return idEvenement;
+    }
+
+    /**
+     * Setter for idEvenement.
+     * @param paramIdEvenement ID of the event.
+     */
+    public void setIdEvenement(final Long paramIdEvenement) {
+        this.idEvenement = paramIdEvenement;
     }
 }

@@ -1,18 +1,14 @@
 package fr.istic.taa.jaxrs.rest;
 
+import fr.istic.taa.jaxrs.domain.Administrateur;
+import fr.istic.taa.jaxrs.domain.Organisateur;
 import fr.istic.taa.jaxrs.domain.Utilisateur;
 import fr.istic.taa.jaxrs.dto.UtilisateurDTO;
 import fr.istic.taa.jaxrs.service.business.UtilisateurService;
 import fr.istic.taa.jaxrs.utils.AuthResponse;
 import fr.istic.taa.jaxrs.utils.TokenUtil;
 import io.swagger.v3.oas.annotations.Parameter;
-import jakarta.annotation.security.RolesAllowed;
-import jakarta.ws.rs.Consumes;
-import jakarta.ws.rs.GET;
-import jakarta.ws.rs.POST;
-import jakarta.ws.rs.Path;
-import jakarta.ws.rs.PathParam;
-import jakarta.ws.rs.Produces;
+import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.Context;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
@@ -38,7 +34,13 @@ public class UtilisateurRessource {
   @GET
   @Path("/{id}")
   public UtilisateurDTO getUserById(@PathParam("id") final Long id, @Context SecurityContext securityContext){
-      return utilisateurService.getUtilisateurById(id);
+
+      Utilisateur user = utilisateurService.getUtilisateurById(id);
+
+        if(user != null) {
+            return new UtilisateurDTO(user);
+        }
+        return null;
   }
 
   /**
@@ -127,15 +129,28 @@ public class UtilisateurRessource {
     }
   }
 
-  @GET
-  @Path("/secure")
-  @Produces("application/json")
-  public Response getSecureData(@Context SecurityContext securityContext) {
+  /**
+   * Update a user role.
+   * @param user the new user
+   * @return the response
+   */
+    @PUT
+    @Consumes("application/json")
+    @Produces("application/json")
+    @Path("/updateUser")
+    public Response updateUser(
+            @Parameter(description = "User object that needs to be updated", required = true) final UtilisateurDTO user,
+            @Context SecurityContext securityContext) {
+            if(securityContext.isUserInRole("administrateur")){
+              System.out.println("id : " + user.getIdUtilisateur());
+              Utilisateur userToUpdate = utilisateurService.getUtilisateurById(user.getIdUtilisateur());
+              userToUpdate.setTypeUtilisateur(user.getRole());
 
-    if (!securityContext.isUserInRole("utilisateur")) {
-      return Response.status(Response.Status.UNAUTHORIZED).entity("{\"error\":\"Accès refusé !\"}").build();
+                utilisateurService.updateUtilisateur(userToUpdate);
+                return Response.status(Response.Status.OK).entity(Collections.singletonMap("message", "Utilisateur mis à jour avec succès")).build();
+            }
+
+        return Response.status(Response.Status.FORBIDDEN).entity(Collections.singletonMap("message", "Vous n'avez pas le droit de mettre à jour un utilisateur")).build();
     }
-    return Response.ok( utilisateurService.getAllUtilisateurs()).build();
-  }
 
 }

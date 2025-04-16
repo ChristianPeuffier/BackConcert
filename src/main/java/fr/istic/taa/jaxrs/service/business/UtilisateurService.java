@@ -25,12 +25,8 @@ public class UtilisateurService extends AbstractService<Long, Utilisateur> {
      * @param id the id of the Utilisateur
      * @return the created Utilisateur DTO
      */
-    public UtilisateurDTO getUtilisateurById(final Long id) {
-        Utilisateur utilisateur = findOne(id);
-        if (utilisateur != null) {
-            return new UtilisateurDTO(utilisateur);
-        }
-        return null;
+    public Utilisateur getUtilisateurById(final Long id) {
+        return findOne(id);
     }
 
     /**
@@ -83,6 +79,14 @@ public class UtilisateurService extends AbstractService<Long, Utilisateur> {
     public boolean checkPassword(final String email, final String password) {
         Utilisateur utilisateur = utilisateurDAO.findByEmail(email);
         return PasswordUtil.checkPassword(password, utilisateur.getPassword());
+    }
+
+    /**
+     * Update an Utilisateur.
+     * @param utilisateur the Utilisateur to update
+     */
+    public void updateUtilisateur(final Utilisateur utilisateur) {
+        utilisateurDAO.updateUtilisateur(utilisateur);
     }
 
 

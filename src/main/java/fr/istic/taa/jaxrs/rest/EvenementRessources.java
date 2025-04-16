@@ -42,8 +42,12 @@ public class EvenementRessources {
      */
     @GET
     @Path("/{id}")
-    public EvenementDTO getEvenementById(@PathParam("id") final Long id)  {
-        return evenementService.getEvenementById(id);
+    public Response getEvenementById(@PathParam("id") final Long id)  {
+        EvenementDTO evenement = evenementService.getEvenementById(id);
+        if(evenement == null) {
+            return Response.status(Response.Status.BAD_REQUEST).entity("Evenement not found").build();
+        }
+        return Response.status(Response.Status.OK).entity(evenement).build();
     }
 
     /**
@@ -85,7 +89,7 @@ public class EvenementRessources {
     @Produces("application/json")
     @Path("/update")
     public Response updateEvenement(
-        @Parameter(description = "User object that needs to be added to the store", required = true) final Evenement event,
+        @Parameter(description = "Event object that needs to be update to the store", required = true) final Evenement event,
         @Context SecurityContext securityContext)
     {
         System.out.println(event.getId());
