@@ -20,11 +20,6 @@ public class Evenement implements Serializable {
     private static final int MAX_LENGTH_DESCRIPTION = 1000;
 
     /**
-     * The maximum length for Lieu Column in database.
-     */
-    private static final int MAX_LENGTH_LIEU = 255;
-
-    /**
      * The id attribute as an int.
      */
     @Id
@@ -46,7 +41,7 @@ public class Evenement implements Serializable {
     /**
      * The lieu attribute as a String.
      */
-    @Column(length = MAX_LENGTH_LIEU, name = "lieu")
+    @Column(name = "lieu")
     private String lieu;
 
     /**

@@ -4,7 +4,6 @@ import fr.istic.taa.jaxrs.domain.Evenement;
 import fr.istic.taa.jaxrs.domain.Organisateur;
 import fr.istic.taa.jaxrs.domain.Utilisateur;
 import fr.istic.taa.jaxrs.dto.EvenementDTO;
-import fr.istic.taa.jaxrs.dto.UtilisateurDTO;
 import fr.istic.taa.jaxrs.service.business.EvenementService;
 import fr.istic.taa.jaxrs.service.business.UtilisateurService;
 import jakarta.ws.rs.*;
@@ -19,6 +18,8 @@ import java.util.List;
 @Path("evenement")
 @Produces({"application/json"})
 public class EvenementRessources {
+
+    private static final String ORGANISATEUR_ROLE = "organisateur";
 
     /**
      * The service to interact with the events.
@@ -63,7 +64,7 @@ public class EvenementRessources {
             @Parameter(description = "User object that needs to be added to the store", required = true) final Evenement event,
             @Context SecurityContext securityContext)
     {
-        if(securityContext.isUserInRole("organisateur")){
+        if(securityContext.isUserInRole(ORGANISATEUR_ROLE)){
             String email = securityContext.getUserPrincipal().getName();
             UtilisateurService utilisateurService = new UtilisateurService();
             Utilisateur user = utilisateurService.getUtilisateurByEmail(email);
@@ -74,9 +75,9 @@ public class EvenementRessources {
             }
 
             evenementService.save(event);
-            return Response.status(Response.Status.CREATED).entity(Collections.singletonMap("message","Evénement Créé")).build();
+            return Response.status(Response.Status.CREATED).entity(Collections.singletonMap("messageCreated","Evénement Créé")).build();
         }
-        return Response.status(Response.Status.FORBIDDEN).entity(Collections.singletonMap("message","Vous n'avez pas le droit de créer un événement")).build();
+        return Response.status(Response.Status.FORBIDDEN).entity(Collections.singletonMap("messageForbbiden","Vous n'avez pas le droit de créer un événement")).build();
     }
 
     /**
@@ -93,7 +94,7 @@ public class EvenementRessources {
         @Context SecurityContext securityContext)
     {
         System.out.println(event.getId());
-        if(securityContext.isUserInRole("organisateur")){
+        if(securityContext.isUserInRole(ORGANISATEUR_ROLE)){
             String email = securityContext.getUserPrincipal().getName();
             UtilisateurService utilisateurService = new UtilisateurService();
             Utilisateur user = utilisateurService.getUtilisateurByEmail(email);
@@ -115,7 +116,7 @@ public class EvenementRessources {
     @DELETE
     @Path("/delete/{id}")
     public Response deleteEvenement(@PathParam("id") final Long id, @Context SecurityContext securityContext)  {
-        if(securityContext.isUserInRole("organisateur")){
+        if(securityContext.isUserInRole(ORGANISATEUR_ROLE)){
         Evenement event = evenementService.findOne(id);
         if (event == null) {
             return Response.status(Response.Status.BAD_REQUEST).entity("Event not found").build();

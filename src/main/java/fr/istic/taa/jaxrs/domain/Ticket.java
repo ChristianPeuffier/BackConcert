@@ -33,7 +33,7 @@ public class Ticket implements Serializable {
     private int id;
 
     /**
-     * The utilisateur attribute as a Utilisateur.
+     * The utilisateur attribute as an Utilisateur.
      */
     @ManyToOne
     @JoinColumn(name = "utilisateur_id")

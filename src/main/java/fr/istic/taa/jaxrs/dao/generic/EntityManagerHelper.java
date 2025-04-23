@@ -29,7 +29,7 @@ public final class EntityManagerHelper {
      * Function to get EntityManager.
      * @return EntityManager
      */
-    protected static EntityManager getEntityManager() {
+    static EntityManager getEntityManager() {
         EntityManager em = THREADLOCAL.get();
 
         if (em == null) {

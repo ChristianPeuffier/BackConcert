@@ -48,13 +48,11 @@ public class UtilisateurService extends AbstractService<Long, Utilisateur> {
      * @param utilisateur the Utilisateur to create
      */
     public String saveUser(final Utilisateur utilisateur) {
-        // Vérification de l'existence de l'email
 
         if (utilisateurDAO.emailExist(utilisateur.getEmail())) {
             return "L'email est déjà utilisé";
         }
 
-        // Hachage du mot de passe et sauvegarde de l'utilisateur
         String hashedPassword = PasswordUtil.hashPassword(utilisateur.getPassword());
         utilisateur.setPassword(hashedPassword);
         save(utilisateur);

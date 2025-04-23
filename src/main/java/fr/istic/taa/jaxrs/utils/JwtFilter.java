@@ -52,13 +52,10 @@ public class JwtFilter implements ContainerRequestFilter {
         String email = claims.getSubject();
         String role = claims.get("role", String.class); // Le rôle est récupéré depuis le token
 
-        final Principal principal = new Principal() {
-            @Override
-            public String getName() {
-                System.out.println("getName");
-                return email;
-            }
-        };
+        final Principal principal = () -> {
+			System.out.println("getName");
+			return email;
+		};
 
         final SecurityContext securityContext = requestContext.getSecurityContext();
         requestContext.setSecurityContext(new SecurityContext() {

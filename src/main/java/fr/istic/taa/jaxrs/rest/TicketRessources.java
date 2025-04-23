@@ -15,11 +15,7 @@ import jakarta.ws.rs.core.Context;
 import jakarta.ws.rs.core.Response;
 import io.swagger.v3.oas.annotations.Parameter;
 import jakarta.ws.rs.core.SecurityContext;
-import javassist.bytecode.ByteArray;
-
 import java.io.ByteArrayOutputStream;
-import java.util.Collection;
-import java.util.Collections;
 import java.util.List;
 
 @Path("ticket")
@@ -95,7 +91,7 @@ public class TicketRessources {
             ticketService.save(ticket);
             System.out.println("id du ticket : " + ticket.getId());
 
-            Ticket ticketSaved = ticketService.getTicketById((long) ticket.getId()); // à adapter selon ton service
+            Ticket ticketSaved = ticketService.getTicketById((long) ticket.getId());
             System.out.println("Ticket rechargé : " + ticketSaved);
 
            evenement.setId((int) evenementService.getEvenementById(ticket.getEvenement().getId()).getIdEvenement());
@@ -156,7 +152,7 @@ public class TicketRessources {
     @POST
     @Path("/update/{id}/user/{userId}")
     @Consumes("application/json")
-    public Response changeTicketUser(@PathParam("id") final long idTicket, @PathParam("userId") final String newUserEmail, @Context SecurityContext securityContext) {
+    public Response changeTicketUser(@PathParam("id") final long idTicket, @PathParam("userId") final String newUserEmail) {
         Ticket ticket = ticketService.getTicketById(idTicket);
         UtilisateurService userService = new UtilisateurService();
         Utilisateur user = userService.getUtilisateurByEmail(newUserEmail);

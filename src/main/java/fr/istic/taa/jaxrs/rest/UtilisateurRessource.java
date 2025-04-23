@@ -1,7 +1,5 @@
 package fr.istic.taa.jaxrs.rest;
 
-import fr.istic.taa.jaxrs.domain.Administrateur;
-import fr.istic.taa.jaxrs.domain.Organisateur;
 import fr.istic.taa.jaxrs.domain.Utilisateur;
 import fr.istic.taa.jaxrs.dto.UtilisateurDTO;
 import fr.istic.taa.jaxrs.service.business.UtilisateurService;
@@ -33,7 +31,7 @@ public class UtilisateurRessource {
    */
   @GET
   @Path("/{id}")
-  public UtilisateurDTO getUserById(@PathParam("id") final Long id, @Context SecurityContext securityContext){
+  public UtilisateurDTO getUserById(@PathParam("id") final Long id){
 
       Utilisateur user = utilisateurService.getUtilisateurById(id);
 
@@ -102,6 +100,11 @@ public class UtilisateurRessource {
     }
   }
 
+    /**
+     * Login a user.
+     * @param user the user
+     * @return the response
+     */
   @POST
   @Path("/login")
   @Consumes("application/json")
@@ -147,10 +150,10 @@ public class UtilisateurRessource {
               userToUpdate.setTypeUtilisateur(user.getRole());
 
                 utilisateurService.updateUtilisateur(userToUpdate);
-                return Response.status(Response.Status.OK).entity(Collections.singletonMap("message", "Utilisateur mis à jour avec succès")).build();
+                return Response.status(Response.Status.OK).entity(Collections.singletonMap("messageUpdate", "Utilisateur mis à jour avec succès")).build();
             }
 
-        return Response.status(Response.Status.FORBIDDEN).entity(Collections.singletonMap("message", "Vous n'avez pas le droit de mettre à jour un utilisateur")).build();
+        return Response.status(Response.Status.FORBIDDEN).entity(Collections.singletonMap("messageForbidden", "Vous n'avez pas le droit de mettre à jour un utilisateur")).build();
     }
 
 }

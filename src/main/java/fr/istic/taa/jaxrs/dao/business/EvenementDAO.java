@@ -31,6 +31,10 @@ public class EvenementDAO extends AbstractJpaDao<Long, Evenement> {
         em.getTransaction().commit();
     }
 
+    /**
+     * Get all Evenements from the database.
+     * @return the created Evenement
+     */
     public List<Evenement> findByOrganisateurId(Long id) {
         EntityManager em = getEntityManager();
         return em.createQuery("select e from Evenement e where e.organisateur.id = :id", Evenement.class)

@@ -27,6 +27,11 @@ public class UtilisateurDAO extends AbstractJpaDao<Long, Utilisateur> {
                 .getResultList().isEmpty();
     }
 
+    /**
+     * Find an Utilisateur by its email.
+     * @param email the email of the Utilisateur
+     * @return the Utilisateur
+     */
     public Utilisateur findByEmail(String email) {
         EntityManager em = getEntityManager();
         return em.createQuery("select u from Utilisateur u where u.email = :email", Utilisateur.class)
@@ -34,6 +39,10 @@ public class UtilisateurDAO extends AbstractJpaDao<Long, Utilisateur> {
                 .getSingleResult();
     }
 
+    /**
+     * Update the role of an Utilisateur.
+     * @param utilisateur the Utilisateur to update
+     */
     public void updateUtilisateur(Utilisateur utilisateur) {
         EntityManager em = getEntityManager();
         em.getTransaction().begin();

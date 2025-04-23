@@ -23,7 +23,6 @@ public class TicketToPDF {
 			// Création du document
 			Document document = new Document();
 
-			// Crée le PdfWriter pour écrire dans le ByteArrayOutputStream
 			PdfWriter.getInstance(document, baos);
 
 			document.open();
@@ -39,7 +38,6 @@ public class TicketToPDF {
 
 			document.add(new Chunk(new LineSeparator()));
 
-			// Crée une table pour afficher les informations du ticket
 			PdfPTable table = new PdfPTable(2);
 			table.setWidthPercentage(100);
 			table.setHorizontalAlignment(Element.ALIGN_CENTER);
@@ -61,10 +59,9 @@ public class TicketToPDF {
 
 			document.add(table);
 
-			// Génère un QR code
 			BarcodeQRCode qrCode = new BarcodeQRCode("Ticket ID: " + ticket.getId(), 100, 100, null);
 			Image qrCodeImage = qrCode.getImage();
-			qrCodeImage.setAlignment(Image.ALIGN_CENTER);
+			qrCodeImage.setAlignment(Element.ALIGN_CENTER);
 			qrCodeImage.scaleToFit(100f, 100f);
 			document.add(qrCodeImage);
 
@@ -73,9 +70,9 @@ public class TicketToPDF {
 			message.setAlignment(Element.ALIGN_CENTER);
 			document.add(message);
 
-			document.close();  // Ferme le document et écrit dans le flux de sortie
+			document.close();
 
-			return baos;  // Retourne le ByteArrayOutputStream qui contient le PDF
+			return baos;
 		} catch (Exception e) {
 			e.printStackTrace();
 			return null;
