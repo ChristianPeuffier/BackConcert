@@ -29,7 +29,7 @@ SET FILES NIO TRUE
 SET FILES NIO SIZE 256
 SET FILES LOG TRUE
 SET FILES LOG SIZE 50
-SET FILES CHECK 3699
+SET FILES CHECK 3855
 SET DATABASE COLLATION "SQL_TEXT" PAD SPACE
 CREATE USER SA PASSWORD DIGEST 'd41d8cd98f00b204e9800998ecf8427e'
 ALTER USER SA SET LOCAL TRUE
@@ -43,10 +43,10 @@ CREATE MEMORY TABLE PUBLIC.EVENEMENT(DATE DATE,ID INTEGER NOT NULL PRIMARY KEY,N
 CREATE MEMORY TABLE PUBLIC.STATS(EVENEMENT_ID INTEGER,ID INTEGER NOT NULL PRIMARY KEY,CONSTRAINT FKNX30P674YASIT6I7549EJSUQF FOREIGN KEY(EVENEMENT_ID) REFERENCES PUBLIC.EVENEMENT(ID))
 CREATE MEMORY TABLE PUBLIC.TICKET(DATEACHAT DATE,EVENEMENT_ID INTEGER,ID INTEGER NOT NULL PRIMARY KEY,PRIX DOUBLE,UTILISATEUR_ID BIGINT,STATUT VARCHAR(100),CHECK((PUBLIC.TICKET.STATUT) IN (('ACHETE'),('ANNULE'),('REMBOURSE'),('RESERVE'))),CONSTRAINT FK4L049KQ87R4DHKY2RIJK4R0F5 FOREIGN KEY(EVENEMENT_ID) REFERENCES PUBLIC.EVENEMENT(ID),CONSTRAINT FKR6P65RATY6L8VRFSSXRDOLNEE FOREIGN KEY(UTILISATEUR_ID) REFERENCES PUBLIC.UTILISATEUR(ID))
 ALTER SEQUENCE SYSTEM_LOBS.LOB_ID RESTART WITH 1
-ALTER SEQUENCE PUBLIC.EVENEMENT_SEQ RESTART WITH 1901
+ALTER SEQUENCE PUBLIC.EVENEMENT_SEQ RESTART WITH 2001
 ALTER SEQUENCE PUBLIC.STATS_SEQ RESTART WITH 1
-ALTER SEQUENCE PUBLIC.TICKET_SEQ RESTART WITH 1651
-ALTER SEQUENCE PUBLIC.UTILISATEUR_SEQ RESTART WITH 1301
+ALTER SEQUENCE PUBLIC.TICKET_SEQ RESTART WITH 1701
+ALTER SEQUENCE PUBLIC.UTILISATEUR_SEQ RESTART WITH 1351
 SET DATABASE DEFAULT INITIAL SCHEMA PUBLIC
 GRANT USAGE ON DOMAIN INFORMATION_SCHEMA.CARDINAL_NUMBER TO PUBLIC
 GRANT USAGE ON DOMAIN INFORMATION_SCHEMA.YES_OR_NO TO PUBLIC
@@ -57,14 +57,8 @@ GRANT DBA TO SA
 SET SCHEMA SYSTEM_LOBS
 INSERT INTO BLOCKS VALUES(0,2147483647,0)
 SET SCHEMA PUBLIC
-INSERT INTO UTILISATEUR VALUES(602,'administrateur','christian.peuffier@gmail.com','Peuffier','$2a$12$lywzCSgNUIfJ7dd4tJuQ3ODpa6qXKuoC5f80sK7gZoRUSp6m/2aY2','Christian')
-INSERT INTO UTILISATEUR VALUES(1103,'administrateur','alexisr1009@gmail.com','Raulais','$2a$12$vSZnNPJqS9Dao5wFNuTszexkY/YJ7IrdIa3wUD.kwi4ukqU2enufW','Alexis')
 INSERT INTO UTILISATEUR VALUES(1153,'administrateur','admin@admin.com','admin','$2a$12$z/vqt0YCnnwbm6xBmOaoH.8s6nJlLICJpy/CEyRpvvbC29mdv714S','admin')
-INSERT INTO EVENEMENT VALUES('2025-04-18',1602,25,4,12.0E0,NULL,'Gims','Pop, Jazz, Blues','test2','lkjgkschvblmdjhgfkhv','Rennes')
-INSERT INTO EVENEMENT VALUES('2025-04-16',1652,659,659,23.0E0,NULL,'ejhkvbkj','Blues, Classique','testRole','kbvd,,lkjbkcvjn,djcbhjdkjlkejlkjkn;nknknkbbnnnknknkj','rennes')
-INSERT INTO EVENEMENT VALUES('2025-04-17',1753,23,22,12.0E0,NULL,'test','Hip-hop','testOrganisateur','ichvhjwvcjbzkjkjeh','redon')
-INSERT INTO EVENEMENT VALUES('2025-04-17',1802,12,12,12.0E0,602,'test','Hip-hop','testOrganisateur','ichvhjwvcjbzkjkjeh','redon')
-INSERT INTO EVENEMENT VALUES('2025-04-15',1803,23,23,23.0E0,602,'Soprano','Blues','test45','testestestestest','Rennes')
-INSERT INTO EVENEMENT VALUES('2025-04-17',1805,546,546,12.0E0,602,'test','Hip-hop','testOrganisateur','ichvhjwvcjbzkjkjeh','redon')
-INSERT INTO TICKET VALUES('2025-04-15',1753,1552,12.0E0,602,'ACHETE')
-INSERT INTO TICKET VALUES('2025-04-15',1602,1553,12.0E0,602,'ACHETE')
+INSERT INTO UTILISATEUR VALUES(1252,'organisateur','organisateur@organisateur.com','Organisateur','$2a$12$RNXsnsOCyTUgho6Agly9wO5tn2fbNDCmPTrEY8AO2qxe0DizDCxQi','Organisateur')
+INSERT INTO EVENEMENT VALUES('2025-05-31',1902,500,500,40.0E0,1252,'Soprano','Hip-hop','Soprano Freedom Tour','Apr\u00e8s sa folle tourn\u00e9e "Chasseur d''\u00e9toiles" qui l''aura men\u00e9 jusqu''au Stade de France, Soprano revient en 2025 avec le Freedom tour dans toute la France. ','Stade Pierre Mauroy, Villeneuve d''Ascq')
+INSERT INTO EVENEMENT VALUES('2026-03-18',1903,650,650,62.0E0,1252,'Florent Pagny','Pop','Florent Pagny, Le retour','Florent Pagny fera son grand retour en 2026 avec une tourn\u00e9e exceptionnelle.\u000aIl revient pr\u00eat \u00e0 partager des moments forts avec son public, o\u00f9 il interpr\u00e9tera tous ses tubes.  \u000aC\u2019est \u00e0 partir du mois de janvier que Florent Pagny parcourra les villes de France, Suisse et Belgique lors de s\u00e9ries de concerts exclusifs, avant de pousser les portes de l\u2019Olympia et s\u2019y installer en juin et juillet 2026 pour une r\u00e9sidence in\u00e9dite.\u000a \u000aRendez-vous dans toute la France, en Suisse et en Belgique d\u00e8s janvier 2026.','LDLC Arena, Decines Charpieu')
+INSERT INTO EVENEMENT VALUES('2025-04-26',1904,200,200,39.0E0,1252,'Big Ocean','Rock, Pop, Folk','Big Ocean - Underwater','BIG OCEAN n''est pas seulement une nouvelle sensation K-pop - c''est un trio r\u00e9volutionnaire qui prouve que la musique n''a pas de barri\u00e8res. En tant que premier groupe de K-pop malentendant au monde, ils chantent, dansent et captivent le public comme n''importe quels autres idols de premier plan, mais avec une inspiration singuli\u00e8re. Ils nous rappellent ce que cela signifie d\u2019\u00e9couter de la musique : un rythme que l\u2019on entend, mais aussi que l\u2019on voit, ressent et vit.','Caf\u00e9 de la danse, Paris')

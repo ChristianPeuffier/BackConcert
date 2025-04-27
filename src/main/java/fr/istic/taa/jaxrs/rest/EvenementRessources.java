@@ -14,6 +14,7 @@ import jakarta.ws.rs.core.SecurityContext;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 
 @Path("evenement")
 @Produces({"application/json"})
@@ -69,7 +70,7 @@ public class EvenementRessources {
             UtilisateurService utilisateurService = new UtilisateurService();
             Utilisateur user = utilisateurService.getUtilisateurByEmail(email);
 
-            if (user instanceof Organisateur){
+            if (Objects.equals(user.getTypeUtilisateur(), "organisateur")){
                 Organisateur org = (Organisateur)user;
                 event.setOrganisateur(org);
             }
@@ -81,7 +82,7 @@ public class EvenementRessources {
     }
 
     /**
-     * Update an event. Post request at /evenement/update path.
+     * Update an event. Post request at /evenement/update a path.
      * @param event the event to update
      * @return the response
      */
